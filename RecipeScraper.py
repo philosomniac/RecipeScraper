@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import datetime
 from dateutil.relativedelta import relativedelta
+from urllib.error import HTTPError
 
 
 # url = "https://www.budgetbytes.com/archive/2010/07"
@@ -30,17 +31,20 @@ recipe_url_list = []
 
 
 def get_recipe_urls_from_archive_page(archiveurl):
-
-    req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
-    page = urlopen(req)
-    html = page.read().decode("utf-8")
-    soup = BeautifulSoup(html, "html.parser")
-    articleElements = soup.find_all("article")
     linklist = []
-    for a in articleElements:
-        linklist.append(a.find("a").get("href"))
+    try:
+        req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
+        page = urlopen(req)
+        html = page.read().decode("utf-8")
+        soup = BeautifulSoup(html, "html.parser")
+        articleElements = soup.find_all("article")
 
-    return linklist
+        for a in articleElements:
+            linklist.append(a.find("a").get("href"))
+
+        return linklist
+    except HTTPError:
+        return linklist
 
 
 def get_archive_page_url(targetdate):
@@ -57,14 +61,17 @@ archive_end_date = datetime.date(
     datetime.date.today().year, datetime.date.today().month, 1)
 
 
-for i in range(0, 13):
-    currentdate = datetime.date(
-        archive_start_date.year, archive_start_date.month, archive_start_date.day)
-    currentdate = currentdate + relativedelta(months=+i)
-    # print(currentdate)
-    # print(get_archive_page_url(currentdate))
-    currentpage = get_archive_page_url(currentdate)
-    recipe_url_list.extend(get_recipe_urls_from_archive_page(currentpage))
+with open("BudgetBytesRecipes.txt") as recipefile:
+    for i in range(0, 1000):
+        currentdate = datetime.date(
+            archive_start_date.year, archive_start_date.month, archive_start_date.day)
+        currentdate = currentdate + relativedelta(months=+i)
+        if currentdate == archive_end_date:
+            break
+        # print(currentdate)
+        # print(get_archive_page_url(currentdate))
+        currentpage = get_archive_page_url(currentdate)
+        recipe_url_list.extend(get_recipe_urls_from_archive_page(currentpage))
 
-for i in recipe_url_list:
-    print(i)
+    for i in recipe_url_list:
+        recipefile.writelines(recipe_url_list)
