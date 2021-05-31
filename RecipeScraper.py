@@ -31,10 +31,11 @@ from urllib.error import HTTPError
 def get_recipe_urls_from_archive_page(archiveurl):
     linklist = []
     try:
-        req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
-        page = urlopen(req)
-        html = page.read().decode("utf-8")
-        soup = BeautifulSoup(html, "html.parser")
+        # req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
+        # page = urlopen(req)
+        # html = page.read().decode("utf-8")
+        # soup = BeautifulSoup(html, "html.parser")
+        soup = get_parsed_html_from_url(archiveurl)
         articleElements = soup.find_all("article")
 
         for a in articleElements:
@@ -49,6 +50,13 @@ def get_archive_page_url(targetdate):
     paddedmonth = str(targetdate.month).zfill(2)
     return "https://budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
 
+
+def get_parsed_html_from_url(url):
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    page = urlopen(req)
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    return soup
 
 # print(get_recipe_urls_from_archive_page(
 #     "https://www.budgetbytes.com/archive/2010/07"))
@@ -80,7 +88,9 @@ def get_full_recipe_URL_list():
 
 
 class Recipe:
-    def __init__(self, url, name, ingredient_set, total_cost, serving_cost, servings, prep_time, cook_time, instruction_set):
+    def __init__(self, url="", name=None, ingredient_set=None, total_cost=None, serving_cost=None, servings=None, prep_time=None, cook_time=None, instruction_set=None):
+        self.url = url
+        self.name = name
         pass
 
 
@@ -107,3 +117,14 @@ class InstructionSet:
 class Step:
     def __init__(self):
         pass
+
+
+def get_recipe_details_from_url(url):
+    try:
+        soup = get_parsed_html_from_url(url)
+        recipetitle = soup.find_all(class="wprm-recipe-name")
+
+        pass
+
+    except:
+        raise
