@@ -75,3 +75,23 @@ with open("BudgetBytesRecipes.txt", 'w') as recipefile:
         print("completed date: " + str(currentdate))
 
     recipefile.writelines(l + '\n' for l in recipe_url_list)
+
+
+class Recipe:
+    def __init__(self, url, name, ingredient_set):
+        pass
+
+
+class IngredientSet:
+    def __init__(self, ingredient_list):
+        pass
+
+
+class Ingredient:
+    def __init__(self, name, amount, unit):
+        pass
+
+
+class MeasurementUnit:
+    def __init__(self, name):
+        pass
