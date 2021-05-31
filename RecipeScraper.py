@@ -61,4 +61,9 @@ for i in range(0, 13):
         archive_start_date.year, archive_start_date.month, archive_start_date.day)
     currentdate = currentdate + relativedelta(months=+i)
     # print(currentdate)
-    print(get_archive_page_url(currentdate))
+    # print(get_archive_page_url(currentdate))
+    currentpage = get_archive_page_url(currentdate)
+    recipe_url_list.extend(get_recipe_urls_from_archive_page(currentpage))
+
+for i in recipe_url_list:
+    print(i)
