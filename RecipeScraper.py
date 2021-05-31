@@ -42,6 +42,11 @@ def get_recipe_urls_from_archive_page(archiveurl):
     return linklist
 
 
+def get_archive_page_url(targetdate):
+    paddedmonth = str(targetdate.month).zfill(2)
+    return "https://budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
+
+
 # print(get_recipe_urls_from_archive_page(
 #     "https://www.budgetbytes.com/archive/2010/07"))
 
@@ -55,8 +60,5 @@ for i in range(0, 13):
     currentdate = datetime.date(
         archive_start_date.year, archive_start_date.month, archive_start_date.day)
     currentdate = currentdate + relativedelta(months=+i)
-    print(currentdate)
-
-
-def get_archive_page_url(targetdate):
-    return "https://budgetbytes.com/archive/{0}/{1}".format(targetdate.year, targetdate.month)
+    # print(currentdate)
+    print(get_archive_page_url(currentdate))
