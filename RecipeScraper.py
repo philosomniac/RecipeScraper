@@ -61,7 +61,7 @@ archive_end_date = datetime.date(
     datetime.date.today().year, datetime.date.today().month, 1)
 
 
-with open("BudgetBytesRecipes.txt") as recipefile:
+with open("BudgetBytesRecipes.txt", 'w') as recipefile:
     for i in range(0, 1000):
         currentdate = datetime.date(
             archive_start_date.year, archive_start_date.month, archive_start_date.day)
@@ -72,6 +72,6 @@ with open("BudgetBytesRecipes.txt") as recipefile:
         # print(get_archive_page_url(currentdate))
         currentpage = get_archive_page_url(currentdate)
         recipe_url_list.extend(get_recipe_urls_from_archive_page(currentpage))
+        print("completed date: " + str(currentdate))
 
-    for i in recipe_url_list:
-        recipefile.writelines(recipe_url_list)
+    recipefile.writelines(l + '\n' for l in recipe_url_list)
