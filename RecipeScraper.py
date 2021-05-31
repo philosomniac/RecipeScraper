@@ -2,6 +2,7 @@ from os import link
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import datetime
+from dateutil.relativedelta import relativedelta
 
 
 # url = "https://www.budgetbytes.com/archive/2010/07"
@@ -25,6 +26,8 @@ import datetime
 # for l in linklist:
 #     print(l.get("href"))
 
+recipe_url_list = []
+
 
 def get_recipe_urls_from_archive_page(archiveurl):
     req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
@@ -39,9 +42,21 @@ def get_recipe_urls_from_archive_page(archiveurl):
     return linklist
 
 
-print(get_recipe_urls_from_archive_page(
-    "https://www.budgetbytes.com/archive/2010/07"))
+# print(get_recipe_urls_from_archive_page(
+#     "https://www.budgetbytes.com/archive/2010/07"))
 
 
-archive_start_date = datetime(2009, 5)
-archive_end_date = datetime.date.today()
+archive_start_date = datetime.date(2009, 5, 1)
+archive_end_date = datetime.date(
+    datetime.date.today().year, datetime.date.today().month, 1)
+
+
+for i in range(0, 13):
+    currentdate = datetime.date(
+        archive_start_date.year, archive_start_date.month, archive_start_date.day)
+    currentdate = currentdate + relativedelta(months=+i)
+    print(currentdate)
+
+
+def get_archive_page_url(targetdate):
+    return "https://budgetbytes.com/archive/{0}/{1}".format(targetdate.year, targetdate.month)
