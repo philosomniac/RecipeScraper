@@ -27,8 +27,6 @@ from urllib.error import HTTPError
 # for l in linklist:
 #     print(l.get("href"))
 
-recipe_url_list = []
-
 
 def get_recipe_urls_from_archive_page(archiveurl):
     linklist = []
@@ -56,29 +54,33 @@ def get_archive_page_url(targetdate):
 #     "https://www.budgetbytes.com/archive/2010/07"))
 
 
-archive_start_date = datetime.date(2009, 5, 1)
-archive_end_date = datetime.date(
-    datetime.date.today().year, datetime.date.today().month, 1)
+def get_full_recipe_URL_list():
 
+    recipe_url_list = []
 
-with open("BudgetBytesRecipes.txt", 'w') as recipefile:
-    for i in range(0, 1000):
-        currentdate = datetime.date(
-            archive_start_date.year, archive_start_date.month, archive_start_date.day)
-        currentdate = currentdate + relativedelta(months=+i)
-        if currentdate == archive_end_date:
-            break
-        # print(currentdate)
-        # print(get_archive_page_url(currentdate))
-        currentpage = get_archive_page_url(currentdate)
-        recipe_url_list.extend(get_recipe_urls_from_archive_page(currentpage))
-        print("completed date: " + str(currentdate))
+    archive_start_date = datetime.date(2009, 5, 1)
+    archive_end_date = datetime.date(
+        datetime.date.today().year, datetime.date.today().month, 1)
 
-    recipefile.writelines(l + '\n' for l in recipe_url_list)
+    with open("BudgetBytesRecipes.txt", 'w') as recipefile:
+        for i in range(0, 1000):
+            currentdate = datetime.date(
+                archive_start_date.year, archive_start_date.month, archive_start_date.day)
+            currentdate = currentdate + relativedelta(months=+i)
+            if currentdate == archive_end_date:
+                break
+            # print(currentdate)
+            # print(get_archive_page_url(currentdate))
+            currentpage = get_archive_page_url(currentdate)
+            recipe_url_list.extend(
+                get_recipe_urls_from_archive_page(currentpage))
+            print("completed date: " + str(currentdate))
+
+        recipefile.writelines(l + '\n' for l in recipe_url_list)
 
 
 class Recipe:
-    def __init__(self, url, name, ingredient_set):
+    def __init__(self, url, name, ingredient_set, total_cost, serving_cost, servings, prep_time, cook_time, instruction_set):
         pass
 
 
@@ -94,4 +96,14 @@ class Ingredient:
 
 class MeasurementUnit:
     def __init__(self, name):
+        pass
+
+
+class InstructionSet:
+    def __init__(self, step_list):
+        pass
+
+
+class Step:
+    def __init__(self):
         pass
