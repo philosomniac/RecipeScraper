@@ -100,7 +100,11 @@ class IngredientSet:
 
 
 class Ingredient:
-    def __init__(self, name, amount, unit):
+    def __init__(self, name, amount, unit, price):
+        self.name = name
+        self.amount = amount
+        self.unit = unit
+        self.price = price
         pass
 
 
@@ -134,6 +138,26 @@ def get_recipe_details_from_url(url):
         servingsunit = soup.find(class_="wprm-recipe-servings-unit").string
 
         imgurl = soup.find(class_="wprm-recipe-image").img['data-src']
+
+        ingredientlist = []
+
+        ingredientcontainer = soup.find(
+            class_="wprm-recipe-ingredients-container")
+        ingredientelements = ingredientcontainer.find_all(
+            class_="wprm-recipe-ingredient")
+
+        for i in ingredientelements:
+            currentamount = i.find(
+                class_="wprm-recipe-ingredient-amount").string
+            currentunit = i.find(class_="wprm-recipe-ingredient-unit").string
+            currentname = i.find(class_="wprm-recipe-ingredient-name").string
+            currentprice = i.find(class_="wprm-recipe-ingredient-notes").string
+            curIngredient = Ingredient(
+                currentname, currentamount, currentunit, currentprice)
+            ingredientlist.append(curIngredient)
+
+            pass
+        # ingredienttext = ingredientcontainer.get_text()
 
         pass
 
