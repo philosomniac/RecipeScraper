@@ -122,9 +122,24 @@ class Step:
 def get_recipe_details_from_url(url):
     try:
         soup = get_parsed_html_from_url(url)
-        recipetitle = soup.find_all(class_="wprm-recipe-name")
+        recipetitle = soup.find(class_="wprm-recipe-name").string
+        coststring = soup.find(class_="wprm-recipe-recipe_cost").string
+        totaltime = soup.find(
+            class_="wprm-recipe-total-time-container").get_text().strip()
+        preptime = soup.find(
+            class_="wprm-recipe-prep-time-container").get_text().strip()
+        cooktime = soup.find(
+            class_="wprm-recipe-cook-time-container").get_text().strip()
+        servings = soup.find(class_="wprm-recipe-servings").string
+        servingsunit = soup.find(class_="wprm-recipe-servings-unit").string
+
+        imgurl = soup.find(class_="wprm-recipe-image").img['data-src']
 
         pass
 
     except:
         raise
+
+
+get_recipe_details_from_url(
+    "https://www.budgetbytes.com/beef-and-cauliflower-taco-skillet/")
