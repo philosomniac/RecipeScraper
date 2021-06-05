@@ -122,7 +122,7 @@ class Step:
 def get_recipe_details_from_url(url):
     try:
         soup = get_parsed_html_from_url(url)
-        recipetitle = soup.find_all(class="wprm-recipe-name")
+        recipetitle = soup.find_all(class_="wprm-recipe-name")
 
         pass
 
