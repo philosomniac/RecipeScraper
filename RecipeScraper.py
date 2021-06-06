@@ -123,6 +123,10 @@ class Step:
         pass
 
 
+def formatprice(s):
+    return s.replace("(", "").replace(")", "").replace("$", "")
+
+
 def get_recipe_details_from_url(url):
     try:
         soup = get_parsed_html_from_url(url)
@@ -149,15 +153,17 @@ def get_recipe_details_from_url(url):
         for i in ingredientelements:
             currentamount = i.find(
                 class_="wprm-recipe-ingredient-amount").string
-            currentunit = i.find(class_="wprm-recipe-ingredient-unit").string
+            currentunit = i.find(class_="wprm-recipe-ingredient-unit")
+            if currentunit:
+                currentunit = currentunit.string
             currentname = i.find(class_="wprm-recipe-ingredient-name").string
             currentprice = i.find(class_="wprm-recipe-ingredient-notes").string
+            currentprice = float(formatprice(currentprice))
             curIngredient = Ingredient(
                 currentname, currentamount, currentunit, currentprice)
             ingredientlist.append(curIngredient)
 
             pass
-        # ingredienttext = ingredientcontainer.get_text()
 
         pass
 
