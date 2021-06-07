@@ -91,11 +91,19 @@ class Recipe:
     def __init__(self, url="", name=None, ingredient_set=None, total_cost=None, serving_cost=None, servings=None, prep_time=None, cook_time=None, instruction_set=None):
         self.url = url
         self.name = name
+        self.ingredient_set = ingredient_set
+        self.total_cost = total_cost
+        self.serving_cost = serving_cost
+        self.servings = servings
+        self.prep_time = prep_time
+        self.cook_time = cook_time
+        self.instruction_set = instruction_set
         pass
 
 
 class IngredientSet:
     def __init__(self, ingredient_list):
+        self.ingredients = ingredient_list
         pass
 
 
@@ -123,53 +131,62 @@ class Step:
         pass
 
 
-def formatprice(s):
+def format_price(s):
     return s.replace("(", "").replace(")", "").replace("$", "")
 
 
 def get_recipe_details_from_url(url):
     try:
         soup = get_parsed_html_from_url(url)
-        recipetitle = soup.find(class_="wprm-recipe-name").string
-        coststring = soup.find(class_="wprm-recipe-recipe_cost").string
-        totaltime = soup.find(
+        recipe_title = soup.find(class_="wprm-recipe-name").string
+        cost_string = soup.find(class_="wprm-recipe-recipe_cost").string
+        total_time = soup.find(
             class_="wprm-recipe-total-time-container").get_text().strip()
-        preptime = soup.find(
+        prep_time = soup.find(
             class_="wprm-recipe-prep-time-container").get_text().strip()
-        cooktime = soup.find(
+        cook_time = soup.find(
             class_="wprm-recipe-cook-time-container").get_text().strip()
         servings = soup.find(class_="wprm-recipe-servings").string
-        servingsunit = soup.find(class_="wprm-recipe-servings-unit").string
+        servings_unit = soup.find(class_="wprm-recipe-servings-unit").string
 
-        imgurl = soup.find(class_="wprm-recipe-image").img['data-src']
+        img_url = soup.find(class_="wprm-recipe-image").img['data-src']
 
-        ingredientlist = []
+        ingredient_list = []
 
-        ingredientcontainer = soup.find(
+        ingredient_container = soup.find(
             class_="wprm-recipe-ingredients-container")
-        ingredientelements = ingredientcontainer.find_all(
+        ingredient_elements = ingredient_container.find_all(
             class_="wprm-recipe-ingredient")
 
-        for i in ingredientelements:
-            currentamount = i.find(
+        for i in ingredient_elements:
+            current_amount = i.find(
                 class_="wprm-recipe-ingredient-amount").string
-            currentunit = i.find(class_="wprm-recipe-ingredient-unit")
-            if currentunit:
-                currentunit = currentunit.string
-            currentname = i.find(class_="wprm-recipe-ingredient-name").string
-            currentprice = i.find(class_="wprm-recipe-ingredient-notes").string
-            currentprice = float(formatprice(currentprice))
-            curIngredient = Ingredient(
-                currentname, currentamount, currentunit, currentprice)
-            ingredientlist.append(curIngredient)
+            current_unit = i.find(class_="wprm-recipe-ingredient-unit")
+            if current_unit:
+                current_unit = current_unit.string
+            current_name = i.find(class_="wprm-recipe-ingredient-name").string
+            current_price = i.find(
+                class_="wprm-recipe-ingredient-notes").string
+            current_price = float(format_price(current_price))
+            current_ingredient = Ingredient(
+                current_name, current_amount, current_unit, current_price)
+            ingredient_list.append(current_ingredient)
 
             pass
 
+        current_ingredient_set = IngredientSet(ingredient_list)
+
+        current_recipe = Recipe(url, recipe_title, current_ingredient_set,
+                                cost_string, cost_string, servings, prep_time, cook_time, None)
+
+        return current_recipe
         pass
 
     except:
         raise
 
 
-get_recipe_details_from_url(
+my_recipe = get_recipe_details_from_url(
     "https://www.budgetbytes.com/beef-and-cauliflower-taco-skillet/")
+
+pass
