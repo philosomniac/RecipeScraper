@@ -139,8 +139,16 @@ def format_price(s):
 def get_recipe_details_from_url(url):
     try:
         soup = get_parsed_html_from_url(url)
+
+        # TODO: extract method for each recipe attribute.
+        # TODO: wrap each operation in a try block(?)
+        # TODO: log events
         recipe_title = soup.find(class_="wprm-recipe-name").string
+
+        # TODO: Parse the cost into real data
         cost_string = soup.find(class_="wprm-recipe-recipe_cost").string
+
+        # TODO: Parse time strings into actual times
         total_time = soup.find(
             class_="wprm-recipe-total-time-container").get_text().strip()
         prep_time = soup.find(
@@ -176,6 +184,8 @@ def get_recipe_details_from_url(url):
             pass
 
         current_ingredient_set = IngredientSet(ingredient_list)
+
+        # TODO: get instruction set data and put into recipe class
 
         current_recipe = Recipe(url, recipe_title, current_ingredient_set,
                                 cost_string, cost_string, servings, prep_time, cook_time, None)
