@@ -72,7 +72,7 @@ def get_parsed_html_from_url(url):
 #     "https://www.budgetbytes.com/archive/2010/07"))
 
 
-def get_full_recipe_URL_list():
+def scrape_full_recipe_URL_list():
 
     recipe_url_list = []
 
@@ -95,6 +95,12 @@ def get_full_recipe_URL_list():
             print("completed date: " + str(currentdate))
 
         recipefile.writelines(l + '\n' for l in recipe_url_list)
+
+
+def get_recipe_urls(starting_line_index):
+    with open("BudgetBytesRecipes.txt") as recipefile:
+        recipe_urls = recipefile.readlines()
+        return recipe_urls[starting_line_index+1:]
 
 
 class Recipe:
@@ -257,7 +263,24 @@ def get_recipe_title(soup):
     return soup.find(class_="wprm-recipe-name").string
 
 
-my_recipe = get_recipe_details_from_url(
-    "https://www.budgetbytes.com/beef-and-cauliflower-taco-skillet/")
+# my_recipe = get_recipe_details_from_url(
+#     "https://www.budgetbytes.com/beef-and-cauliflower-taco-skillet/")
 
 pass
+
+
+def Main():
+    setup_logging()
+
+    my_recipes = []
+    recipe_urls = []
+    startline = 3
+    recipe_urls = get_recipe_urls(startline)
+
+    for x in range(10):
+        current_recipe = get_recipe_details_from_url()
+
+    close_logging()
+
+
+Main()
