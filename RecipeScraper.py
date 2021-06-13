@@ -99,8 +99,8 @@ def scrape_full_recipe_URL_list():
 
 def get_recipe_urls(starting_line_index):
     with open("BudgetBytesRecipes.txt") as recipefile:
-        recipe_urls = recipefile.readlines()
-        return recipe_urls[starting_line_index+1:]
+        recipe_urls = [line.strip() for line in recipefile]
+        return recipe_urls[starting_line_index-1:]
 
 
 class Recipe:
@@ -277,8 +277,8 @@ def Main():
     startline = 3
     recipe_urls = get_recipe_urls(startline)
 
-    for x in range(10):
-        current_recipe = get_recipe_details_from_url()
+    for i in range(10):
+        current_recipe = get_recipe_details_from_url(recipe_urls[i])
 
     close_logging()
 
