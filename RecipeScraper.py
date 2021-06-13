@@ -148,6 +148,7 @@ def format_price(s):
 
 def get_recipe_details_from_url(url):
     try:
+        logging.info(f"getting recipe details from url: {url}")
         soup = get_parsed_html_from_url(url)
 
         # TODO: extract method for each recipe attribute.
@@ -195,7 +196,8 @@ def get_recipe_details_from_url(url):
         return current_recipe
         pass
 
-    except:
+    except Exception as e:
+        logging.exception(f"Error getting recipe details from url : {url}")
         raise
 
 
