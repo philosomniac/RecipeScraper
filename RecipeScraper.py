@@ -28,6 +28,15 @@ import logging
 # for l in linklist:
 #     print(l.get("href"))
 
+def setup_logging():
+    logging.basicConfig(filename="recipescraper.log",
+                        encoding="utf-8", level=logging.INFO, format='%(asctime)s %(message)s')
+    logging.info('Started')
+
+
+def close_logging():
+    logging.info('Finished')
+
 
 def get_recipe_urls_from_archive_page(archiveurl):
     linklist = []
