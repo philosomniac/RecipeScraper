@@ -8,27 +8,6 @@ from urllib.error import HTTPError
 import logging
 
 
-# url = "https://www.budgetbytes.com/archive/2010/07"
-# req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-# page = urlopen(req)
-# html = page.read().decode("utf-8")
-# soup = BeautifulSoup(html, "html.parser")
-
-# print(soup.get_text())
-
-# image1, image2 = soup.find_all("img")
-
-# print(image1["src"])
-
-# articlelist = soup.find_all("article")
-# linklist = []
-# for a in articlelist:
-#     # print(a)
-#     linklist.append(a.find("a"))
-
-# for l in linklist:
-#     print(l.get("href"))
-
 def setup_logging():
     logging.basicConfig(filename="recipescraper.log",
                         encoding="utf-8", level=logging.INFO, format='%(asctime)s %(message)s')
