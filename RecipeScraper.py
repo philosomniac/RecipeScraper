@@ -100,8 +100,6 @@ def scrape_full_recipe_URL_list():
             currentdate = currentdate + relativedelta(months=+i)
             if currentdate == archive_end_date:
                 break
-            # print(currentdate)
-            # print(get_archive_page_url(currentdate))
             currentpage = get_archive_page_url_from_date(currentdate)
             recipe_url_list.extend(
                 get_recipe_urls_from_archive_page(currentpage))
