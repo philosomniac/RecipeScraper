@@ -40,28 +40,33 @@ def close_logging():
 
 
 def get_recipe_urls_from_archive_page(archiveurl: str) -> list:
-    linklist = []
+    url_list = []
     try:
-        # req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
-        # page = urlopen(req)
-        # html = page.read().decode("utf-8")
-        # soup = BeautifulSoup(html, "html.parser")
         soup = get_parsed_html_from_url(archiveurl)
+        article_elements = get_article_elements_from_page(soup)
+        url_list.extend(
+            get_all_article_urls_from_article_elements(article_elements))
 
-        articleElements = soup.find_all("article")
-
-        articleElement: PageElement
-        for articleElement in articleElements:
-            if isinstance(articleElement, Tag):
-                a_tag = articleElement.find("a")
-                if isinstance(a_tag, Tag):
-                    link_text = a_tag.get("href")
-
-                    linklist.append(link_text)
-
-        return linklist
+        return url_list
     except HTTPError:
-        return linklist
+        return url_list
+
+
+def get_article_elements_from_page(soup: BeautifulSoup) -> ResultSet:
+    return soup.find_all("article")
+
+
+def get_all_article_urls_from_article_elements(article_elements: ResultSet) -> list:
+    url_list = []
+    article_element: PageElement
+    for article_element in article_elements:
+        if isinstance(article_element, Tag):
+            a_tag = article_element.find("a")
+            if isinstance(a_tag, Tag):
+                url = a_tag.get("href")
+                url_list.append(url)
+
+    return url_list
 
 
 def get_archive_page_url(targetdate: datetime.date) -> str:
