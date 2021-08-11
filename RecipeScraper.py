@@ -190,17 +190,9 @@ def get_recipe_details_from_url(url: str) -> Recipe:
         ingredient_container = get_ingredient_container(soup)
         ingredient_elements = get_ingredient_elements(ingredient_container)
 
-        for i in ingredient_elements:
-            current_amount = get_current_amount(i)
-            current_unit = get_current_unit(i)
-            if current_unit:
-                current_unit = current_unit.string
-            current_name = get_ingredient_name(i)
-            current_price = get_ingredient_price(i)
-            current_price = float(format_price(current_price))
-
-            current_ingredient = Ingredient(
-                current_name, current_amount, current_unit, current_price)
+        for ingredient_element in ingredient_elements:
+            current_ingredient = get_ingredient_from_element(
+                ingredient_element)
             ingredient_list.append(current_ingredient)
 
         current_ingredient_set = IngredientSet(ingredient_list)
@@ -215,6 +207,22 @@ def get_recipe_details_from_url(url: str) -> Recipe:
     except Exception:
         logging.exception(f"Error getting recipe details from url : {url}")
         raise
+
+
+# TODO: unit test this
+def get_ingredient_from_element(element: PageElement) -> Ingredient:
+    current_amount = get_current_amount(element)
+    current_unit = get_current_unit(element)
+    if current_unit:
+        current_unit = current_unit.string
+    current_name = get_ingredient_name(element)
+    current_price = get_ingredient_price(element)
+    current_price = float(format_price(current_price))
+
+    current_ingredient = Ingredient(
+        current_name, current_amount, current_unit, current_price)
+
+    return current_ingredient
 
 
 def get_ingredient_price(i):
