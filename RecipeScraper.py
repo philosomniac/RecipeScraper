@@ -47,6 +47,7 @@ def get_recipe_urls_from_archive_page(archiveurl: str) -> list:
         # html = page.read().decode("utf-8")
         # soup = BeautifulSoup(html, "html.parser")
         soup = get_parsed_html_from_url(archiveurl)
+
         articleElements = soup.find_all("article")
 
         articleElement: PageElement
