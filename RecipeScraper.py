@@ -45,7 +45,7 @@ def get_recipe_urls_from_archive_page(archiveurl: str) -> list:
         soup = get_parsed_html_from_url(archiveurl)
         article_elements = get_article_elements_from_page(soup)
         url_list.extend(
-            get_all_article_urls_from_article_elements(article_elements))
+            get_article_urls_from_article_elements(article_elements))
 
         return url_list
     except HTTPError:
@@ -56,7 +56,7 @@ def get_article_elements_from_page(soup: BeautifulSoup) -> ResultSet:
     return soup.find_all("article")
 
 
-def get_all_article_urls_from_article_elements(article_elements: ResultSet) -> list:
+def get_article_urls_from_article_elements(article_elements: ResultSet) -> list:
     url_list = []
     article_element: PageElement
     for article_element in article_elements:
@@ -69,9 +69,9 @@ def get_all_article_urls_from_article_elements(article_elements: ResultSet) -> l
     return url_list
 
 
-def get_archive_page_url(targetdate: datetime.date) -> str:
+def get_archive_page_url_from_date(targetdate: datetime.date) -> str:
     paddedmonth = str(targetdate.month).zfill(2)
-    return "https://budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
+    return "https://www.budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
 
 
 def get_parsed_html_from_url(url: str) -> BeautifulSoup:
@@ -102,7 +102,7 @@ def scrape_full_recipe_URL_list():
                 break
             # print(currentdate)
             # print(get_archive_page_url(currentdate))
-            currentpage = get_archive_page_url(currentdate)
+            currentpage = get_archive_page_url_from_date(currentdate)
             recipe_url_list.extend(
                 get_recipe_urls_from_archive_page(currentpage))
             print("completed date: " + str(currentdate))
