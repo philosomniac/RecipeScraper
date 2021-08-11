@@ -2,6 +2,7 @@ from os import link
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import datetime
+from bs4.element import PageElement, ResultSet, Tag
 from dateutil.relativedelta import relativedelta
 from urllib.error import HTTPError
 import logging
@@ -38,7 +39,7 @@ def close_logging():
     logging.info('Finished')
 
 
-def get_recipe_urls_from_archive_page(archiveurl):
+def get_recipe_urls_from_archive_page(archiveurl: str) -> list:
     linklist = []
     try:
         # req = Request(archiveurl, headers={'User-Agent': 'Mozilla/5.0'})
@@ -48,20 +49,26 @@ def get_recipe_urls_from_archive_page(archiveurl):
         soup = get_parsed_html_from_url(archiveurl)
         articleElements = soup.find_all("article")
 
-        for a in articleElements:
-            linklist.append(a.find("a").get("href"))
+        articleElement: PageElement
+        for articleElement in articleElements:
+            if isinstance(articleElement, Tag):
+                a_tag = articleElement.find("a")
+                if isinstance(a_tag, Tag):
+                    link_text = a_tag.get("href")
+
+                    linklist.append(link_text)
 
         return linklist
     except HTTPError:
         return linklist
 
 
-def get_archive_page_url(targetdate):
+def get_archive_page_url(targetdate: datetime.date) -> str:
     paddedmonth = str(targetdate.month).zfill(2)
     return "https://budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
 
 
-def get_parsed_html_from_url(url):
+def get_parsed_html_from_url(url: str) -> BeautifulSoup:
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     page = urlopen(req)
     html = page.read().decode("utf-8")
@@ -97,7 +104,7 @@ def scrape_full_recipe_URL_list():
         recipefile.writelines(l + '\n' for l in recipe_url_list)
 
 
-def get_recipe_urls(starting_line_index):
+def get_recipe_urls(starting_line_index: int) -> list:
     with open("BudgetBytesRecipes.txt") as recipefile:
         recipe_urls = [line.strip() for line in recipefile]
         return recipe_urls[starting_line_index-1:]
@@ -148,11 +155,11 @@ class Step:
         pass
 
 
-def format_price(s):
+def format_price(s: str) -> str:
     return s.replace("(", "").replace(")", "").replace("$", "")
 
 
-def get_recipe_details_from_url(url):
+def get_recipe_details_from_url(url: str) -> Recipe:
     try:
         logging.info(f"getting recipe details from url: {url}")
         soup = get_parsed_html_from_url(url)
@@ -283,4 +290,4 @@ def Main():
     close_logging()
 
 
-Main()
+# Main()
