@@ -156,13 +156,13 @@ def get_recipe_details_from_url(url: str) -> Recipe:
         cost_string = get_cost_string(soup)
 
         # TODO: Parse time strings into actual times
-        total_time = get_total_time(soup)
+        # total_time = get_total_time(soup)
         prep_time = get_prep_time(soup)
         cook_time = get_cook_time(soup)
         servings = get_servings(soup)
-        servings_unit = get_servings_unit(soup)
+        # servings_unit = get_servings_unit(soup)
 
-        img_url = get_img_url(soup)
+        # img_url = get_img_url(soup)
 
         ingredient_list = []
 
@@ -275,7 +275,8 @@ def Main():
     recipe_urls = get_recipe_urls(startline)
 
     for i in range(10):
-        current_recipe = get_recipe_details_from_url(recipe_urls[i])
+        # current_recipe = get_recipe_details_from_url(recipe_urls[i])
+        pass
 
     close_logging()
 
