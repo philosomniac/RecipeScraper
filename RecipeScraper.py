@@ -211,9 +211,8 @@ def get_recipe_details_from_url(url: str) -> Recipe:
                                 cost_string, cost_string, servings, prep_time, cook_time, None)
 
         return current_recipe
-        pass
 
-    except Exception as e:
+    except Exception:
         logging.exception(f"Error getting recipe details from url : {url}")
         raise
 
@@ -283,7 +282,7 @@ pass
 def Main():
     setup_logging()
 
-    my_recipes = []
+    # my_recipes = []
     recipe_urls = []
     startline = 3
     recipe_urls = get_recipe_urls(startline)
