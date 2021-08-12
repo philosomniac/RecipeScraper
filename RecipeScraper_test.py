@@ -1,3 +1,4 @@
+from RecipeDetailScraper import RecipeDetailScraper
 from datetime import datetime
 from RecipeURLRetriever import RecipeURLRetriever
 import os
@@ -5,6 +6,7 @@ import filecmp
 import ScraperCommon
 
 retriever = RecipeURLRetriever()
+detail_scraper = RecipeDetailScraper()
 
 
 def test_get_recipe_urls_from_archive_page():
@@ -56,3 +58,8 @@ def test_scrape_full_recipe_URL_list():
 #     soup = ScraperCommon.get_soup_from_test_file(test_file_name)
 
 #     pass
+
+# def test_get_ingredient_elements():
+#     test_recipe_url = "https://www.budgetbytes.com/vegetable-fritters-with-garlic-herb-sauce/"
+#     soup = ScraperCommon.get_parsed_html_from_url(test_recipe_url)
+#     ingredient_elements = detail_scraper.

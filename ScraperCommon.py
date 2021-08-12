@@ -14,16 +14,20 @@ def get_parsed_html_from_url(url: str) -> BeautifulSoup:
     return soup
 
 
-def save_soup_to_file(url: str, file_name: str):
+def save_html_from_url_to_file(url: str, file_name: str):
     soup = get_parsed_html_from_url(url)
-    file_path = TestSoupFilePath + file_name
-    with open(file_path, "w", encoding='utf-8') as output_file:
-        output_file.write(str(soup))
+    save_html_to_file(soup, file_name)
 
 
-def get_soup_from_test_file(file_name: str) -> BeautifulSoup:
+def get_html_from_test_file(file_name: str) -> BeautifulSoup:
     file_path = TestSoupFilePath + file_name
     with open(file_path, encoding="utf-8") as html_file:
         soup = BeautifulSoup(html_file, "html.parser")
 
     return soup
+
+
+def save_html_to_file(soup: BeautifulSoup, file_name: str):
+    file_path = TestSoupFilePath + file_name
+    with open(file_path, "w", encoding='utf-8') as output_file:
+        output_file.write(str(soup))

@@ -15,27 +15,27 @@ class RecipeDetailScraper():
             # TODO: extract method for each recipe attribute.
             # TODO: wrap each operation in a try block(?)
             # TODO: log events
-            recipe_title = get_recipe_title(soup)
+            recipe_title = self.get_recipe_title(soup)
 
             # TODO: Parse the cost into real data
-            cost_string = get_cost_string(soup)
+            cost_string = self.get_cost_string(soup)
 
             # TODO: Parse time strings into actual times
             # total_time = get_total_time(soup)
-            prep_time = get_prep_time(soup)
-            cook_time = get_cook_time(soup)
-            servings = get_servings(soup)
+            prep_time = self.get_prep_time(soup)
+            cook_time = self.get_cook_time(soup)
+            servings = self.get_servings(soup)
             # servings_unit = get_servings_unit(soup)
 
             # img_url = get_img_url(soup)
 
             ingredient_list = []
 
-            ingredient_container = get_ingredient_container(soup)
-            ingredient_elements = get_ingredient_elements(ingredient_container)
+            # ingredient_container = get_ingredient_container(soup)
+            ingredient_elements = self.get_ingredient_elements(soup)
 
             for ingredient_element in ingredient_elements:
-                current_ingredient = get_ingredient_from_element(
+                current_ingredient = self.get_ingredient_from_element(
                     ingredient_element)
                 ingredient_list.append(current_ingredient)
 
@@ -52,84 +52,69 @@ class RecipeDetailScraper():
             logging.exception(f"Error getting recipe details from url : {url}")
             raise
 
+    # TODO: unit test this
 
-# TODO: unit test this
-def get_ingredient_from_element(element: PageElement) -> Ingredient:
-    current_amount = get_current_amount(element)
-    current_unit = get_current_unit(element)
-    if current_unit:
-        current_unit = current_unit.string
-    current_name = get_ingredient_name(element)
-    current_price = get_ingredient_price(element)
-    current_price = float(format_price(current_price))
+    def get_ingredient_from_element(self, element: PageElement) -> Ingredient:
+        current_amount = self.get_current_amount(element)
+        current_unit = self.get_current_unit(element)
+        if current_unit:
+            current_unit = current_unit.string
+        current_name = self.get_ingredient_name(element)
+        current_price = self.get_ingredient_price(element)
+        current_price = float(self.format_price(current_price))
 
-    current_ingredient = Ingredient(
-        current_name, current_amount, current_unit, current_price)
+        current_ingredient = Ingredient(
+            current_name, current_amount, current_unit, current_price)
 
-    return current_ingredient
+        return current_ingredient
 
+    def get_recipe_urls(self, starting_line_index: int) -> list:
+        with open("BudgetBytesRecipes.txt") as recipefile:
+            recipe_urls = [line.strip() for line in recipefile]
+            return recipe_urls[starting_line_index-1:]
 
-def get_recipe_urls(self, starting_line_index: int) -> list:
-    with open("BudgetBytesRecipes.txt") as recipefile:
-        recipe_urls = [line.strip() for line in recipefile]
-        return recipe_urls[starting_line_index-1:]
+    def format_price(self, s: str) -> str:
+        return s.replace("(", "").replace(")", "").replace("$", "")
 
+    def get_ingredient_price(self, i):
+        return i.find(class_="wprm-recipe-ingredient-notes").string
 
-def format_price(s: str) -> str:
-    return s.replace("(", "").replace(")", "").replace("$", "")
+    def get_ingredient_name(self, i):
+        return i.find(class_="wprm-recipe-ingredient-name").string
 
+    def get_current_unit(self, i):
+        return i.find(class_="wprm-recipe-ingredient-unit")
 
-def get_ingredient_price(i):
-    return i.find(class_="wprm-recipe-ingredient-notes").string
+    def get_current_amount(self, i):
+        return i.find(class_="wprm-recipe-ingredient-amount").string
 
+    def get_ingredient_elements(self, soup):
+        ingredient_container = self.get_ingredient_container(soup)
+        return ingredient_container.find_all(class_="wprm-recipe-ingredient")
 
-def get_ingredient_name(i):
-    return i.find(class_="wprm-recipe-ingredient-name").string
+    def get_ingredient_container(self, soup):
+        return soup.find(class_="wprm-recipe-ingredients-container")
 
+    def get_img_url(self, soup):
+        return soup.find(class_="wprm-recipe-image").img['data-src']
 
-def get_current_unit(i):
-    return i.find(class_="wprm-recipe-ingredient-unit")
+    def get_servings_unit(self, soup):
+        return soup.find(class_="wprm-recipe-servings-unit").string
 
+    def get_servings(self, soup):
+        return soup.find(class_="wprm-recipe-servings").string
 
-def get_current_amount(i):
-    return i.find(class_="wprm-recipe-ingredient-amount").string
+    def get_cook_time(self, soup):
+        return soup.find(class_="wprm-recipe-cook-time-container").get_text().strip()
 
+    def get_prep_time(self, soup):
+        return soup.find(class_="wprm-recipe-prep-time-container").get_text().strip()
 
-def get_ingredient_elements(ingredient_container):
-    return ingredient_container.find_all(class_="wprm-recipe-ingredient")
+    def get_total_time(self, soup):
+        return soup.find(class_="wprm-recipe-total-time-container").get_text().strip()
 
+    def get_cost_string(self, soup):
+        return soup.find(class_="wprm-recipe-recipe_cost").string
 
-def get_ingredient_container(soup):
-    return soup.find(class_="wprm-recipe-ingredients-container")
-
-
-def get_img_url(soup):
-    return soup.find(class_="wprm-recipe-image").img['data-src']
-
-
-def get_servings_unit(soup):
-    return soup.find(class_="wprm-recipe-servings-unit").string
-
-
-def get_servings(soup):
-    return soup.find(class_="wprm-recipe-servings").string
-
-
-def get_cook_time(soup):
-    return soup.find(class_="wprm-recipe-cook-time-container").get_text().strip()
-
-
-def get_prep_time(soup):
-    return soup.find(class_="wprm-recipe-prep-time-container").get_text().strip()
-
-
-def get_total_time(soup):
-    return soup.find(class_="wprm-recipe-total-time-container").get_text().strip()
-
-
-def get_cost_string(soup):
-    return soup.find(class_="wprm-recipe-recipe_cost").string
-
-
-def get_recipe_title(soup):
-    return soup.find(class_="wprm-recipe-name").string
+    def get_recipe_title(self, soup):
+        return soup.find(class_="wprm-recipe-name").string

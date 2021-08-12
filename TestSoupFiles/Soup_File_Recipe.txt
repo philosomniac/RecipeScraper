@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<!-- https://www.budgetbytes.com/vegetable-fritters-with-garlic-herb-sauce/ -->
+
 <!--[if lt IE 7]>
 <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
 <!--[if IE 7]>
@@ -88,13 +90,19 @@ l0.type='text/css';l0.rel='stylesheet';l0.media='screen';document.getElementsByT
 <link href="//gstaticadssl.l.google.com" rel="dns-prefetch">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link as="style" crossorigin="" href="https://www.budgetbytes.com/wp-content/plugins/thrive-leads/editor-layouts/css/frontend.css?ver=2.1.6" rel="preload"/><link as="style" crossorigin="" href="https://www.budgetbytes.com/wp-includes/css/jquery-ui-dialog.min.css" rel="preload"/><link as="style" crossorigin="" href="https://www.budgetbytes.com/wp-includes/css/dashicons.min.css" rel="preload"/><link href="https://www.budgetbytes.com/vegetable-fritters-with-garlic-herb-sauce/feed/" rel="alternate" title="Budget Bytes » Vegetable Fritters with Garlic Herb Sauce Comments Feed" type="application/rss+xml">
-<script>function cpLoadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];return i.rel="stylesheet",i.href=e,i.media="only x",o.parentNode.insertBefore(i,o),setTimeout(function(){i.media=n||"all"}),i}</script><style>.cp-popup-container .cpro-overlay,.cp-popup-container .cp-popup-wrapper{opacity:0;visibility:hidden;display:none}</style><script>wprmInited=!1;
-isNearViewwprm=function(t){if(!t)return;var n=t.getBoundingClientRect();return 1800>n.top||-1800>n.top};function lazywprm1(){
+<script>function cpLoadCSS(e,t,n){"use strict";var i=window.document.createElement("link"),o=t||window.document.getElementsByTagName("script")[0];return i.rel="stylesheet",i.href=e,i.media="only x",o.parentNode.insertBefore(i,o),setTimeout(function(){i.media=n||"all"}),i}</script><style>.cp-popup-container .cpro-overlay,.cp-popup-container .cp-popup-wrapper{opacity:0;visibility:hidden;display:none}</style><script>wprmInited=!1;
+
+isNearViewwprm=function(t){if(!t)return;var n=t.getBoundingClientRect();return 1800>n.top||-1800>n.top};function lazywprm1(){
+
 if(wprmInited||!isNearViewwprm(document.querySelector('.wprm-recipe-container')))return;wprmInited=!0;console.log('load css / js [2/0] /plugins/wp-recipe-maker-premium/templates/recipe/legacy/side-by-side/side-by-side.min.css');
-var l0=document.createElement('link');l0.href='/wp-content/plugins/wp-recipe-maker/dist/public-modern.css';
-l0.type='text/css';l0.rel='stylesheet';l0.media='screen';document.getElementsByTagName('head')[0].appendChild(l0);
-var l1=document.createElement('link');l1.href='/wp-content/plugins/wp-recipe-maker-premium/dist/public-elite.css';
-l1.type='text/css';l1.rel='stylesheet';l1.media='screen';document.getElementsByTagName('head')[0].appendChild(l1);
+var l0=document.createElement('link');l0.href='/wp-content/plugins/wp-recipe-maker/dist/public-modern.css';
+
+l0.type='text/css';l0.rel='stylesheet';l0.media='screen';document.getElementsByTagName('head')[0].appendChild(l0);
+
+var l1=document.createElement('link');l1.href='/wp-content/plugins/wp-recipe-maker-premium/dist/public-elite.css';
+
+l1.type='text/css';l1.rel='stylesheet';l1.media='screen';document.getElementsByTagName('head')[0].appendChild(l1);
+
 var s=document.createElement('script');s.onload=function(){};s.src='/wp-content/plugins/wp-recipe-maker/dist/public-modern.js';document.head.appendChild(s);setTimeout(function(){var t=document.createElement('script');t.onload=function(){};t.src='/wp-content/plugins/wp-recipe-maker-premium/dist/public-elite.js';document.head.appendChild(t)},240);}document.addEventListener('scroll',function(){if(window.scrollY>166)lazywprm1()});document.addEventListener('touchend',lazywprm1);document.addEventListener('resize',lazywprm1)</script>
 <script>document.addEventListener('DOMContentLoaded', function(event) {  if( typeof cpLoadCSS !== 'undefined' ) { cpLoadCSS('https://www.budgetbytes.com/wp-content/plugins/convertpro/assets/modules/css/cp-popup.min.css', 0, 'all'); } }); </script>
 <script async="async" data-cfasync="false" data-noptimize="1" id="mv-script-wrapper-js" src="https://scripts.mediavine.com/tags/budget-bytes-new-owner.js" type="text/javascript"></script>
@@ -160,40 +168,74 @@ var pl_js_object = {"admin_ajax_url":"https:\/\/www.budgetbytes.com\/wp-admin\/a
 						.dpsp-networks-btns-wrapper.dpsp-networks-btns-content .dpsp-network-btn {--networkHover: rgba(0, 0, 0, 0.4); --networkAccent: rgba(0, 0, 0, 1);}</style><style></style><style type="text/css"> .wprm-comment-rating svg { width: 16px !important; height: 16px !important; } img.wprm-comment-rating { width: 80px !important; height: 16px !important; } .wprm-comment-rating svg path { fill: #fcc51c; } .wprm-comment-rating svg polygon { stroke: #fcc51c; } .wprm-comment-ratings-container svg .wprm-star-full { fill: #fcc51c; } .wprm-comment-ratings-container svg .wprm-star-empty { stroke: #fcc51c; }.span_content .wprm-recipe ul.wprm-recipe-instructions li {
 list-style-type: decimal!important;
 }
-</style><style>
-@media (max-width: 536px){
-	.home-about-section.app img {
-		max-width: 100%;
-	}
-	.home-about-section.about {
-		position: initial;
-	}
-	.home-about-section p {
-		width: 100%;
-		display: block !important;
-		clear: both;
-		float: none;
-		text-align: center;
-	}
-	.home-about-section.about img {
-		position: initial;
-	}
-	.home-about-section.about {
-		padding: 5%;
-		text-align: center;
-		position: relative;
-	}
-	.home-about-section.about img {
-		position: initial;
-		float: none;
-		margin: 0 auto;
-	}
-	.home-about-section.about:before {
-		top: 50px;
-		right: 20%;
-		left: auto;
-	}
-}
+</style><style>
+
+@media (max-width: 536px){
+
+	.home-about-section.app img {
+
+		max-width: 100%;
+
+	}
+
+	.home-about-section.about {
+
+		position: initial;
+
+	}
+
+	.home-about-section p {
+
+		width: 100%;
+
+		display: block !important;
+
+		clear: both;
+
+		float: none;
+
+		text-align: center;
+
+	}
+
+	.home-about-section.about img {
+
+		position: initial;
+
+	}
+
+	.home-about-section.about {
+
+		padding: 5%;
+
+		text-align: center;
+
+		position: relative;
+
+	}
+
+	.home-about-section.about img {
+
+		position: initial;
+
+		float: none;
+
+		margin: 0 auto;
+
+	}
+
+	.home-about-section.about:before {
+
+		top: 50px;
+
+		right: 20%;
+
+		left: auto;
+
+	}
+
+}
+
 </style>
 <style id="wp-custom-css" type="text/css">
 			.single-post .dpsp-networks-btns-wrapper li {
@@ -663,7 +705,8 @@ main.content h2 {
 <a href="https://www.budgetbytes.com/lostpassword">Forgot Password</a>
 </div>
 </div>
-<!--<a href="" title="Your Cart" class="cart-icon"><i
+<!--<a href="" title="Your Cart" class="cart-icon"><i
+
             class="fa fa-shopping-cart"></i><span class="cart-count">0</span></a>--> </div>
 <form action="https://www.budgetbytes.com/" class="header-search search-form" method="get">
 <input class="search-input" id="s" name="s" placeholder="search recipes" type="text" value=""/>
@@ -1503,19 +1546,32 @@ main.content h2 {
 </div><!-- Overlay -->
 </div><!-- Modal popup container -->
 <!-- Custom Feeds for Instagram JS -->
-<script data-rocket-type="text/javascript" type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
-var sbiajaxurl = "https://www.budgetbytes.com/wp-admin/admin-ajax.php";
-window.sbi_custom_js = function(){
-$ = jQuery;
-jQuery('.sbi_item').each(function() {
-var $item = jQuery(this);
-var srcSet = JSON.parse($item.find('.sbi_photo').attr('data-img-src-set').replace(/\\\//g, '/'));
-if (typeof srcSet[150] !== 'undefined' && $item.find('.sbi_photo img').attr('data-lazy-src').indexOf('placeholder') > -1) {
-$item.find('.sbi_photo img').attr('src', srcSet[150]);
-$item.find('.sbi_photo').css('background-image', 'url(' + srcSet[150] + ')');
-}
-});}
-    
+<script data-rocket-type="text/javascript" type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+
+var sbiajaxurl = "https://www.budgetbytes.com/wp-admin/admin-ajax.php";
+
+window.sbi_custom_js = function(){
+
+$ = jQuery;
+
+jQuery('.sbi_item').each(function() {
+
+var $item = jQuery(this);
+
+var srcSet = JSON.parse($item.find('.sbi_photo').attr('data-img-src-set').replace(/\\\//g, '/'));
+
+if (typeof srcSet[150] !== 'undefined' && $item.find('.sbi_photo img').attr('data-lazy-src').indexOf('placeholder') > -1) {
+
+$item.find('.sbi_photo img').attr('src', srcSet[150]);
+
+$item.find('.sbi_photo').css('background-image', 'url(' + srcSet[150] + ')');
+
+}
+
+});}
+
+    
+
 });</script>
 <!-- YouTube Feed JS -->
 <script data-rocket-type="text/javascript" type="rocketlazyloadscript">
@@ -1565,27 +1621,48 @@ var cp_v2_ab_tests = {"cp_v2_ab_tests_object":[]};
 </script>
 <script data-rocket-type="text/javascript" defer="defer" id="cp-popup-script-js" src="https://www.budgetbytes.com/wp-content/plugins/convertpro/assets/modules/js/cp-popup.min.js" type="rocketlazyloadscript"></script>
 <script data-rocket-type="text/javascript" id="flying-images" type="rocketlazyloadscript">"use strict";window.FIConfig={lazyMethod:"nativejavascript",lazyMargin:300};var flyingImages=function(){var a=document.querySelectorAll("[data-loading=\"lazy\"]");if(window.FIConfig.lazyMethod.includes("native")&&"loading"in HTMLImageElement.prototype)a.forEach(function(a){a.removeAttribute("data-loading"),a.setAttribute("loading","lazy"),a.dataset.srcset&&(a.srcset=a.dataset.srcset),a.src=a.dataset.src});else if(window.IntersectionObserver){var b=new IntersectionObserver(function(a){a.forEach(function(a){a.isIntersecting&&(b.unobserve(a.target),a.target.dataset.srcset&&(a.target.srcset=a.target.dataset.srcset),a.target.src=a.target.dataset.src,a.target.classList.add("lazyloaded"),a.target.removeAttribute("data-loading"))})},{rootMargin:window.FIConfig.lazyMargin+"px"});a.forEach(function(a){b.observe(a)})}else for(var c=0;c<a.length;c++)a[c].dataset.srcset&&(a[c].srcset=a[c].dataset.srcset),a[c].src=a[c].dataset.src};flyingImages();function throttle(a,b){var c=!1;return function(){c||(a.apply(null,arguments),c=!0,setTimeout(function(){c=!1},b))}}var dynamicContentObserver=new MutationObserver(throttle(flyingImages,125));dynamicContentObserver.observe(document.body,{attributes:!0,childList:!0,subtree:!0}),function(){var a=document.querySelectorAll("[data-loading=\"lazy-background\"]");if(window.IntersectionObserver){var d=new IntersectionObserver(function(a){a.forEach(function(a){if(a.isIntersecting){d.unobserve(a.target);var b=a.target.getAttribute("style"),c=b.replace("background:none;","");a.target.setAttribute("style",c),a.target.removeAttribute("data-loading")}})},{rootMargin:window.FIConfig.lazyMargin+"px"});a.forEach(function(a){d.observe(a)})}else for(var e=0;e<a.length;e++){var b=a[e].target.getAttribute("style"),c=b.replace("background:none;","");a[e].target.setAttribute("style",c),a[e].target.removeAttribute("data-loading")}}();</script>
-<script data-rocket-type="text/javascript" type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
-
-				jQuery(document).on( "cp_after_form_submit", function( e, element, response
-					, style_slug ) {
-
-					if( false == response.data.error ) {
-
-						if( 'undefined' !== typeof response.data['cfox_data']  ) {
-							var form_data = JSON.parse( response.data['cfox_data']  );
-
-							form_data.overwrite_tags = false;
-
-							if( 'undefined' !== typeof convertfox ) {
-								convertfox.identify( form_data );
-							}
-						}
-					}
-
-				});
-
-
+<script data-rocket-type="text/javascript" type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+
+
+
+				jQuery(document).on( "cp_after_form_submit", function( e, element, response
+
+					, style_slug ) {
+
+
+
+					if( false == response.data.error ) {
+
+
+
+						if( 'undefined' !== typeof response.data['cfox_data']  ) {
+
+							var form_data = JSON.parse( response.data['cfox_data']  );
+
+
+
+							form_data.overwrite_tags = false;
+
+
+
+							if( 'undefined' !== typeof convertfox ) {
+
+								convertfox.identify( form_data );
+
+							}
+
+						}
+
+					}
+
+
+
+				});
+
+
+
+
+
 			});</script>
 <style type="text/css">.wprm-recipe-template-custom {
     margin: 20px auto;
@@ -1679,7 +1756,8 @@ var cp_v2_ab_tests = {"cp_v2_ab_tests_object":[]};
 }
 .wprm-recipe-template-custom-snippets a:last-child {
     margin-right: 0;
-}</style><script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {ytInited=!1;function lazyLoadYT(){if(ytInited)return;jQuery('iframe[data-yt-src]').each(function(){var e=jQuery(this),vidSource=jQuery(e).attr('data-yt-src'),distance=jQuery(e).offset().top-jQuery(window).scrollTop(),distTopBot=window.innerHeight-distance,distBotTop=distance+jQuery(e).height();if(distTopBot>-2200&&distBotTop>-2200){ytInited=!0;jQuery(e).attr('src',vidSource);jQuery(e).removeAttr('data-yt-src');console.log('ll youtube')}})}
+}</style><script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {ytInited=!1;function lazyLoadYT(){if(ytInited)return;jQuery('iframe[data-yt-src]').each(function(){var e=jQuery(this),vidSource=jQuery(e).attr('data-yt-src'),distance=jQuery(e).offset().top-jQuery(window).scrollTop(),distTopBot=window.innerHeight-distance,distBotTop=distance+jQuery(e).height();if(distTopBot>-2200&&distBotTop>-2200){ytInited=!0;jQuery(e).attr('src',vidSource);jQuery(e).removeAttr('data-yt-src');console.log('ll youtube')}})}
+
 document.addEventListener('scroll',lazyLoadYT)});</script>
 <!--393 queries. 0.475 seconds-->
 </div>
