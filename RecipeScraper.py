@@ -7,6 +7,8 @@ from urllib.error import HTTPError
 import logging
 
 from Models.Recipe import Recipe
+from Models.Ingredient import Ingredient
+from Models.IngredientSet import IngredientSet
 
 
 def get_recipe_urls_from_archive_page(archiveurl: str) -> list:
@@ -89,36 +91,6 @@ def setup_logging():
 
 def close_logging():
     logging.info('Finished')
-
-
-class IngredientSet:
-    def __init__(self, ingredient_list):
-        self.ingredients = ingredient_list
-        pass
-
-
-class Ingredient:
-    def __init__(self, name, amount, unit, price):
-        self.name = name
-        self.amount = amount
-        self.unit = unit
-        self.price = price
-        pass
-
-
-class MeasurementUnit:
-    def __init__(self, name):
-        pass
-
-
-class InstructionSet:
-    def __init__(self, step_list):
-        pass
-
-
-class Step:
-    def __init__(self):
-        pass
 
 
 def format_price(s: str) -> str:
