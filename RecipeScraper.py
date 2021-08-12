@@ -1,17 +1,4 @@
-from bs4 import BeautifulSoup
-from urllib.request import urlopen, Request
-import datetime
-from bs4.element import PageElement, ResultSet, Tag
-
-from urllib.error import HTTPError
 import logging
-
-from Models.Recipe import Recipe
-from Models.Ingredient import Ingredient
-from Models.IngredientSet import IngredientSet
-
-import RecipeURLRetriever
-import ScraperCommon
 
 
 def setup_logging():
