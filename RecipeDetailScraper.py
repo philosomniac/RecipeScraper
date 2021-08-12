@@ -52,9 +52,8 @@ class RecipeDetailScraper():
             logging.exception(f"Error getting recipe details from url : {url}")
             raise
 
+
 # TODO: unit test this
-
-
 def get_ingredient_from_element(element: PageElement) -> Ingredient:
     current_amount = get_current_amount(element)
     current_unit = get_current_unit(element)
