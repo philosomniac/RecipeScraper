@@ -76,17 +76,17 @@ class RecipeDetailScraper():
     def format_price(self, s: str) -> str:
         return s.replace("(", "").replace(")", "").replace("$", "")
 
-    def get_ingredient_price(self, i):
-        return i.find(class_="wprm-recipe-ingredient-notes").string
+    def get_ingredient_price(self, element):
+        return element.find(class_="wprm-recipe-ingredient-notes").string
 
-    def get_ingredient_name(self, i):
-        return i.find(class_="wprm-recipe-ingredient-name").string
+    def get_ingredient_name(self, element):
+        return element.find(class_="wprm-recipe-ingredient-name").string
 
-    def get_current_unit(self, i):
-        return i.find(class_="wprm-recipe-ingredient-unit")
+    def get_current_unit(self, element):
+        return element.find(class_="wprm-recipe-ingredient-unit")
 
-    def get_current_amount(self, i):
-        return i.find(class_="wprm-recipe-ingredient-amount").string
+    def get_current_amount(self, element):
+        return element.find(class_="wprm-recipe-ingredient-amount").string
 
     def get_ingredient_elements(self, soup):
         ingredient_container = self.get_ingredient_container(soup)
