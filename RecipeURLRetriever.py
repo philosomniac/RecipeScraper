@@ -10,6 +10,29 @@ import ScraperCommon
 
 class RecipeURLRetriever():
 
+    def scrape_full_recipe_URL_list(self, recipe_file_path: str):
+        """Function: Retrieve Recipe List"""
+
+        recipe_url_list = []
+
+        archive_start_date = datetime.date(2009, 5, 1)
+        archive_end_date = datetime.date(
+            datetime.date.today().year, datetime.date.today().month, 1)
+
+        with open(recipe_file_path, 'w') as recipefile:
+            for i in range(0, 1000):
+                currentdate = datetime.date(
+                    archive_start_date.year, archive_start_date.month, archive_start_date.day)
+                currentdate = currentdate + relativedelta(months=+i)
+                if currentdate == archive_end_date:
+                    break
+                currentpage = self.get_archive_page_url_from_date(currentdate)
+                recipe_url_list.extend(
+                    self.get_recipe_urls_from_archive_page(currentpage))
+                print("completed date: " + str(currentdate))
+
+            recipefile.writelines(l + '\n' for l in recipe_url_list)
+
     def get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
         """Function: Retrieve Recipe List"""
         paddedmonth = str(targetdate.month).zfill(2)
@@ -45,26 +68,3 @@ class RecipeURLRetriever():
                     url_list.append(url)
 
         return url_list
-
-    def scrape_full_recipe_URL_list(self, recipe_file_path):
-        """Function: Retrieve Recipe List"""
-
-        recipe_url_list = []
-
-        archive_start_date = datetime.date(2009, 5, 1)
-        archive_end_date = datetime.date(
-            datetime.date.today().year, datetime.date.today().month, 1)
-
-        with open(recipe_file_path, 'w') as recipefile:
-            for i in range(0, 1000):
-                currentdate = datetime.date(
-                    archive_start_date.year, archive_start_date.month, archive_start_date.day)
-                currentdate = currentdate + relativedelta(months=+i)
-                if currentdate == archive_end_date:
-                    break
-                currentpage = self.get_archive_page_url_from_date(currentdate)
-                recipe_url_list.extend(
-                    self.get_recipe_urls_from_archive_page(currentpage))
-                print("completed date: " + str(currentdate))
-
-            recipefile.writelines(l + '\n' for l in recipe_url_list)
