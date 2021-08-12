@@ -11,15 +11,7 @@ from Models.Ingredient import Ingredient
 from Models.IngredientSet import IngredientSet
 
 import RecipeURLRetriever
-
-
-def get_parsed_html_from_url(url: str) -> BeautifulSoup:
-    """Function: General scraping"""
-    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    page = urlopen(req)
-    html = page.read().decode("utf-8")
-    soup = BeautifulSoup(html, "html.parser")
-    return soup
+import ScraperCommon
 
 
 def get_recipe_urls(starting_line_index: int) -> list:
@@ -50,7 +42,7 @@ def get_recipe_details_from_url(url: str) -> Recipe:
     """Function: Scrape Recipe Details"""
     try:
         logging.info(f"getting recipe details from url: {url}")
-        soup = get_parsed_html_from_url(url)
+        soup = ScraperCommon.get_parsed_html_from_url(url)
 
         # TODO: extract method for each recipe attribute.
         # TODO: wrap each operation in a try block(?)
