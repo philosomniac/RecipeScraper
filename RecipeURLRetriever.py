@@ -10,7 +10,7 @@ import ScraperCommon
 
 class RecipeURLRetriever():
 
-    def scrape_full_recipe_URL_list(self, recipe_file_path: str = "BudgetBytesRecipes.txt", month_limit: int = 1000):
+    def scrape_recipe_URL_list_to_file(self, recipe_file_path: str = "BudgetBytesRecipes.txt", month_limit: int = 1000):
         """Function: Retrieve Recipe List"""
 
         recipe_url_list = []
@@ -33,6 +33,7 @@ class RecipeURLRetriever():
                 print("completed date: " + str(currentdate))
 
             recipefile.writelines(l + '\n' for l in recipe_url_list)
+            return recipefile
 
     def _get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
         """Function: Retrieve Recipe List"""
