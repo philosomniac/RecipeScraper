@@ -54,7 +54,7 @@ def get_parsed_html_from_url(url: str) -> BeautifulSoup:
     return soup
 
 
-def scrape_full_recipe_URL_list():
+def scrape_full_recipe_URL_list(recipe_file_path):
 
     recipe_url_list = []
 
@@ -62,7 +62,7 @@ def scrape_full_recipe_URL_list():
     archive_end_date = datetime.date(
         datetime.date.today().year, datetime.date.today().month, 1)
 
-    with open("BudgetBytesRecipes.txt", 'w') as recipefile:
+    with open(recipe_file_path, 'w') as recipefile:
         for i in range(0, 1000):
             currentdate = datetime.date(
                 archive_start_date.year, archive_start_date.month, archive_start_date.day)
@@ -215,12 +215,6 @@ def get_recipe_title(soup):
     return soup.find(class_="wprm-recipe-name").string
 
 
-# my_recipe = get_recipe_details_from_url(
-#     "https://www.budgetbytes.com/beef-and-cauliflower-taco-skillet/")
-
-pass
-
-
 def Main():
     setup_logging()
 
@@ -232,6 +226,8 @@ def Main():
     # for i in range(10):
     #     # current_recipe = get_recipe_details_from_url(recipe_urls[i])
     #     pass
+
+    # recipe_file_path = "BudgetBytesRecipes.txt"
 
     close_logging()
 
