@@ -26,37 +26,37 @@ class RecipeURLRetriever():
                 currentdate = currentdate + relativedelta(months=+i)
                 if currentdate == archive_end_date:
                     break
-                currentpage = self.get_archive_page_url_from_date(currentdate)
+                currentpage = self._get_archive_page_url_from_date(currentdate)
                 recipe_url_list.extend(
-                    self.get_recipe_urls_from_archive_page(currentpage))
+                    self._get_recipe_urls_from_archive_page(currentpage))
                 print("completed date: " + str(currentdate))
 
             recipefile.writelines(l + '\n' for l in recipe_url_list)
 
-    def get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
+    def _get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
         """Function: Retrieve Recipe List"""
         paddedmonth = str(targetdate.month).zfill(2)
         return "https://www.budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
 
-    def get_recipe_urls_from_archive_page(self, archiveurl: str) -> list:
+    def _get_recipe_urls_from_archive_page(self, archiveurl: str) -> list:
         """Function: Retrieve Recipe List"""
         url_list = []
         try:
             soup = ScraperCommon.get_parsed_html_from_url(archiveurl)
-            article_elements = self.get_article_elements_from_page(soup)
+            article_elements = self._get_article_elements_from_page(soup)
             url_list.extend(
-                self.get_article_urls_from_article_elements(article_elements))
+                self._get_article_urls_from_article_elements(article_elements))
 
             return url_list
         except HTTPError:
             return url_list
 
-    def get_article_elements_from_page(self, soup: BeautifulSoup) -> ResultSet:
+    def _get_article_elements_from_page(self, soup: BeautifulSoup) -> ResultSet:
         """Function: Retrieve Recipe List"""
 
         return soup.find_all("article")
 
-    def get_article_urls_from_article_elements(self, article_elements: ResultSet) -> list:
+    def _get_article_urls_from_article_elements(self, article_elements: ResultSet) -> list:
         """Function: Retrieve Recipe List"""
         url_list = []
         article_element: PageElement
