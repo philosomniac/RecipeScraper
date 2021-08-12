@@ -34,7 +34,7 @@ def test_scrape_full_recipe_URL_list():
     retriever = RecipeURLRetriever()
     if os.path.exists(test_file_path):
         os.remove(test_file_path)
-    result_file = retriever.scrape_recipe_URL_list_to_file(
+    _ = retriever.scrape_recipe_URL_list_to_file(
         test_file_path, month_limit)
 
     compare_file_path = "BudgetBytesRecipes_test_compare.txt"
