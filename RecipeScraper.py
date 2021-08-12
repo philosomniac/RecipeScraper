@@ -41,11 +41,6 @@ def get_article_urls_from_article_elements(article_elements: ResultSet) -> list:
     return url_list
 
 
-def get_archive_page_url_from_date(targetdate: datetime.date) -> str:
-    paddedmonth = str(targetdate.month).zfill(2)
-    return "https://www.budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
-
-
 def get_parsed_html_from_url(url: str) -> BeautifulSoup:
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     page = urlopen(req)
@@ -75,6 +70,11 @@ def scrape_full_recipe_URL_list(recipe_file_path):
             print("completed date: " + str(currentdate))
 
         recipefile.writelines(l + '\n' for l in recipe_url_list)
+
+
+def get_archive_page_url_from_date(targetdate: datetime.date) -> str:
+    paddedmonth = str(targetdate.month).zfill(2)
+    return "https://www.budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
 
 
 def get_recipe_urls(starting_line_index: int) -> list:
