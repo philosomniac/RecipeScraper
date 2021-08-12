@@ -10,7 +10,7 @@ import ScraperCommon
 
 class RecipeURLRetriever():
 
-    def scrape_full_recipe_URL_list(self, recipe_file_path: str):
+    def scrape_full_recipe_URL_list(self, recipe_file_path: str = "BudgetBytesRecipes.txt", month_limit: int = 1000):
         """Function: Retrieve Recipe List"""
 
         recipe_url_list = []
@@ -20,10 +20,11 @@ class RecipeURLRetriever():
             datetime.date.today().year, datetime.date.today().month, 1)
 
         with open(recipe_file_path, 'w') as recipefile:
-            for i in range(0, 1000):
+            for month_counter in range(0, month_limit):
                 currentdate = datetime.date(
                     archive_start_date.year, archive_start_date.month, archive_start_date.day)
-                currentdate = currentdate + relativedelta(months=+i)
+                currentdate = currentdate + \
+                    relativedelta(months=+month_counter)
                 if currentdate == archive_end_date:
                     break
                 currentpage = self._get_archive_page_url_from_date(currentdate)
