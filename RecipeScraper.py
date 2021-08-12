@@ -6,15 +6,7 @@ from dateutil.relativedelta import relativedelta
 from urllib.error import HTTPError
 import logging
 
-
-def setup_logging():
-    logging.basicConfig(filename="recipescraper.log",
-                        encoding="utf-8", level=logging.INFO, format='%(asctime)s %(message)s')
-    logging.info('Started')
-
-
-def close_logging():
-    logging.info('Finished')
+from Models.Recipe import Recipe
 
 
 def get_recipe_urls_from_archive_page(archiveurl: str) -> list:
@@ -59,9 +51,6 @@ def get_parsed_html_from_url(url: str) -> BeautifulSoup:
     soup = BeautifulSoup(html, "html.parser")
     return soup
 
-# print(get_recipe_urls_from_archive_page(
-#     "https://www.budgetbytes.com/archive/2010/07"))
-
 
 def scrape_full_recipe_URL_list():
 
@@ -92,19 +81,14 @@ def get_recipe_urls(starting_line_index: int) -> list:
         return recipe_urls[starting_line_index-1:]
 
 
-class Recipe:
-    def __init__(self, url="", name=None, ingredient_set=None, total_cost=None, serving_cost=None, servings=None, prep_time=None, cook_time=None, instruction_set=None, img_url=None):
-        self.url = url
-        self.name = name
-        self.ingredient_set = ingredient_set
-        self.total_cost = total_cost
-        self.serving_cost = serving_cost
-        self.servings = servings
-        self.prep_time = prep_time
-        self.cook_time = cook_time
-        self.instruction_set = instruction_set
-        self.img_url = img_url
-        pass
+def setup_logging():
+    logging.basicConfig(filename="recipescraper.log",
+                        encoding="utf-8", level=logging.INFO, format='%(asctime)s %(message)s')
+    logging.info('Started')
+
+
+def close_logging():
+    logging.info('Finished')
 
 
 class IngredientSet:
