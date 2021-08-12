@@ -2,14 +2,12 @@ import logging
 
 
 def setup_logging():
-    """Function: Application"""
     logging.basicConfig(filename="recipescraper.log",
                         encoding="utf-8", level=logging.INFO, format='%(asctime)s %(message)s')
     logging.info('Started')
 
 
 def close_logging():
-    """Function: Application"""
     logging.info('Finished')
 
 
