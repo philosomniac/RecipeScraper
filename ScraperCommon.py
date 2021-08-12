@@ -1,3 +1,4 @@
+import os
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 
@@ -29,5 +30,7 @@ def get_html_from_test_file(file_name: str) -> BeautifulSoup:
 
 def save_html_to_file(soup: BeautifulSoup, file_name: str):
     file_path = TestSoupFilePath + file_name
+    if os.path.exists(file_path):
+        os.remove(file_path)
     with open(file_path, "w", encoding='utf-8') as output_file:
         output_file.write(str(soup))

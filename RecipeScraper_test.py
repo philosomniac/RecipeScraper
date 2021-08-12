@@ -1,3 +1,5 @@
+from Models.IngredientSet import IngredientSet
+from Models.Ingredient import Ingredient
 from RecipeDetailScraper import RecipeDetailScraper
 from datetime import datetime
 from RecipeURLRetriever import RecipeURLRetriever
@@ -53,13 +55,37 @@ def test_scrape_full_recipe_URL_list():
 #         test_recipe_url, "Soup_File_Non_Recipe.txt")
 
 # def test_get_soup_from_test_file():
-#     test_file_name = "Soup_File_Recipe.txt"
+#     test_file_name = "Test_elements.txt"
 #     print(os.getcwd())
-#     soup = ScraperCommon.get_soup_from_test_file(test_file_name)
+#     soup = ScraperCommon.get_html_from_test_file(test_file_name)
+
 
 #     pass
 
+
 # def test_get_ingredient_elements():
-#     test_recipe_url = "https://www.budgetbytes.com/vegetable-fritters-with-garlic-herb-sauce/"
+#     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
 #     soup = ScraperCommon.get_parsed_html_from_url(test_recipe_url)
-#     ingredient_elements = detail_scraper.
+#     ingredient_elements = detail_scraper.get_ingredient_elements(soup)
+
+#     ScraperCommon.save_html_to_file(ingredient_elements, "Test_elements.txt")
+
+
+def test_get_ingredient_list_from_html():
+    test_html = "Test_elements.txt"
+    soup = ScraperCommon.get_html_from_test_file(test_html)
+
+    target_ingredients = [
+        Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),
+        Ingredient("garlic", "2", "cloves", float("0.16")),
+        Ingredient("olive oil", "1", "tbsp", float("0.16")),
+        Ingredient("salt", "1/8", "tsp", float("0.02")),
+        Ingredient("freshly cracked black pepper",
+                   "1/8", "tsp", float("0.89")),
+        Ingredient("fresh lemon", "1", "", float("0.89"))
+    ]
+    target_ingredient_set = IngredientSet(target_ingredients)
+
+    actual_ingredients = detail_scraper.get_ingredient_set_from_elements(soup)
+
+    assert target_ingredient_set == actual_ingredients

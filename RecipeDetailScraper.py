@@ -29,17 +29,8 @@ class RecipeDetailScraper():
 
             # img_url = get_img_url(soup)
 
-            ingredient_list = []
-
-            # ingredient_container = get_ingredient_container(soup)
-            ingredient_elements = self.get_ingredient_elements(soup)
-
-            for ingredient_element in ingredient_elements:
-                current_ingredient = self.get_ingredient_from_element(
-                    ingredient_element)
-                ingredient_list.append(current_ingredient)
-
-            current_ingredient_set = IngredientSet(ingredient_list)
+            # ingredient_elements = self.get_ingredient_elements(soup)
+            current_ingredient_set = self.get_ingredient_set(soup)
 
             # TODO: get instruction set data and put into recipe class
 
@@ -52,7 +43,24 @@ class RecipeDetailScraper():
             logging.exception(f"Error getting recipe details from url : {url}")
             raise
 
+    def get_ingredient_set_from_elements(self, ingredient_elements):
+        ingredient_list = []
+
+        for ingredient_element in ingredient_elements:
+            current_ingredient = self.get_ingredient_from_element(
+                ingredient_element)
+            ingredient_list.append(current_ingredient)
+
+        current_ingredient_set = IngredientSet(ingredient_list)
+        return current_ingredient_set
+
+    def get_ingredient_set(self, soup):
+        ingredient_elements = self.get_ingredient_elements(soup)
+        return self.get_ingredient_set_from_elements(ingredient_elements)
+
     # TODO: unit test this
+
+    # TODO: add support for ingredient sections?
 
     def get_ingredient_from_element(self, element: PageElement) -> Ingredient:
         current_amount = self.get_current_amount(element)
