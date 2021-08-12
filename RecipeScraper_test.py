@@ -1,5 +1,4 @@
 from datetime import datetime
-import RecipeScraper
 from RecipeURLRetriever import RecipeURLRetriever
 
 
