@@ -5,16 +5,10 @@ from urllib.request import urlopen, Request
 from bs4.element import PageElement, ResultSet, Tag
 from urllib.error import HTTPError
 
+import ScraperCommon
+
 
 class RecipeURLRetriever():
-
-    def get_parsed_html_from_url(self, url: str) -> BeautifulSoup:
-        """Function: General scraping"""
-        req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        page = urlopen(req)
-        html = page.read().decode("utf-8")
-        soup = BeautifulSoup(html, "html.parser")
-        return soup
 
     def get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
         """Function: Retrieve Recipe List"""
@@ -25,7 +19,7 @@ class RecipeURLRetriever():
         """Function: Retrieve Recipe List"""
         url_list = []
         try:
-            soup = self.get_parsed_html_from_url(archiveurl)
+            soup = ScraperCommon.get_parsed_html_from_url(archiveurl)
             article_elements = self.get_article_elements_from_page(soup)
             url_list.extend(
                 self.get_article_urls_from_article_elements(article_elements))
