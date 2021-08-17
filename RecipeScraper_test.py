@@ -49,10 +49,10 @@ def test_scrape_full_recipe_URL_list():
     assert filecmp.cmp(test_file_path, compare_file_path, shallow=False)
 
 
-# def test_save_soup_to_file():
-#     test_recipe_url = "https://www.budgetbytes.com/prices-and-portions/"
-#     ScraperCommon.save_soup_to_file(
-#         test_recipe_url, "Soup_File_Non_Recipe.txt")
+def test_save_soup_to_file():
+    test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
+    ScraperCommon.save_html_from_url_to_file(
+        test_recipe_url, "Test_Lemon_Garlic_Asparagus.txt")
 
 # def test_get_soup_from_test_file():
 #     test_file_name = "Test_elements.txt"
@@ -72,8 +72,8 @@ def test_scrape_full_recipe_URL_list():
 
 
 def test_get_ingredient_list_from_html():
-    test_html = "Test_elements.txt"
-    soup = ScraperCommon.get_html_from_test_file(test_html)
+    test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
+    soup = ScraperCommon.get_html_from_test_file(test_html_file)
 
     target_ingredients = [
         Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),

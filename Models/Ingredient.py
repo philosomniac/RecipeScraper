@@ -5,3 +5,8 @@ class Ingredient:
         self.unit = unit
         self.price = price
         pass
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Ingredient):
+            return self.name == other.name
+        return False
