@@ -65,8 +65,6 @@ class RecipeDetailScraper():
     def get_ingredient_from_element(self, element: PageElement) -> Ingredient:
         current_amount = self.get_current_amount(element)
         current_unit = self.get_current_unit(element)
-        if current_unit:
-            current_unit = current_unit.string
         current_name = self.get_ingredient_name(element)
         current_price = self.get_ingredient_price(element)
         current_price = float(self.format_price(current_price))
@@ -85,20 +83,54 @@ class RecipeDetailScraper():
         return s.replace("(", "").replace(")", "").replace("$", "")
 
     def get_ingredient_price(self, element):
-        return element.find(class_="wprm-recipe-ingredient-notes").string
+        result = ""
+        if isinstance(element, Tag):
+            price_element = element.find(class_="wprm-recipe-ingredient-notes")
+            if price_element is not None:
+                result = price_element.string
+        if result is not None:
+            return result
+        else:
+            return ""
 
     def get_ingredient_name(self, element):
-        return element.find(class_="wprm-recipe-ingredient-name").string
+        result = ""
+        if isinstance(element, Tag):
+            ingredient_element = element.find(
+                class_="wprm-recipe-ingredient-name")
+            if ingredient_element is not None:
+                if ingredient_element.string is not None:
+                    result = ingredient_element.string
+        return result
 
-    def get_current_unit(self, element):
-        return element.find(class_="wprm-recipe-ingredient-unit")
+    def get_current_unit(self, element) -> str:
+        result = ""
+        if isinstance(element, Tag):
+            unit_element = element.find(class_="wprm-recipe-ingredient-unit")
+            if unit_element is not None:
+                if unit_element.string is not None:
+                    result = unit_element.string
+        return result
 
     def get_current_amount(self, element):
-        return element.find(class_="wprm-recipe-ingredient-amount").string
+        amount = ""
+        if isinstance(element, Tag):
+            ingredient_tag = element.find(
+                class_="wprm-recipe-ingredient-amount")
+            if ingredient_tag is not None:
+                amount = ingredient_tag.string
+        if amount is not None:
+            return amount
+        else:
+            return ""
 
     def get_ingredient_elements(self, soup):
+        result = None
         ingredient_container = self.get_ingredient_container(soup)
-        return ingredient_container.find_all(class_="wprm-recipe-ingredient")
+        if isinstance(ingredient_container, Tag):
+            result = ingredient_container.find_all(
+                class_="wprm-recipe-ingredient")
+        return result
 
     def get_ingredient_container(self, soup):
         return soup.find(class_="wprm-recipe-ingredients-container")

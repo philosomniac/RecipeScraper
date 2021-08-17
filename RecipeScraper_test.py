@@ -86,6 +86,6 @@ def test_get_ingredient_list_from_html():
     ]
     target_ingredient_set = IngredientSet(target_ingredients)
 
-    actual_ingredients = detail_scraper.get_ingredient_set_from_elements(soup)
+    actual_ingredients = detail_scraper.get_ingredient_set(soup)
 
     assert target_ingredient_set == actual_ingredients
