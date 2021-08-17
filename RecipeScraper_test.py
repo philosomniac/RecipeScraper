@@ -32,7 +32,7 @@ def compare_recipe() -> Recipe:
     servings = 4
     prep_time_mins = 10
     cook_time_mins = 20
-    total_time_mins = 30
+    # total_time_mins = 30
     img_url = "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-200x200.jpg"
     return Recipe(url, name, target_ingredient_set, total_cost, serving_cost, servings, prep_time_mins, cook_time_mins, None, img_url)
 
