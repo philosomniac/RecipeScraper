@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from Models.Recipe import Recipe
 from Models.Ingredient import Ingredient
 from Models.IngredientSet import IngredientSet
@@ -12,36 +13,40 @@ class RecipeDetailScraper():
             logging.info(f"getting recipe details from url: {url}")
             soup = ScraperCommon.get_parsed_html_from_url(url)
 
-            # TODO: extract method for each recipe attribute.
-            # TODO: wrap each operation in a try block(?)
-            # TODO: log events
-            recipe_title = self.get_recipe_title(soup)
-
-            # TODO: Parse the cost into real data
-            cost_string = self.get_cost_string(soup)
-
-            # TODO: Parse time strings into actual times
-            # total_time = get_total_time(soup)
-            prep_time = self.get_prep_time(soup)
-            cook_time = self.get_cook_time(soup)
-            servings = self.get_servings(soup)
-            # servings_unit = get_servings_unit(soup)
-
-            # img_url = get_img_url(soup)
-
-            # ingredient_elements = self.get_ingredient_elements(soup)
-            current_ingredient_set = self.get_ingredient_set(soup)
-
-            # TODO: get instruction set data and put into recipe class
-
-            current_recipe = Recipe(url, recipe_title, current_ingredient_set,
-                                    cost_string, cost_string, servings, prep_time, cook_time, None)
+            current_recipe = self.get_recipe_details_from_html(soup)
 
             return current_recipe
 
         except Exception:
             logging.exception(f"Error getting recipe details from url : {url}")
             raise
+
+    def get_recipe_details_from_html(self, soup: BeautifulSoup, url: str = "") -> Recipe:
+        # TODO: extract method for each recipe attribute.
+        # TODO: wrap each operation in a try block(?)
+        # TODO: log events
+        recipe_title = self.get_recipe_title(soup)
+
+        # TODO: Parse the cost into real data
+        cost_string = self.get_cost_string(soup)
+
+        # TODO: Parse time strings into actual times
+        # total_time = get_total_time(soup)
+        prep_time = self.get_prep_time(soup)
+        cook_time = self.get_cook_time(soup)
+        servings = self.get_servings(soup)
+        # servings_unit = get_servings_unit(soup)
+
+        # img_url = get_img_url(soup)
+
+        # ingredient_elements = self.get_ingredient_elements(soup)
+        current_ingredient_set = self.get_ingredient_set(soup)
+
+        # TODO: get instruction set data and put into recipe class
+
+        current_recipe = Recipe(url, recipe_title, current_ingredient_set,
+                                cost_string, cost_string, servings, prep_time, cook_time, None)
+        return current_recipe
 
     def get_ingredient_set_from_elements(self, ingredient_elements):
         ingredient_list = []
@@ -92,6 +97,24 @@ class RecipeDetailScraper():
             return result
         else:
             return ""
+
+    def get_recipe_cost_from_cost_string(self, cost_string: str) -> float:
+        recipe_word_index = cost_string.index('recipe')
+        recipe_cost_string = cost_string[:recipe_word_index]
+        recipe_cost_string = recipe_cost_string.replace("$", "")
+        recipe_cost_string = recipe_cost_string.strip()
+        recipe_cost = float(recipe_cost_string)
+        return recipe_cost
+
+    def get_serving_cost_from_cost_string(self, cost_string: str) -> float:
+        slash_character_index = cost_string.index("/")
+        serving_word_index = cost_string.index('serving')
+        serving_cost_string = cost_string[slash_character_index:serving_word_index]
+        serving_cost_string = serving_cost_string.replace("$", "")
+        serving_cost_string = serving_cost_string.replace("/", "")
+        serving_cost_string = serving_cost_string.strip()
+        serving_cost = float(serving_cost_string)
+        return serving_cost
 
     def get_ingredient_name(self, element):
         result = ""

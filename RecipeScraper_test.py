@@ -1,3 +1,4 @@
+from Models.Recipe import Recipe
 from Models.IngredientSet import IngredientSet
 from Models.Ingredient import Ingredient
 from RecipeDetailScraper import RecipeDetailScraper
@@ -6,9 +7,34 @@ from RecipeURLRetriever import RecipeURLRetriever
 import os
 import filecmp
 import ScraperCommon
+import pytest
 
 retriever = RecipeURLRetriever()
 detail_scraper = RecipeDetailScraper()
+
+
+@pytest.fixture
+def compare_recipe() -> Recipe:
+    target_ingredients = [
+        Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),
+        Ingredient("garlic", "2", "cloves", float("0.16")),
+        Ingredient("olive oil", "1", "tbsp", float("0.16")),
+        Ingredient("salt", "1/8", "tsp", float("0.02")),
+        Ingredient("freshly cracked black pepper",
+                   "1/8", "tsp", float("0.89")),
+        Ingredient("fresh lemon", "1", "", float("0.89"))
+    ]
+    target_ingredient_set = IngredientSet(target_ingredients)
+    url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
+    name = "Lemon Garlic Roasted Asparagus"
+    total_cost = 3.13
+    serving_cost = 0.78
+    servings = 4
+    prep_time_mins = 10
+    cook_time_mins = 20
+    total_time_mins = 30
+    img_url = "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-380x380.jpg"
+    return Recipe(url, name, target_ingredient_set, total_cost, serving_cost, servings, prep_time_mins, cook_time_mins, None, img_url)
 
 
 def test_get_recipe_urls_from_archive_page():
@@ -89,3 +115,35 @@ def test_get_ingredient_list_from_html():
     actual_ingredients = detail_scraper.get_ingredient_set(soup)
 
     assert target_ingredient_set == actual_ingredients
+
+
+def test_get_recipe_detail_functions(compare_recipe: Recipe):
+    test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
+    test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
+    soup = ScraperCommon.get_html_from_test_file(test_html_file)
+    scraped_recipe = detail_scraper.get_recipe_details_from_html(
+        soup, test_recipe_url)
+
+    assert scraped_recipe.url == compare_recipe.url
+    assert scraped_recipe.name == compare_recipe.name
+    assert scraped_recipe.total_cost == compare_recipe.total_cost
+    assert scraped_recipe.serving_cost == compare_recipe.serving_cost
+    assert scraped_recipe.servings == compare_recipe.servings
+    assert scraped_recipe.ingredient_set == compare_recipe.ingredient_set
+    assert scraped_recipe.cook_time == compare_recipe.cook_time
+    assert scraped_recipe.prep_time == compare_recipe.prep_time
+    assert scraped_recipe.img_url == compare_recipe.img_url
+
+
+def test_parse_cost_string():
+    test_cost_string = '$3.13 recipe / $0.78 serving'
+    target_recipe_cost = 3.13
+    target_serving_cost = 0.78
+    actual_recipe_cost = detail_scraper.get_recipe_cost_from_cost_string(
+        test_cost_string)
+    # TODO: add serving cost test
+    assert target_recipe_cost == actual_recipe_cost
+
+    actual_serving_cost = detail_scraper.get_serving_cost_from_cost_string(
+        test_cost_string)
+    assert target_serving_cost == actual_serving_cost
