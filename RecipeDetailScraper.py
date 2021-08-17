@@ -28,7 +28,9 @@ class RecipeDetailScraper():
         recipe_title = self.get_recipe_title(soup)
 
         # TODO: Parse the cost into real data
-        cost_string = self.get_cost_string(soup)
+        cost_string = str(self.get_cost_string(soup))
+        serving_cost = self.get_serving_cost_from_cost_string(cost_string)
+        recipe_cost = self.get_recipe_cost_from_cost_string(cost_string)
 
         # TODO: Parse time strings into actual times
         # total_time = get_total_time(soup)
@@ -37,7 +39,7 @@ class RecipeDetailScraper():
         servings = self.get_servings(soup)
         # servings_unit = get_servings_unit(soup)
 
-        # img_url = get_img_url(soup)
+        img_url = self.get_img_url(soup)
 
         # ingredient_elements = self.get_ingredient_elements(soup)
         current_ingredient_set = self.get_ingredient_set(soup)
@@ -45,7 +47,7 @@ class RecipeDetailScraper():
         # TODO: get instruction set data and put into recipe class
 
         current_recipe = Recipe(url, recipe_title, current_ingredient_set,
-                                cost_string, cost_string, servings, prep_time, cook_time, None)
+                                recipe_cost, serving_cost, servings, prep_time, cook_time, None, img_url)
         return current_recipe
 
     def get_ingredient_set_from_elements(self, ingredient_elements):
@@ -165,13 +167,23 @@ class RecipeDetailScraper():
         return soup.find(class_="wprm-recipe-servings-unit").string
 
     def get_servings(self, soup):
-        return soup.find(class_="wprm-recipe-servings").string
+        return int(soup.find(class_="wprm-recipe-servings").string)
 
     def get_cook_time(self, soup):
-        return soup.find(class_="wprm-recipe-cook-time-container").get_text().strip()
+        cook_time_string = soup.find(
+            class_="wprm-recipe-cook-time-container").get_text().strip()
+        cook_time = cook_time_string.replace("Cook Time:", "")
+        cook_time = cook_time.replace("mins", "")
+        cook_time = cook_time.strip()
+        return int(cook_time)
 
     def get_prep_time(self, soup):
-        return soup.find(class_="wprm-recipe-prep-time-container").get_text().strip()
+        prep_time_string = soup.find(
+            class_="wprm-recipe-prep-time-container").get_text().strip()
+        prep_time = prep_time_string.replace("Prep Time:", "")
+        prep_time = prep_time.replace("mins", "")
+        prep_time = prep_time.strip()
+        return int(prep_time)
 
     def get_total_time(self, soup):
         return soup.find(class_="wprm-recipe-total-time-container").get_text().strip()
