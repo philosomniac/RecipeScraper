@@ -142,7 +142,7 @@ def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     target_serving_cost = 0.78
     actual_recipe_cost = detail_scraper.get_recipe_cost_from_cost_string(
         test_cost_string)
-    # TODO: add serving cost test
+
     assert target_recipe_cost == actual_recipe_cost
 
     actual_serving_cost = detail_scraper.get_serving_cost_from_cost_string(
