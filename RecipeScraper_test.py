@@ -8,6 +8,7 @@ import os
 import filecmp
 import ScraperCommon
 import pytest
+import json
 
 
 @pytest.fixture
@@ -21,7 +22,7 @@ def detail_scraper() -> RecipeDetailScraper:
 
 
 @pytest.fixture
-def compare_recipe() -> Recipe:
+def sample_recipe() -> Recipe:
     target_ingredients = [
         Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),
         Ingredient("garlic", "2", "cloves", float("0.16")),
@@ -148,3 +149,8 @@ def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     actual_serving_cost = detail_scraper.get_serving_cost_from_cost_string(
         test_cost_string)
     assert target_serving_cost == actual_serving_cost
+
+
+def test_recipe_to_json(sample_recipe):
+
+    pass
