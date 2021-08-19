@@ -9,8 +9,15 @@ import filecmp
 import ScraperCommon
 import pytest
 
-retriever = RecipeURLRetriever()
-detail_scraper = RecipeDetailScraper()
+
+@pytest.fixture
+def retriever() -> RecipeURLRetriever:
+    return RecipeURLRetriever()
+
+
+@pytest.fixture
+def detail_scraper() -> RecipeDetailScraper:
+    return RecipeDetailScraper()
 
 
 @pytest.fixture
@@ -37,7 +44,7 @@ def compare_recipe() -> Recipe:
     return Recipe(url, name, target_ingredient_set, total_cost, serving_cost, servings, prep_time_mins, cook_time_mins, None, img_url)
 
 
-def test_get_recipe_urls_from_archive_page():
+def test_get_recipe_urls_from_archive_page(retriever):
     test_page = "https://www.budgetbytes.com/archive/2010/07/"
     known_recipe_urls = [
         "https://www.budgetbytes.com/chipotle-peach-salsa/",
@@ -45,26 +52,22 @@ def test_get_recipe_urls_from_archive_page():
         "https://www.budgetbytes.com/breakfast-pizza/"
     ]
 
-    # retriever = RecipeURLRetriever()
-
     urls = retriever._get_recipe_urls_from_archive_page(test_page)
 
     assert all(elem in urls for elem in known_recipe_urls)
 
 
-def test_get_archive_url_from_date():
+def test_get_archive_url_from_date(retriever):
     test_date = datetime(2015, 7, 10)
     url = "https://www.budgetbytes.com/archive/2015/07/"
-    # retriever = RecipeURLRetriever()
     result_url = retriever._get_archive_page_url_from_date(test_date)
 
     assert url == result_url
 
 
-def test_scrape_full_recipe_URL_list():
+def test_scrape_full_recipe_URL_list(retriever):
     test_file_path = "BudgetBytesRecipes_test.txt"
     month_limit = 8
-    # retriever = RecipeURLRetriever()
     if os.path.exists(test_file_path):
         os.remove(test_file_path)
     _ = retriever.scrape_recipe_URL_list_to_file(
@@ -80,24 +83,22 @@ def test_save_soup_to_file():
     ScraperCommon.save_html_from_url_to_file(
         test_recipe_url, "Test_Lemon_Garlic_Asparagus.txt")
 
-# def test_get_soup_from_test_file():
-#     test_file_name = "Test_elements.txt"
-#     print(os.getcwd())
-#     soup = ScraperCommon.get_html_from_test_file(test_file_name)
+
+def test_get_soup_from_test_file():
+    test_file_name = "Test_elements.txt"
+    print(os.getcwd())
+    _ = ScraperCommon.get_html_from_test_file(test_file_name)
 
 
-#     pass
+def test_get_ingredient_elements(detail_scraper):
+    test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
+    soup = ScraperCommon.get_parsed_html_from_url(test_recipe_url)
+    ingredient_elements = detail_scraper.get_ingredient_elements(soup)
+
+    ScraperCommon.save_html_to_file(ingredient_elements, "Test_elements.txt")
 
 
-# def test_get_ingredient_elements():
-#     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
-#     soup = ScraperCommon.get_parsed_html_from_url(test_recipe_url)
-#     ingredient_elements = detail_scraper.get_ingredient_elements(soup)
-
-#     ScraperCommon.save_html_to_file(ingredient_elements, "Test_elements.txt")
-
-
-def test_get_ingredient_list_from_html():
+def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
     test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
     soup = ScraperCommon.get_html_from_test_file(test_html_file)
 
@@ -117,7 +118,7 @@ def test_get_ingredient_list_from_html():
     assert target_ingredient_set == actual_ingredients
 
 
-def test_get_recipe_detail_functions(compare_recipe: Recipe):
+def test_get_recipe_detail_functions(compare_recipe: Recipe, detail_scraper: RecipeDetailScraper):
     test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
     soup = ScraperCommon.get_html_from_test_file(test_html_file)
@@ -135,7 +136,7 @@ def test_get_recipe_detail_functions(compare_recipe: Recipe):
     assert scraped_recipe.img_url == compare_recipe.img_url
 
 
-def test_parse_cost_string():
+def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     test_cost_string = '$3.13 recipe / $0.78 serving'
     target_recipe_cost = 3.13
     target_serving_cost = 0.78
