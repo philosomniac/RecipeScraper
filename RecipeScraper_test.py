@@ -134,22 +134,22 @@ def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
     assert target_ingredient_set == actual_ingredients
 
 
-def test_get_recipe_detail_functions(compare_recipe: Recipe, detail_scraper: RecipeDetailScraper):
+def test_get_recipe_detail_functions(sample_recipe: Recipe, detail_scraper: RecipeDetailScraper):
     test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
     soup = ScraperCommon.get_html_from_test_file(test_html_file)
     scraped_recipe = detail_scraper.get_recipe_details_from_html(
         soup, test_recipe_url)
 
-    assert scraped_recipe.url == compare_recipe.url
-    assert scraped_recipe.name == compare_recipe.name
-    assert scraped_recipe.total_cost == compare_recipe.total_cost
-    assert scraped_recipe.serving_cost == compare_recipe.serving_cost
-    assert scraped_recipe.servings == compare_recipe.servings
-    assert scraped_recipe.ingredient_set == compare_recipe.ingredient_set
-    assert scraped_recipe.cook_time == compare_recipe.cook_time
-    assert scraped_recipe.prep_time == compare_recipe.prep_time
-    assert scraped_recipe.img_url == compare_recipe.img_url
+    assert scraped_recipe.url == sample_recipe.url
+    assert scraped_recipe.name == sample_recipe.name
+    assert scraped_recipe.total_cost == sample_recipe.total_cost
+    assert scraped_recipe.serving_cost == sample_recipe.serving_cost
+    assert scraped_recipe.servings == sample_recipe.servings
+    assert scraped_recipe.ingredient_set == sample_recipe.ingredient_set
+    assert scraped_recipe.cook_time == sample_recipe.cook_time
+    assert scraped_recipe.prep_time == sample_recipe.prep_time
+    assert scraped_recipe.img_url == sample_recipe.img_url
 
 
 def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
