@@ -57,7 +57,18 @@ def sample_recipe() -> Recipe:
     cook_time_mins = 20
     # total_time_mins = 30
     img_url = "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-200x200.jpg"
-    return Recipe(url, name, target_ingredient_set, total_cost, serving_cost, servings, prep_time_mins, cook_time_mins, None, img_url)
+    return Recipe(
+        url,
+        name,
+        target_ingredient_set,
+        total_cost,
+        serving_cost,
+        servings,
+        prep_time_mins,
+        cook_time_mins,
+        None,
+        img_url
+    )
 
 
 def test_get_recipe_urls_from_archive_page(retriever):
@@ -81,7 +92,7 @@ def test_get_archive_url_from_date(retriever):
     assert url == result_url
 
 
-def test_scrape_full_recipe_URL_list(retriever):
+def test_scrape_full_recipe_url_list(retriever):
     test_file_path = "BudgetBytesRecipes_test.txt"
     month_limit = 8
     if os.path.exists(test_file_path):
