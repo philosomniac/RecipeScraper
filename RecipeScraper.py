@@ -11,7 +11,7 @@ def close_logging():
     logging.info('Finished')
 
 
-def Main():
+def main():
     setup_logging()
 
     # my_recipes = []

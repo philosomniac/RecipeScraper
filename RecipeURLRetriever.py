@@ -32,7 +32,7 @@ class RecipeURLRetriever():
                     self._get_recipe_urls_from_archive_page(currentpage))
                 print("completed date: " + str(currentdate))
 
-            recipefile.writelines(l + '\n' for l in recipe_url_list)
+            recipefile.writelines(url + '\n' for url in recipe_url_list)
             return recipefile
 
     def _get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
