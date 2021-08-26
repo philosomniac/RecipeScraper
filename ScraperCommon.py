@@ -1,6 +1,9 @@
+from Models.IngredientSet import IngredientSet
 import os
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
+from Models.Recipe import Recipe
+import json
 
 
 TestSoupFilePath = "TestSoupFiles\\"
@@ -34,3 +37,23 @@ def save_html_to_file(soup: BeautifulSoup, file_name: str):
         os.remove(file_path)
     with open(file_path, "w", encoding='utf-8') as output_file:
         output_file.write(str(soup))
+
+
+def recipe_to_json(recipe: Recipe):
+    return json.dumps(recipe, default=lambda x: vars(x))
+
+
+def recipe_decode(json_to_decode):
+    if 'ingredient_set' in json_to_decode:
+        myIngredientSet = IngredientSet(
+            json_to_decode['ingredient_set']['ingredients'])
+        myRecipe = Recipe(**json_to_decode, ingredient_set=myIngredientSet)
+        return myRecipe
+
+    return json_to_decode
+
+
+def json_to_recipe(recipe_json: str):
+    j = json.loads(recipe_json, object_hook=recipe_decode)
+    u = Recipe(**j)
+    return u

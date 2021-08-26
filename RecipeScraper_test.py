@@ -163,5 +163,21 @@ def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
 
 
 def test_recipe_to_json(sample_recipe: Recipe):
-    json_ingredient = json.dumps(sample_recipe, default=lambda x: vars(x))
+    # json_ingredient = json.dumps(sample_recipe, default=lambda x: vars(x))
+    recipe_json = ScraperCommon.recipe_to_json(sample_recipe)
+
+    compare_recipe_json = """\
+{"url": "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/", "name": "Lemon Garlic Roasted Asparagus", "ingredient_set": {"ingredients": [{"name": "asparagus (1 lb.)", "amount": "1", "unit": "bunch", "price": 1.88}, {"name": "garlic", "amount": "2", "unit": "cloves", "price": 0.16}, {"name": "olive oil", "amount": "1", "unit": "tbsp", "price": 0.16}, {"name": "salt", "amount": "1/8", "unit": "tsp", "price": 0.02}, {"name": "freshly cracked black pepper", "amount": "1/8", "unit": "tsp", "price": 0.89}, {"name": "fresh lemon", "amount": "1", "unit": "", "price": 0.89}]}, "total_cost": 3.13, "serving_cost": 0.78, "servings": 4, "prep_time": 10, "cook_time": 20, "instruction_set": null, "img_url": "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-200x200.jpg"}\
+"""
+
+    assert recipe_json == compare_recipe_json
+    pass
+
+
+def test_json_to_recipe():
+    recipe_json = """\
+{"url": "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/", "name": "Lemon Garlic Roasted Asparagus", "ingredient_set": {"ingredients": [{"name": "asparagus (1 lb.)", "amount": "1", "unit": "bunch", "price": 1.88}, {"name": "garlic", "amount": "2", "unit": "cloves", "price": 0.16}, {"name": "olive oil", "amount": "1", "unit": "tbsp", "price": 0.16}, {"name": "salt", "amount": "1/8", "unit": "tsp", "price": 0.02}, {"name": "freshly cracked black pepper", "amount": "1/8", "unit": "tsp", "price": 0.89}, {"name": "fresh lemon", "amount": "1", "unit": "", "price": 0.89}]}, "total_cost": 3.13, "serving_cost": 0.78, "servings": 4, "prep_time": 10, "cook_time": 20, "instruction_set": null, "img_url": "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-200x200.jpg"}\
+"""
+
+    test_recipe = ScraperCommon.json_to_recipe(recipe_json)
     pass
