@@ -9,21 +9,6 @@ import filecmp
 import ScraperCommon
 import pytest
 import json
-from json import JSONEncoder
-
-
-class RecipeEncoder(JSONEncoder):
-    def default(self, recipe):
-        if isinstance(recipe, Recipe):
-            ingredient_json_list = []
-            for ingredient in recipe.ingredient_set.ingredients:
-                ingredient_json = json.dumps(ingredient.__dict__)
-                ingredient_json_list.append(ingredient_json)
-            return ingredient_json_list
-        else:
-            return json.JSONEncoder.default(self, recipe)
-
-    pass
 
 
 @pytest.fixture
@@ -178,9 +163,5 @@ def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
 
 
 def test_recipe_to_json(sample_recipe: Recipe):
-    recipe_encoder = RecipeEncoder()
-    json_ingredient = recipe_encoder.encode(sample_recipe)
-    json_ingredient2 = json.dumps(sample_recipe, indent=4, cls=RecipeEncoder)
-    print(json_ingredient)
-    print(json_ingredient2)
+    json_ingredient = json.dumps(sample_recipe, default=lambda x: vars(x))
     pass
