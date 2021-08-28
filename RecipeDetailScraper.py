@@ -192,4 +192,13 @@ class RecipeDetailScraper():
         return soup.find(class_="wprm-recipe-recipe_cost").string
 
     def get_recipe_title(self, soup):
-        return soup.find(class_="wprm-recipe-name").string
+        result = soup.find(class_="wprm-recipe-name")
+        if result:
+            return result.string
+        else:
+            raise ElementNotFound("Could not find recipe title")
+
+
+class ElementNotFound(Exception):
+    """Raised when an element can't be found in the html"""
+    pass

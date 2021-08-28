@@ -1,7 +1,7 @@
 from Models.Recipe import Recipe
 from Models.IngredientSet import IngredientSet
 from Models.Ingredient import Ingredient
-from RecipeDetailScraper import RecipeDetailScraper
+from RecipeDetailScraper import ElementNotFound, RecipeDetailScraper
 from datetime import datetime
 from RecipeURLRetriever import RecipeURLRetriever
 import os
@@ -9,6 +9,7 @@ import filecmp
 import ScraperCommon
 import pytest
 import json
+from PersistenceHandler import PersistenceHandler
 
 
 @pytest.fixture
@@ -19,6 +20,11 @@ def retriever() -> RecipeURLRetriever:
 @pytest.fixture
 def detail_scraper() -> RecipeDetailScraper:
     return RecipeDetailScraper()
+
+
+@pytest.fixture()
+def persistence() -> PersistenceHandler:
+    return PersistenceHandler()
 
 
 @pytest.fixture
@@ -148,6 +154,14 @@ def test_get_recipe_detail_functions(sample_recipe: Recipe, detail_scraper: Reci
     assert scraped_recipe.img_url == sample_recipe.img_url
 
 
+def test_scraping_non_recipe_should_throw_error(detail_scraper: RecipeDetailScraper):
+    non_recipe_file = 'Soup_File_Non_Recipe.txt'
+
+    with pytest.raises(ElementNotFound):
+        soup = ScraperCommon.get_html_from_test_file(non_recipe_file)
+        detail_scraper.get_recipe_details_from_html(soup)
+
+
 def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     test_cost_string = '$3.13 recipe / $0.78 serving'
     target_recipe_cost = 3.13
@@ -184,3 +198,9 @@ def test_json_to_recipe(sample_recipe: Recipe):
     assert test_recipe == sample_recipe
 
     pass
+
+
+def test_get_recipe_from_persistence(persistence: PersistenceHandler):
+    recipe = persistence.get_recipe()
+
+    assert isinstance(recipe, Recipe)
