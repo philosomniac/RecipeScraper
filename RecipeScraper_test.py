@@ -223,7 +223,6 @@ def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, d
         recipe = detail_scraper.get_recipe_details_from_url(url)
         recipe_list.append(recipe)
 
-    for recipe in recipe_list:
-        persistence.save_recipe_to_persistence(recipe)
+    persistence.save_recipes_to_persistence(recipe_list)
 
     pass
