@@ -1,4 +1,6 @@
+from __future__ import annotations
 from Models.IngredientSet import IngredientSet
+import json
 
 
 class Recipe:
@@ -14,3 +16,30 @@ class Recipe:
         self.instruction_set = instruction_set
         self.img_url = img_url
         pass
+
+    def __eq__(self, o: Recipe) -> bool:
+        return self.url == o.url and \
+            self.name == o.name and \
+            self.img_url == self.img_url and \
+            self.ingredient_set == o.ingredient_set and \
+            self.instruction_set == self.instruction_set
+
+    @classmethod
+    def from_json(cls, recipe_json: str) -> Recipe:
+        return Recipe._json_to_recipe(recipe_json)
+
+    @staticmethod
+    def _recipe_decode(json_to_decode: dict):
+        if 'ingredient_set' in json_to_decode:
+            myIngredientSet = IngredientSet(
+                json_to_decode['ingredient_set']['ingredients'])
+            del json_to_decode['ingredient_set']
+            myRecipe = Recipe(ingredient_set=myIngredientSet, **json_to_decode)
+            return myRecipe
+
+        return json_to_decode
+
+    @staticmethod
+    def _json_to_recipe(recipe_json: str):
+        recipe = json.loads(recipe_json, object_hook=Recipe._recipe_decode)
+        return recipe

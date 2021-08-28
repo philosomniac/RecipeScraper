@@ -1,3 +1,6 @@
+import json
+
+
 class Ingredient:
     def __init__(self, name: str, amount: str, unit: str, price: float):
         self.name = name
@@ -10,3 +13,9 @@ class Ingredient:
         if isinstance(other, Ingredient):
             return self.name == other.name
         return False
+
+    @classmethod
+    def from_json(cls, ingredient_json: str):
+        parsed = json.loads(ingredient_json)
+        ingredient = cls(**parsed)
+        return ingredient
