@@ -212,7 +212,6 @@ def test_save_recipe_to_persistence(persistence: PersistenceHandler, sample_reci
 
 def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, detail_scraper: RecipeDetailScraper):
     recipe_url_list = [
-        'https://www.budgetbytes.com/picnic-potato-salad/',
         'https://www.budgetbytes.com/parmesan-roasted-potatoes/',
         'https://www.budgetbytes.com/pepperoni-stuffed-chicken/',
         'https://www.budgetbytes.com/mexican-lentil-stew/',
@@ -223,5 +222,8 @@ def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, d
     for url in recipe_url_list:
         recipe = detail_scraper.get_recipe_details_from_url(url)
         recipe_list.append(recipe)
+
+    for recipe in recipe_list:
+        persistence.save_recipe_to_persistence(recipe)
 
     pass

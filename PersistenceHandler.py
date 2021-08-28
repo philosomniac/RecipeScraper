@@ -10,5 +10,5 @@ class PersistenceHandler():
         return Recipe()
 
     def save_recipe_to_persistence(self, recipe: Recipe):
-        with open(self._persistence_file, "r+") as persistence_store:
-            persistence_store.write(recipe.to_json())
+        with open(self._persistence_file, "a") as persistence_store:
+            persistence_store.write(recipe.to_json() + "\n")
