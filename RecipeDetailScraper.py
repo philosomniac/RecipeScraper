@@ -1,10 +1,14 @@
+import logging
+import re
+
 from bs4 import BeautifulSoup
-from Models.Recipe import Recipe
+from bs4.element import PageElement, ResultSet, Tag
+
+import ScraperCommon
 from Models.Ingredient import Ingredient
 from Models.IngredientSet import IngredientSet
-import logging
-import ScraperCommon
-from bs4.element import PageElement, ResultSet, Tag
+from Models.Recipe import Recipe
+from Models.Costs import Costs
 
 
 class RecipeDetailScraper():
@@ -28,9 +32,7 @@ class RecipeDetailScraper():
         recipe_title = self.get_recipe_title(soup)
 
         # TODO: Parse the cost into real data
-        cost_string = str(self.get_cost_string(soup))
-        serving_cost = self.get_serving_cost_from_cost_string(cost_string)
-        recipe_cost = self.get_recipe_cost_from_cost_string(cost_string)
+        cost_data = self.get_cost_data(soup)
 
         # TODO: Parse time strings into actual times
         # total_time = get_total_time(soup)
@@ -47,8 +49,33 @@ class RecipeDetailScraper():
         # TODO: get instruction set data and put into recipe class
 
         current_recipe = Recipe(url, recipe_title, current_ingredient_set,
-                                recipe_cost, serving_cost, servings, prep_time, cook_time, None, img_url)
+                                cost_data.recipe_cost, cost_data.serving_cost, servings, prep_time, cook_time, None, img_url)
         return current_recipe
+
+    def get_cost_data(self, soup: BeautifulSoup) -> Costs:
+        serving_cost = None
+        recipe_cost = None
+        try:
+            cost_string = str(self.get_cost_string(soup))
+            serving_cost = self.get_serving_cost_from_cost_string(cost_string)
+            recipe_cost = self.get_recipe_cost_from_cost_string(cost_string)
+        except ElementNotFound:
+            # old format
+            recipe_cost = self.get_old_format_recipe_cost(soup)
+            serving_cost = self.get_old_format_serving_cost(soup)
+
+        costs = Costs(serving_cost, recipe_cost)
+        return costs
+
+    def get_old_format_recipe_cost(self, soup):
+        result = str(soup.find(string=re.compile("Total Recipe cost")))
+        cost = result.replace("Total Recipe cost: $", "").strip()
+        return cost
+
+    def get_old_format_serving_cost(self, soup):
+        result = str(soup.find(string=re.compile("Cost per serving")))
+        cost = result.replace("Cost per serving: $", "").strip()
+        return cost
 
     def get_ingredient_set_from_elements(self, ingredient_elements):
         ingredient_list = []
@@ -189,14 +216,23 @@ class RecipeDetailScraper():
         return soup.find(class_="wprm-recipe-total-time-container").get_text().strip()
 
     def get_cost_string(self, soup):
-        return soup.find(class_="wprm-recipe-recipe_cost").string
+        result = soup.find(class_="wprm-recipe-recipe_cost")
+        if result:
+            return result.string
+        else:
+            raise ElementNotFound("Could not find cost string")
 
     def get_recipe_title(self, soup):
         result = soup.find(class_="wprm-recipe-name")
         if result:
             return result.string
         else:
-            raise ElementNotFound("Could not find recipe title")
+            # old format
+            old_format_result = soup.find(class_="post-title").h1
+            if old_format_result:
+                return old_format_result
+            else:
+                raise ElementNotFound("Could not find recipe title")
 
 
 class ElementNotFound(Exception):

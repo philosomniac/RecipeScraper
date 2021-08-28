@@ -204,3 +204,24 @@ def test_get_recipe_from_persistence(persistence: PersistenceHandler):
     recipe = persistence.get_recipe()
 
     assert isinstance(recipe, Recipe)
+
+
+def test_save_recipe_to_persistence(persistence: PersistenceHandler, sample_recipe: Recipe):
+    persistence.save_recipe_to_persistence(sample_recipe)
+
+
+def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, detail_scraper: RecipeDetailScraper):
+    recipe_url_list = [
+        'https://www.budgetbytes.com/picnic-potato-salad/',
+        'https://www.budgetbytes.com/parmesan-roasted-potatoes/',
+        'https://www.budgetbytes.com/pepperoni-stuffed-chicken/',
+        'https://www.budgetbytes.com/mexican-lentil-stew/',
+        'https://www.budgetbytes.com/egg-florentine-quesadillas/'
+    ]
+
+    recipe_list = []
+    for url in recipe_url_list:
+        recipe = detail_scraper.get_recipe_details_from_url(url)
+        recipe_list.append(recipe)
+
+    pass
