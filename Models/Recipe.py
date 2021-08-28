@@ -24,6 +24,9 @@ class Recipe:
             self.ingredient_set == o.ingredient_set and \
             self.instruction_set == self.instruction_set
 
+    def to_json(self) -> str:
+        return json.dumps(self, default=lambda x: vars(x))
+
     @classmethod
     def from_json(cls, recipe_json: str) -> Recipe:
         return Recipe._json_to_recipe(recipe_json)
