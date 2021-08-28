@@ -37,7 +37,3 @@ def save_html_to_file(soup: BeautifulSoup, file_name: str):
         os.remove(file_path)
     with open(file_path, "w", encoding='utf-8') as output_file:
         output_file.write(str(soup))
-
-
-def recipe_to_json(recipe: Recipe):
-    return json.dumps(recipe, default=lambda x: vars(x))
