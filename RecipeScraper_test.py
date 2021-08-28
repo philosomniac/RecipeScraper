@@ -200,12 +200,6 @@ def test_json_to_recipe(sample_recipe: Recipe):
     pass
 
 
-def test_get_recipe_from_persistence(persistence: PersistenceHandler):
-    recipe = persistence.get_recipe()
-
-    assert isinstance(recipe, Recipe)
-
-
 def test_save_recipe_to_persistence(persistence: PersistenceHandler, sample_recipe: Recipe):
     persistence.save_recipe_to_persistence(sample_recipe)
 
@@ -226,3 +220,11 @@ def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, d
     persistence.save_recipes_to_persistence(recipe_list)
 
     pass
+
+
+def test_get_recipe_from_persistence(persistence: PersistenceHandler):
+    url = 'https://www.budgetbytes.com/mexican-lentil-stew/'
+    recipe = persistence.get_recipe_by_url(url)
+
+    assert recipe.name == "Mexican Red Lentil Stew"
+    assert recipe.url == url
