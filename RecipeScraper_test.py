@@ -1,3 +1,4 @@
+from types import resolve_bases
 from Models.Recipe import Recipe
 from Models.IngredientSet import IngredientSet
 from Models.Ingredient import Ingredient
@@ -228,3 +229,27 @@ def test_get_recipe_from_persistence(persistence: PersistenceHandler):
 
     assert recipe.name == "Mexican Red Lentil Stew"
     assert recipe.url == url
+
+
+def test_save_duplicate_recipe_to_persistence(persistence: PersistenceHandler):
+    url = 'https://www.budgetbytes.com/mexican-lentil-stew/'
+    recipe = persistence.get_recipe_by_url(url)
+
+    persistence.save_recipe_to_persistence(recipe)
+    persistence.save_recipe_to_persistence(recipe)
+
+    assert persistence.count_recipes_with_url("not a real url") == 0
+    assert persistence.count_recipes_with_url(url) == 1
+
+
+def test_save_existing_recipe_should_modify_recipe(persistence: PersistenceHandler):
+    url = 'https://www.budgetbytes.com/mexican-lentil-stew/'
+    recipe = persistence.get_recipe_by_url(url)
+
+    original_prep_time = recipe.prep_time
+    modified_prep_time = original_prep_time + 1
+
+    recipe.prep_time = modified_prep_time
+    persistence.save_recipe_to_persistence(recipe)
+    modified_recipe = persistence.get_recipe_by_url(url)
+    assert modified_recipe.prep_time == modified_prep_time

@@ -22,13 +22,30 @@ class PersistenceHandler():
 
     def save_recipe_to_persistence(self, recipe: Recipe):
         with open(self._persistence_file, "a+") as persistence_store:
-            persistence_store.write(recipe.to_json() + "\n")
+            pre_existing_recipe = self.get_recipe_by_url(recipe.url)
+            if pre_existing_recipe is None:
+                persistence_store.write(recipe.to_json() + "\n")
+            else:
+                pass
 
     def save_recipes_to_persistence(self, recipe_list: list[Recipe]):
         with open(self._persistence_file, "a+") as persistence_store:
             for recipe in recipe_list:
                 persistence_store.write(recipe.to_json() + "\n")
 
+    def count_recipes_with_url(self, url: str) -> int:
+        with open(self._persistence_file, "r") as persistence_store:
+            matchingRecipesCount = 0
+            for recipe_str in persistence_store:
+                recipe = Recipe.from_json(recipe_str)
+                if recipe.url == url:
+                    matchingRecipesCount += 1
+            return
+
 
 class RecipeNotFoundException(Exception):
+    pass
+
+
+class RecipeAlreadyExistsException(Exception):
     pass
