@@ -41,7 +41,10 @@ class RecipeDetailScraper():
         except ElementNotFound:
             # means there is no prep time
             prep_time = 0
-        cook_time = self.get_cook_time(soup)
+        try:
+            cook_time = self.get_cook_time(soup)
+        except:
+            raise
         servings = self.get_servings(soup)
         # servings_unit = get_servings_unit(soup)
 
@@ -210,12 +213,15 @@ class RecipeDetailScraper():
         return int(soup.find(class_="wprm-recipe-servings").string)
 
     def get_cook_time(self, soup):
-        cook_time_string = soup.find(
-            class_="wprm-recipe-cook-time-container").get_text().strip()
-        cook_time = cook_time_string.replace("Cook Time:", "")
-        cook_time = cook_time.replace("mins", "")
-        cook_time = cook_time.strip()
-        return int(cook_time)
+        try:
+            cook_time_string = soup.find(
+                class_="wprm-recipe-cook-time-container").get_text().strip()
+            cook_time = cook_time_string.replace("Cook Time:", "")
+            cook_time = cook_time.replace("mins", "")
+            cook_time = cook_time.strip()
+            return int(cook_time)
+        except:
+            raise ElementNotFound("Could not get Cook time")
 
     def get_prep_time(self, soup):
         try:
