@@ -26,9 +26,8 @@ class PersistenceHandler():
                 persistence_store.write(recipe.to_json() + "\n")
 
     def save_recipes_to_persistence(self, recipe_list: list[Recipe]):
-        with open(self._persistence_file, "a+") as persistence_store:
-            for recipe in recipe_list:
-                persistence_store.write(recipe.to_json() + "\n")
+        for recipe in recipe_list:
+            self.save_recipe_to_persistence(recipe)
 
     def count_recipes_with_url(self, url: str) -> int:
         with open(self._persistence_file, "r") as persistence_store:

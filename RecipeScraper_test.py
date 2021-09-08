@@ -84,9 +84,9 @@ def test_get_archive_url_from_date(retriever):
     assert url == result_url
 
 
-def test_scrape_full_recipe_url_list(retriever):
+def test_scrape_full_recipe_url_list(retriever: RecipeURLRetriever):
     test_file_path = "BudgetBytesRecipes_test.txt"
-    month_limit = 8
+    month_limit = 2
     if os.path.exists(test_file_path):
         os.remove(test_file_path)
     _ = retriever.scrape_recipe_URL_list_to_file(
@@ -237,6 +237,7 @@ def test_save_duplicate_recipe_to_persistence(persistence: PersistenceHandler):
 
     persistence.save_recipe_to_persistence(recipe)
     persistence.save_recipe_to_persistence(recipe)
+    persistence.save_recipes_to_persistence([recipe])
 
     assert persistence.count_recipes_with_url("not a real url") == 0
     assert persistence.count_recipes_with_url(url) == 1

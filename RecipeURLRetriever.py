@@ -15,7 +15,7 @@ class RecipeURLRetriever():
 
         recipe_url_list = []
 
-        archive_start_date = datetime.date(2009, 5, 1)
+        archive_start_date = datetime.date(2009, 11, 1)
         archive_end_date = datetime.date(
             datetime.date.today().year, datetime.date.today().month, 1)
 
