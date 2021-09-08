@@ -6,12 +6,6 @@ class PersistenceHandler():
     def __init__(self):
         self._persistence_file = 'recipedb.txt'
 
-    def get_recipe(self) -> Recipe:
-        with open(self._persistence_file, "r") as persistence_store:
-            recipe_str = persistence_store.readline().strip()
-            recipe = Recipe.from_json(recipe_str)
-            return recipe
-
     def get_recipe_by_url(self, url) -> Recipe:
         with open(self._persistence_file, "r") as persistence_store:
             for recipe_str in persistence_store:
