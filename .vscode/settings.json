@@ -14,5 +14,6 @@
     "python.linting.enabled": true,
     "python.testing.pytestArgs": [
         "."
-    ]
+    ],
+    "diffEditor.codeLens": true
 }
