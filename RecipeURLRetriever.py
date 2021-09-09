@@ -1,7 +1,6 @@
 import datetime
 from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
-from urllib.request import urlopen, Request
 from bs4.element import PageElement, ResultSet, Tag
 from urllib.error import HTTPError
 
