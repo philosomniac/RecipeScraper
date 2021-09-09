@@ -1,4 +1,4 @@
-from Models.Ingredient import Ingredient
+from models.Ingredient import Ingredient
 
 
 class IngredientSet:

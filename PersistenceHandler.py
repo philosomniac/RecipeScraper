@@ -1,4 +1,4 @@
-from Models.Recipe import Recipe
+from models.Recipe import Recipe
 
 
 class PersistenceHandler():

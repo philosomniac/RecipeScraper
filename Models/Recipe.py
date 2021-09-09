@@ -1,5 +1,5 @@
 from __future__ import annotations
-from Models.IngredientSet import IngredientSet
+from models.IngredientSet import IngredientSet
 import json
 
 

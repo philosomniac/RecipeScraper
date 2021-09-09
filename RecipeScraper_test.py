@@ -5,9 +5,9 @@ from datetime import datetime
 import pytest
 
 import ScraperCommon
-from Models.Ingredient import Ingredient
-from Models.IngredientSet import IngredientSet
-from Models.Recipe import Recipe
+from models.Ingredient import Ingredient
+from models.IngredientSet import IngredientSet
+from models.Recipe import Recipe
 from PersistenceHandler import PersistenceHandler
 from RecipeDetailScraper import ElementNotFound, RecipeDetailScraper
 from RecipeURLRetriever import RecipeURLRetriever
