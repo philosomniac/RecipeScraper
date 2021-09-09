@@ -1,4 +1,3 @@
-from types import resolve_bases
 from Models.Recipe import Recipe
 from Models.IngredientSet import IngredientSet
 from Models.Ingredient import Ingredient
@@ -9,7 +8,6 @@ import os
 import filecmp
 import ScraperCommon
 import pytest
-import json
 from PersistenceHandler import PersistenceHandler
 
 
