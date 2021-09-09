@@ -1,14 +1,16 @@
-from Models.Recipe import Recipe
-from Models.IngredientSet import IngredientSet
-from Models.Ingredient import Ingredient
-from RecipeDetailScraper import ElementNotFound, RecipeDetailScraper
-from datetime import datetime
-from RecipeURLRetriever import RecipeURLRetriever
-import os
 import filecmp
-import ScraperCommon
+import os
+from datetime import datetime
+
 import pytest
+
+import ScraperCommon
+from Models.Ingredient import Ingredient
+from Models.IngredientSet import IngredientSet
+from Models.Recipe import Recipe
 from PersistenceHandler import PersistenceHandler
+from RecipeDetailScraper import ElementNotFound, RecipeDetailScraper
+from RecipeURLRetriever import RecipeURLRetriever
 
 
 @pytest.fixture
