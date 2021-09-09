@@ -2,13 +2,13 @@ import logging
 import re
 
 from bs4 import BeautifulSoup
-from bs4.element import PageElement, ResultSet, Tag
+from bs4.element import PageElement, Tag
 
 import ScraperCommon
+from Models.Costs import Costs
 from Models.Ingredient import Ingredient
 from Models.IngredientSet import IngredientSet
 from Models.Recipe import Recipe
-from Models.Costs import Costs
 
 
 class RecipeDetailScraper():
