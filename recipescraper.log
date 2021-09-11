@@ -80,3 +80,88 @@ RecipeDetailScraper.ElementNotFound: Could not get Cook time
 2021-09-11 12:02:35,551 getting recipe details from url: https://www.budgetbytes.com/baba-ganoush/
 2021-09-11 12:02:38,299 successfully retrieved recipe details from url: https://www.budgetbytes.com/baba-ganoush/
 2021-09-11 12:02:38,315 Finished
+2021-09-11 13:24:38,909 Started
+2021-09-11 13:24:43,608 getting recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+2021-09-11 13:24:44,344 successfully retrieved recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+2021-09-11 13:24:45,402 getting recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+2021-09-11 13:24:46,264 successfully retrieved recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+2021-09-11 13:24:48,088 getting recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+2021-09-11 13:24:48,852 successfully retrieved recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+2021-09-11 13:24:50,664 getting recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+2021-09-11 13:24:51,517 successfully retrieved recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+2021-09-11 13:24:53,243 getting recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+2021-09-11 13:24:54,035 successfully retrieved recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+2021-09-11 13:24:55,895 getting recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+2021-09-11 13:24:56,685 successfully retrieved recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+2021-09-11 13:25:03,411 getting recipe details from url: https://www.budgetbytes.com/homemade-marinara/
+2021-09-11 13:25:04,174 successfully retrieved recipe details from url: https://www.budgetbytes.com/homemade-marinara/
+2021-09-11 13:25:06,329 getting recipe details from url: https://www.budgetbytes.com/garlic-noodles/
+2021-09-11 13:25:07,112 successfully retrieved recipe details from url: https://www.budgetbytes.com/garlic-noodles/
+2021-09-11 13:25:09,106 getting recipe details from url: https://www.budgetbytes.com/indian-spiced-oats-w-coconut-milk/
+2021-09-11 13:25:09,958 successfully retrieved recipe details from url: https://www.budgetbytes.com/indian-spiced-oats-w-coconut-milk/
+2021-09-11 13:25:12,120 getting recipe details from url: https://www.budgetbytes.com/baba-ganoush/
+2021-09-11 13:25:12,868 successfully retrieved recipe details from url: https://www.budgetbytes.com/baba-ganoush/
+2021-09-11 13:25:14,667 getting recipe details from url: https://www.budgetbytes.com/thai-peanut-sauce/
+2021-09-11 13:25:18,064 Error getting recipe details from url : https://www.budgetbytes.com/thai-peanut-sauce/ (ElementNotFound)
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 211, in _get_cook_time
+    cook_time_string = soup.find(
+AttributeError: 'NoneType' object has no attribute 'get_text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 52, in get_recipe_details_from_html
+    cook_time = self._get_cook_time(soup)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 217, in _get_cook_time
+    raise ElementNotFound("Could not get Cook time")
+RecipeDetailScraper.ElementNotFound: Could not get Cook time
+2021-09-11 13:25:18,068 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/thai-peanut-sauce/
+2021-09-11 13:25:19,560 getting recipe details from url: https://www.budgetbytes.com/sweet-potato-enchiladas/
+2021-09-11 13:25:22,006 successfully retrieved recipe details from url: https://www.budgetbytes.com/sweet-potato-enchiladas/
+2021-09-11 13:25:23,137 getting recipe details from url: https://www.budgetbytes.com/roasted-poblano-and-sweet-potato-salad/
+2021-09-11 13:25:23,991 successfully retrieved recipe details from url: https://www.budgetbytes.com/roasted-poblano-and-sweet-potato-salad/
+2021-09-11 13:25:24,833 getting recipe details from url: https://www.budgetbytes.com/lemon-ricotta-cookies/
+2021-09-11 13:25:25,562 successfully retrieved recipe details from url: https://www.budgetbytes.com/lemon-ricotta-cookies/
+2021-09-11 13:25:26,448 getting recipe details from url: https://www.budgetbytes.com/budget-byting-principles/
+2021-09-11 13:25:29,160 Error getting recipe details from url : https://www.budgetbytes.com/budget-byting-principles/ (ElementNotFound)
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 42, in get_recipe_details_from_html
+    cost_data = self._get_cost_data(soup)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 72, in _get_cost_data
+    cost_string = str(self._get_cost_string(soup))
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 260, in _get_cost_string
+    raise ElementNotFound("Could not find cost string")
+RecipeDetailScraper.ElementNotFound: Could not find cost string
+2021-09-11 13:25:29,161 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/budget-byting-principles/
+2021-09-11 13:25:30,958 getting recipe details from url: https://www.budgetbytes.com/marinated-mushrooms/
+2021-09-11 13:25:34,732 successfully retrieved recipe details from url: https://www.budgetbytes.com/marinated-mushrooms/
+2021-09-11 13:25:35,578 getting recipe details from url: https://www.budgetbytes.com/stuffed-poblano-peppers/
+2021-09-11 13:25:36,392 successfully retrieved recipe details from url: https://www.budgetbytes.com/stuffed-poblano-peppers/
+2021-09-11 13:25:37,131 getting recipe details from url: https://www.budgetbytes.com/rice-pancakes/
+2021-09-11 13:25:37,900 successfully retrieved recipe details from url: https://www.budgetbytes.com/rice-pancakes/
+2021-09-11 13:25:38,515 getting recipe details from url: https://www.budgetbytes.com/chili-garlic-breakfast-quesadilla/
+2021-09-11 13:25:39,366 successfully retrieved recipe details from url: https://www.budgetbytes.com/chili-garlic-breakfast-quesadilla/
+2021-09-11 13:25:39,916 getting recipe details from url: https://www.budgetbytes.com/guacamole-salad/
+2021-09-11 13:25:40,825 Error getting recipe details from url : https://www.budgetbytes.com/guacamole-salad/ (ElementNotFound)
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 211, in _get_cook_time
+    cook_time_string = soup.find(
+AttributeError: 'NoneType' object has no attribute 'get_text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 52, in get_recipe_details_from_html
+    cook_time = self._get_cook_time(soup)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 217, in _get_cook_time
+    raise ElementNotFound("Could not get Cook time")
+RecipeDetailScraper.ElementNotFound: Could not get Cook time
+2021-09-11 13:25:40,827 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/guacamole-salad/
+2021-09-11 13:25:40,828 Finished

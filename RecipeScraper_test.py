@@ -186,6 +186,16 @@ def test_scraping_cook_times_with_hours_component(detail_scraper: RecipeDetailSc
     assert test_recipe.cook_time + test_recipe.prep_time == expected_total_time
 
 
+def test_scraping_recipe_with_no_cook_time(detail_scraper: RecipeDetailScraper):
+    url = "https://www.budgetbytes.com/thai-peanut-sauce/"
+    recipe = detail_scraper.get_recipe_details_from_url(url)
+
+    expected_cook_time = 0
+    expected_prep_time = 15
+    assert recipe.cook_time == expected_cook_time
+    assert recipe.prep_time == expected_prep_time
+
+
 def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     test_cost_string = '$3.13 recipe / $0.78 serving'
     target_recipe_cost = 3.13

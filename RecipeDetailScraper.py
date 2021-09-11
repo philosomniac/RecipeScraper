@@ -51,7 +51,12 @@ class RecipeDetailScraper():
         try:
             cook_time = self._get_cook_time(soup)
         except ElementNotFound:
-            raise
+            # means there is no cook time
+            cook_time = 0
+
+        if cook_time == 0 and prep_time == 0:
+            raise ElementNotFound("Could not get cook time or prep time")
+
         servings = self._get_servings(soup)
         # servings_unit = get_servings_unit(soup)
 
