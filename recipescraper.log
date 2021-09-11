@@ -10,3 +10,73 @@ Traceback (most recent call last):
   File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeScraper.py", line 263, in get_recipe_title
     return soup.find(class_="wprm-recipe-name").string
 AttributeError: 'NoneType' object has no attribute 'string'
+2021-09-11 11:55:05,237 Started
+2021-09-11 11:55:05,255 getting recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+
+2021-09-11 11:55:14,498 successfully retrieved recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+
+2021-09-11 11:55:14,505 getting recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+
+2021-09-11 11:56:32,456 Started
+2021-09-11 11:56:55,559 getting recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+
+2021-09-11 11:56:56,695 successfully retrieved recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+
+2021-09-11 11:56:58,166 getting recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+
+2021-09-11 11:56:58,803 successfully retrieved recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+
+2021-09-11 11:57:00,920 getting recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+
+2021-09-11 11:57:01,736 successfully retrieved recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+
+2021-09-11 11:57:10,148 getting recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+
+2021-09-11 11:57:11,595 successfully retrieved recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+
+2021-09-11 11:57:24,358 getting recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+
+2021-09-11 11:57:28,257 successfully retrieved recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+
+2021-09-11 11:57:47,401 getting recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+
+2021-09-11 11:57:49,236 successfully retrieved recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+
+2021-09-11 12:01:39,967 Started
+2021-09-11 12:01:43,210 getting recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+2021-09-11 12:01:44,119 successfully retrieved recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+2021-09-11 12:01:45,066 getting recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+2021-09-11 12:01:45,953 successfully retrieved recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+2021-09-11 12:01:46,523 getting recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+2021-09-11 12:01:47,279 successfully retrieved recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+2021-09-11 12:01:47,890 getting recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+2021-09-11 12:01:48,690 successfully retrieved recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+2021-09-11 12:01:49,177 getting recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+2021-09-11 12:01:49,913 successfully retrieved recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+2021-09-11 12:01:50,457 getting recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+2021-09-11 12:01:51,223 successfully retrieved recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+2021-09-11 12:01:52,137 getting recipe details from url: https://www.budgetbytes.com/homemade-marinara/
+2021-09-11 12:01:52,885 Error getting recipe details from url : https://www.budgetbytes.com/homemade-marinara/ (ElementNotFound)
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 229, in get_cook_time
+    return int(cook_time)
+ValueError: invalid literal for int() with base 10: '1 hr 30'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 52, in get_recipe_details_from_html
+    cook_time = self.get_cook_time(soup)
+  File "c:\Users\shami\onedrive\documents\Programming projects\recipescraper\RecipeDetailScraper.py", line 231, in get_cook_time
+    raise ElementNotFound("Could not get Cook time")
+RecipeDetailScraper.ElementNotFound: Could not get Cook time
+2021-09-11 12:01:52,890 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/homemade-marinara/
+2021-09-11 12:01:56,124 getting recipe details from url: https://www.budgetbytes.com/garlic-noodles/
+2021-09-11 12:01:57,090 successfully retrieved recipe details from url: https://www.budgetbytes.com/garlic-noodles/
+2021-09-11 12:02:00,004 getting recipe details from url: https://www.budgetbytes.com/indian-spiced-oats-w-coconut-milk/
+2021-09-11 12:02:06,676 successfully retrieved recipe details from url: https://www.budgetbytes.com/indian-spiced-oats-w-coconut-milk/
+2021-09-11 12:02:35,551 getting recipe details from url: https://www.budgetbytes.com/baba-ganoush/
+2021-09-11 12:02:38,299 successfully retrieved recipe details from url: https://www.budgetbytes.com/baba-ganoush/
+2021-09-11 12:02:38,315 Finished

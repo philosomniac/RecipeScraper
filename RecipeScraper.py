@@ -32,7 +32,7 @@ def scrape_recipes(limit=999999, recipe_url_file_path="BudgetBytesRecipes.txt"):
         for line in recipe_url_file:
             if line_count >= limit:
                 break
-            recipe_url_list.append(line)
+            recipe_url_list.append(line.strip())
             line_count += 1
 
     detail_scraper = RecipeDetailScraper()

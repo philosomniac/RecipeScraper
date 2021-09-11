@@ -14,6 +14,7 @@ from models.Recipe import Recipe
 class RecipeDetailScraper():
     def get_recipe_details_from_url(self, url: str) -> Recipe:
         try:
+            url = url.strip()
             logging.info(f"getting recipe details from url: {url}")
             soup = ScraperCommon.get_parsed_html_from_url(url)
 
