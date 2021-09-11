@@ -196,6 +196,16 @@ def test_scraping_recipe_with_no_cook_time(detail_scraper: RecipeDetailScraper):
     assert recipe.prep_time == expected_prep_time
 
 
+def test_no_cook_time_and_multiple_hour_prep_time(detail_scraper: RecipeDetailScraper):
+    url = 'https://www.budgetbytes.com/eggplant-parmesan/'
+    recipe = detail_scraper.get_recipe_details_from_url(url)
+
+    expected_prep_time = 120
+    expected_cook_time = 0
+    assert recipe.prep_time == expected_prep_time
+    assert recipe.cook_time == expected_cook_time
+
+
 def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     test_cost_string = '$3.13 recipe / $0.78 serving'
     target_recipe_cost = 3.13

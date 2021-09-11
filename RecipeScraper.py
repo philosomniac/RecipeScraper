@@ -16,7 +16,7 @@ def close_logging():
 def main():
     initialize()
 
-    scrape_recipes(limit=20)
+    scrape_recipes(limit=100)
 
     close_logging()
 

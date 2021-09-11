@@ -231,12 +231,14 @@ class RecipeDetailScraper():
 
             hours_component = ''.join(
                 c for c in hours_component if c.isdigit())
-            result_time += int(hours_component) * 60
+            if hours_component:
+                result_time += int(hours_component) * 60
             minutes_component = cook_time_string[hours_component_index:]
 
             minutes_component = ''.join(
                 c for c in minutes_component if c.isdigit())
-            result_time += int(minutes_component)
+            if minutes_component:
+                result_time += int(minutes_component)
 
         else:
             cook_time_string = ''.join(
