@@ -57,7 +57,11 @@ class RecipeDetailScraper():
         if cook_time == 0 and prep_time == 0:
             raise ElementNotFound("Could not get cook time or prep time")
 
-        servings = self._get_servings(soup)
+        try:
+            servings = self._get_servings(soup)
+        except ElementNotFound:
+            # assume single serving if servings element can't be found
+            servings = 1
         # servings_unit = get_servings_unit(soup)
 
         img_url = self._get_img_url(soup)
@@ -209,7 +213,10 @@ class RecipeDetailScraper():
         return soup.find(class_="wprm-recipe-servings-unit").string
 
     def _get_servings(self, soup):
-        return int(soup.find(class_="wprm-recipe-servings").string)
+        try:
+            return int(soup.find(class_="wprm-recipe-servings").string)
+        except:
+            ElementNotFound("Could not get servings")
 
     def _get_cook_time(self, soup):
         try:
