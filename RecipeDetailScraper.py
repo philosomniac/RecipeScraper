@@ -18,11 +18,17 @@ class RecipeDetailScraper():
             soup = ScraperCommon.get_parsed_html_from_url(url)
 
             current_recipe = self.get_recipe_details_from_html(soup, url)
+            logging.info(
+                f"successfully retrieved recipe details from url: {url}")
 
             return current_recipe
 
+        except ElementNotFound:
+            logging.exception(
+                f"Error getting recipe details from url : {url} (ElementNotFound)")
+            raise
         except Exception:
-            logging.exception(f"Error getting recipe details from url : {url}")
+            logging.exception(f"Error getting recipe details from url: {url}")
             raise
 
     def get_recipe_details_from_html(self, soup: BeautifulSoup, url: str = "") -> Recipe:
@@ -43,7 +49,7 @@ class RecipeDetailScraper():
             prep_time = 0
         try:
             cook_time = self.get_cook_time(soup)
-        except:
+        except ElementNotFound:
             raise
         servings = self.get_servings(soup)
         # servings_unit = get_servings_unit(soup)
@@ -259,4 +265,8 @@ class RecipeDetailScraper():
 
 class ElementNotFound(Exception):
     """Raised when an element can't be found in the html"""
+    pass
+
+
+class CouldNotScrapeRecipe(Exception):
     pass
