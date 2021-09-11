@@ -124,7 +124,7 @@ def test_get_soup_from_test_file():
 def test_get_ingredient_elements(detail_scraper):
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
     soup = ScraperCommon.get_parsed_html_from_url(test_recipe_url)
-    ingredient_elements = detail_scraper.get_ingredient_elements(soup)
+    ingredient_elements = detail_scraper._get_ingredient_elements(soup)
 
     ScraperCommon.save_html_to_file(ingredient_elements, "Test_elements.txt")
 
@@ -144,7 +144,7 @@ def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
     ]
     target_ingredient_set = IngredientSet(target_ingredients)
 
-    actual_ingredients = detail_scraper.get_ingredient_set(soup)
+    actual_ingredients = detail_scraper._get_ingredient_set(soup)
 
     assert target_ingredient_set == actual_ingredients
 
@@ -190,12 +190,12 @@ def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     test_cost_string = '$3.13 recipe / $0.78 serving'
     target_recipe_cost = 3.13
     target_serving_cost = 0.78
-    actual_recipe_cost = detail_scraper.get_recipe_cost_from_cost_string(
+    actual_recipe_cost = detail_scraper._get_recipe_cost_from_cost_string(
         test_cost_string)
 
     assert target_recipe_cost == actual_recipe_cost
 
-    actual_serving_cost = detail_scraper.get_serving_cost_from_cost_string(
+    actual_serving_cost = detail_scraper._get_serving_cost_from_cost_string(
         test_cost_string)
     assert target_serving_cost == actual_serving_cost
 
