@@ -220,13 +220,39 @@ class RecipeDetailScraper():
         return int(soup.find(class_="wprm-recipe-servings").string)
 
     def get_cook_time(self, soup):
+        result_time = 0
         try:
             cook_time_string = soup.find(
                 class_="wprm-recipe-cook-time-container").get_text().strip()
-            cook_time = cook_time_string.replace("Cook Time:", "")
-            cook_time = cook_time.replace("mins", "")
-            cook_time = cook_time.strip()
-            return int(cook_time)
+            # cook_time_string = cook_time_string.replace("Cook Time:", "")
+            hours_component_index = cook_time_string.find("hr")
+
+            if hours_component_index != -1:
+                hours_component = cook_time_string[:hours_component_index]
+                # hours_component = hours_component.replace(
+                #     "hr", "").replace("s", "")
+                # hours_component = hours_component.strip()
+
+                hours_component = ''.join(
+                    c for c in hours_component if c.isdigit())
+                result_time += int(hours_component) * 60
+                minutes_component = cook_time_string[hours_component_index:]
+                # minutes_component = minutes_component.replace(
+                # "mins", "").strip()
+
+                minutes_component = ''.join(
+                    c for c in minutes_component if c.isdigit())
+                result_time += int(minutes_component)
+
+            else:
+                # cook_time_string = cook_time_string.replace("mins", "")
+                # cook_time_string = cook_time_string.strip()
+
+                cook_time_string = ''.join(
+                    c for c in cook_time_string if c.isdigit())
+                result_time += int(cook_time_string)
+
+            return result_time
         except:
             raise ElementNotFound("Could not get Cook time")
 

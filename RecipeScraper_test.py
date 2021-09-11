@@ -175,6 +175,17 @@ def test_scraping_non_recipe_should_throw_error(detail_scraper: RecipeDetailScra
         detail_scraper.get_recipe_details_from_html(soup)
 
 
+def test_scraping_cook_times_with_hours_component(detail_scraper: RecipeDetailScraper):
+    test_url = "https://www.budgetbytes.com/homemade-marinara/"
+    test_recipe = detail_scraper.get_recipe_details_from_url(test_url)
+
+    expected_cook_time = 90
+    expected_total_time = 100
+
+    assert test_recipe.cook_time == expected_cook_time
+    assert test_recipe.cook_time + test_recipe.prep_time == expected_total_time
+
+
 def test_parse_cost_string(detail_scraper: RecipeDetailScraper):
     test_cost_string = '$3.13 recipe / $0.78 serving'
     target_recipe_cost = 3.13
