@@ -14,6 +14,14 @@ class PersistenceHandler():
                     return recipe
         return None
 
+    def get_recipe_by_name(self, name) -> Recipe:
+        with open(self._persistence_file, "r") as persistence_store:
+            for recipe_str in persistence_store:
+                recipe = Recipe.from_json(recipe_str)
+                if recipe.name == name:
+                    return recipe
+        return None
+
     def save_recipe_to_persistence(self, recipe: Recipe):
         pre_existing_recipe = self.get_recipe_by_url(recipe.url)
 

@@ -1,7 +1,7 @@
 """The API that will retrieve the recipe data"""
 
 from fastapi import FastAPI
-# from persistence_handler import PersistenceHandler
+from persistence_handler import PersistenceHandler
 
 
 app = FastAPI()
@@ -11,3 +11,9 @@ app = FastAPI()
 async def root():
     """docstring"""
     return {"message": "Hello World"}
+
+
+@app.get("/recipes/{name}")
+async def get_recipe_by_name(name):
+    persistence = PersistenceHandler()
+    return persistence.get_recipe_by_name(name).dict()
