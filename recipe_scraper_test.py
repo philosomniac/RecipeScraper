@@ -75,7 +75,7 @@ def sample_recipe() -> Recipe:
     )
 
 
-def test_get_recipe_urls_from_archive_page(retriever):
+def test_get_recipe_urls_from_archive_page(retriever: RecipeURLRetriever):
     test_page = "https://www.budgetbytes.com/archive/2010/07/"
     known_recipe_urls = [
         "https://www.budgetbytes.com/chipotle-peach-salsa/",

@@ -45,7 +45,6 @@ class PersistenceHandler():
             for recipe in recipe_list:
                 if recipe.url != url:
                     persistence_store.write(recipe.to_json() + "\n")
-                pass
             persistence_store.truncate()
 
 

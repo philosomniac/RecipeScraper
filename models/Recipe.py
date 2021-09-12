@@ -55,11 +55,11 @@ class Recipe:
     @staticmethod
     def _recipe_decode(json_to_decode: dict):
         if 'ingredient_set' in json_to_decode:
-            myIngredientSet = IngredientSet(
+            ingredient_set = IngredientSet(
                 json_to_decode['ingredient_set']['ingredients'])
             del json_to_decode['ingredient_set']
-            myRecipe = Recipe(ingredient_set=myIngredientSet, **json_to_decode)
-            return myRecipe
+            recipe = Recipe(ingredient_set=ingredient_set, **json_to_decode)
+            return recipe
 
         return json_to_decode
 
