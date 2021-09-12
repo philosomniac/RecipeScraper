@@ -787,3 +787,248 @@ RecipeDetailScraper.ElementNotFound: Could not find cost string
 2021-09-11 20:41:39,840 getting recipe details from url: https://www.budgetbytes.com/morning-glory-muffins/
 2021-09-11 20:41:40,100 successfully retrieved recipe details from url: https://www.budgetbytes.com/morning-glory-muffins/
 2021-09-11 20:41:40,104 Finished
+2021-09-12 09:45:01,969 Started
+2021-09-12 09:45:01,969 getting recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+2021-09-12 09:45:02,781 successfully retrieved recipe details from url: https://www.budgetbytes.com/parmesan-roasted-potatoes/
+2021-09-12 09:45:02,782 getting recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+2021-09-12 09:45:03,438 successfully retrieved recipe details from url: https://www.budgetbytes.com/pepperoni-stuffed-chicken/
+2021-09-12 09:45:03,439 getting recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+2021-09-12 09:45:04,107 successfully retrieved recipe details from url: https://www.budgetbytes.com/mexican-lentil-stew/
+2021-09-12 09:45:04,108 getting recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+2021-09-12 09:45:04,816 successfully retrieved recipe details from url: https://www.budgetbytes.com/egg-florentine-quesadillas/
+2021-09-12 09:45:04,817 getting recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+2021-09-12 09:45:05,030 successfully retrieved recipe details from url: https://www.budgetbytes.com/meatball-sandwich/
+2021-09-12 09:45:05,031 getting recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+2021-09-12 09:45:05,937 successfully retrieved recipe details from url: https://www.budgetbytes.com/italian-meatballs/
+2021-09-12 09:45:05,938 getting recipe details from url: https://www.budgetbytes.com/homemade-marinara/
+2021-09-12 09:45:06,179 successfully retrieved recipe details from url: https://www.budgetbytes.com/homemade-marinara/
+2021-09-12 09:45:06,181 getting recipe details from url: https://www.budgetbytes.com/garlic-noodles/
+2021-09-12 09:45:06,400 successfully retrieved recipe details from url: https://www.budgetbytes.com/garlic-noodles/
+2021-09-12 09:45:06,402 getting recipe details from url: https://www.budgetbytes.com/indian-spiced-oats-w-coconut-milk/
+2021-09-12 09:45:07,789 successfully retrieved recipe details from url: https://www.budgetbytes.com/indian-spiced-oats-w-coconut-milk/
+2021-09-12 09:45:07,791 getting recipe details from url: https://www.budgetbytes.com/baba-ganoush/
+2021-09-12 09:45:08,041 successfully retrieved recipe details from url: https://www.budgetbytes.com/baba-ganoush/
+2021-09-12 09:45:08,042 getting recipe details from url: https://www.budgetbytes.com/thai-peanut-sauce/
+2021-09-12 09:45:08,265 successfully retrieved recipe details from url: https://www.budgetbytes.com/thai-peanut-sauce/
+2021-09-12 09:45:08,267 getting recipe details from url: https://www.budgetbytes.com/sweet-potato-enchiladas/
+2021-09-12 09:45:09,769 successfully retrieved recipe details from url: https://www.budgetbytes.com/sweet-potato-enchiladas/
+2021-09-12 09:45:09,771 getting recipe details from url: https://www.budgetbytes.com/roasted-poblano-and-sweet-potato-salad/
+2021-09-12 09:45:10,013 successfully retrieved recipe details from url: https://www.budgetbytes.com/roasted-poblano-and-sweet-potato-salad/
+2021-09-12 09:45:10,015 getting recipe details from url: https://www.budgetbytes.com/lemon-ricotta-cookies/
+2021-09-12 09:45:11,404 successfully retrieved recipe details from url: https://www.budgetbytes.com/lemon-ricotta-cookies/
+2021-09-12 09:45:11,406 getting recipe details from url: https://www.budgetbytes.com/budget-byting-principles/
+2021-09-12 09:45:12,050 Error getting recipe details from url : https://www.budgetbytes.com/budget-byting-principles/ (ElementNotFound)
+Traceback (most recent call last):
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 42, in get_recipe_details_from_html
+    cost_data = self._get_cost_data(soup)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 90, in _get_cost_data
+    cost_string = str(self._get_cost_string(soup))
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 287, in _get_cost_string
+    raise ElementNotFound("Could not find cost string")
+recipe_detail_scraper.ElementNotFound: Could not find cost string
+2021-09-12 09:45:12,051 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/budget-byting-principles/
+2021-09-12 09:45:12,051 getting recipe details from url: https://www.budgetbytes.com/marinated-mushrooms/
+2021-09-12 09:45:12,769 successfully retrieved recipe details from url: https://www.budgetbytes.com/marinated-mushrooms/
+2021-09-12 09:45:12,771 getting recipe details from url: https://www.budgetbytes.com/stuffed-poblano-peppers/
+2021-09-12 09:45:13,464 successfully retrieved recipe details from url: https://www.budgetbytes.com/stuffed-poblano-peppers/
+2021-09-12 09:45:13,467 getting recipe details from url: https://www.budgetbytes.com/rice-pancakes/
+2021-09-12 09:45:14,161 successfully retrieved recipe details from url: https://www.budgetbytes.com/rice-pancakes/
+2021-09-12 09:45:14,163 getting recipe details from url: https://www.budgetbytes.com/chili-garlic-breakfast-quesadilla/
+2021-09-12 09:45:14,824 successfully retrieved recipe details from url: https://www.budgetbytes.com/chili-garlic-breakfast-quesadilla/
+2021-09-12 09:45:14,827 getting recipe details from url: https://www.budgetbytes.com/guacamole-salad/
+2021-09-12 09:45:15,496 successfully retrieved recipe details from url: https://www.budgetbytes.com/guacamole-salad/
+2021-09-12 09:45:15,499 getting recipe details from url: https://www.budgetbytes.com/chili-cheese-cornbread/
+2021-09-12 09:45:16,894 successfully retrieved recipe details from url: https://www.budgetbytes.com/chili-cheese-cornbread/
+2021-09-12 09:45:16,897 getting recipe details from url: https://www.budgetbytes.com/gingerbread-steel-cut-oats/
+2021-09-12 09:45:19,408 successfully retrieved recipe details from url: https://www.budgetbytes.com/gingerbread-steel-cut-oats/
+2021-09-12 09:45:19,410 getting recipe details from url: https://www.budgetbytes.com/pork-ginger-pot-stickers/
+2021-09-12 09:45:20,197 successfully retrieved recipe details from url: https://www.budgetbytes.com/pork-ginger-pot-stickers/
+2021-09-12 09:45:20,199 getting recipe details from url: https://www.budgetbytes.com/southern-style-potato-salad/
+2021-09-12 09:45:20,424 successfully retrieved recipe details from url: https://www.budgetbytes.com/southern-style-potato-salad/
+2021-09-12 09:45:20,427 getting recipe details from url: https://www.budgetbytes.com/sriracha-chicken-strips/
+2021-09-12 09:45:21,848 successfully retrieved recipe details from url: https://www.budgetbytes.com/sriracha-chicken-strips/
+2021-09-12 09:45:21,851 getting recipe details from url: https://www.budgetbytes.com/tuna-pasta-salad-wpeas/
+2021-09-12 09:45:22,486 successfully retrieved recipe details from url: https://www.budgetbytes.com/tuna-pasta-salad-wpeas/
+2021-09-12 09:45:22,490 getting recipe details from url: https://www.budgetbytes.com/asparagus-breakfast-wraps/
+2021-09-12 09:45:23,250 successfully retrieved recipe details from url: https://www.budgetbytes.com/asparagus-breakfast-wraps/
+2021-09-12 09:45:23,253 getting recipe details from url: https://www.budgetbytes.com/lemon-coconut-bars/
+2021-09-12 09:45:24,054 successfully retrieved recipe details from url: https://www.budgetbytes.com/lemon-coconut-bars/
+2021-09-12 09:45:24,057 getting recipe details from url: https://www.budgetbytes.com/cranberry-almond-biscotti/
+2021-09-12 09:45:24,285 successfully retrieved recipe details from url: https://www.budgetbytes.com/cranberry-almond-biscotti/
+2021-09-12 09:45:24,289 getting recipe details from url: https://www.budgetbytes.com/raspberry-oat-bars/
+2021-09-12 09:45:24,518 successfully retrieved recipe details from url: https://www.budgetbytes.com/raspberry-oat-bars/
+2021-09-12 09:45:24,520 getting recipe details from url: https://www.budgetbytes.com/creamed-spinach-take-2/
+2021-09-12 09:45:25,286 successfully retrieved recipe details from url: https://www.budgetbytes.com/creamed-spinach-take-2/
+2021-09-12 09:45:25,290 getting recipe details from url: https://www.budgetbytes.com/dolmas-stuffed-grape-leaves/
+2021-09-12 09:45:26,045 successfully retrieved recipe details from url: https://www.budgetbytes.com/dolmas-stuffed-grape-leaves/
+2021-09-12 09:45:26,049 getting recipe details from url: https://www.budgetbytes.com/tzatziki-greek-yogurt-sauce/
+2021-09-12 09:45:26,811 successfully retrieved recipe details from url: https://www.budgetbytes.com/tzatziki-greek-yogurt-sauce/
+2021-09-12 09:45:26,815 getting recipe details from url: https://www.budgetbytes.com/apple-cinnamon-bread-pudding/
+2021-09-12 09:45:27,471 successfully retrieved recipe details from url: https://www.budgetbytes.com/apple-cinnamon-bread-pudding/
+2021-09-12 09:45:27,475 getting recipe details from url: https://www.budgetbytes.com/summer-gazpacho/
+2021-09-12 09:45:27,700 successfully retrieved recipe details from url: https://www.budgetbytes.com/summer-gazpacho/
+2021-09-12 09:45:27,704 getting recipe details from url: https://www.budgetbytes.com/pesto-cheese-toast/
+2021-09-12 09:45:27,921 successfully retrieved recipe details from url: https://www.budgetbytes.com/pesto-cheese-toast/
+2021-09-12 09:45:27,925 getting recipe details from url: https://www.budgetbytes.com/eggplant-parmesan/
+2021-09-12 09:45:28,169 successfully retrieved recipe details from url: https://www.budgetbytes.com/eggplant-parmesan/
+2021-09-12 09:45:28,173 getting recipe details from url: https://www.budgetbytes.com/lobster-cream-cheese-wontons/
+2021-09-12 09:45:28,953 successfully retrieved recipe details from url: https://www.budgetbytes.com/lobster-cream-cheese-wontons/
+2021-09-12 09:45:28,958 getting recipe details from url: https://www.budgetbytes.com/vegetable-not-fried-rice/
+2021-09-12 09:45:29,695 successfully retrieved recipe details from url: https://www.budgetbytes.com/vegetable-not-fried-rice/
+2021-09-12 09:45:29,700 getting recipe details from url: https://www.budgetbytes.com/chipotle-peach-salsa/
+2021-09-12 09:45:29,921 successfully retrieved recipe details from url: https://www.budgetbytes.com/chipotle-peach-salsa/
+2021-09-12 09:45:29,925 getting recipe details from url: https://www.budgetbytes.com/english-muffins/
+2021-09-12 09:45:30,137 successfully retrieved recipe details from url: https://www.budgetbytes.com/english-muffins/
+2021-09-12 09:45:30,142 getting recipe details from url: https://www.budgetbytes.com/spicy-hawaiian-pizza/
+2021-09-12 09:45:30,861 successfully retrieved recipe details from url: https://www.budgetbytes.com/spicy-hawaiian-pizza/
+2021-09-12 09:45:30,866 getting recipe details from url: https://www.budgetbytes.com/garden-tomato-soup/
+2021-09-12 09:45:31,564 successfully retrieved recipe details from url: https://www.budgetbytes.com/garden-tomato-soup/
+2021-09-12 09:45:31,569 getting recipe details from url: https://www.budgetbytes.com/peach-almond-crisp/
+2021-09-12 09:45:32,251 successfully retrieved recipe details from url: https://www.budgetbytes.com/peach-almond-crisp/
+2021-09-12 09:45:32,257 getting recipe details from url: https://www.budgetbytes.com/breakfast-pizza/
+2021-09-12 09:45:33,758 successfully retrieved recipe details from url: https://www.budgetbytes.com/breakfast-pizza/
+2021-09-12 09:45:33,763 getting recipe details from url: https://www.budgetbytes.com/polvorones/
+2021-09-12 09:45:34,500 successfully retrieved recipe details from url: https://www.budgetbytes.com/polvorones/
+2021-09-12 09:45:34,505 getting recipe details from url: https://www.budgetbytes.com/fire-roasted-salsa/
+2021-09-12 09:45:34,721 successfully retrieved recipe details from url: https://www.budgetbytes.com/fire-roasted-salsa/
+2021-09-12 09:45:34,726 getting recipe details from url: https://www.budgetbytes.com/grits-n-greens/
+2021-09-12 09:45:35,520 successfully retrieved recipe details from url: https://www.budgetbytes.com/grits-n-greens/
+2021-09-12 09:45:35,526 getting recipe details from url: https://www.budgetbytes.com/glazed-pork-chops/
+2021-09-12 09:45:35,725 successfully retrieved recipe details from url: https://www.budgetbytes.com/glazed-pork-chops/
+2021-09-12 09:45:35,730 getting recipe details from url: https://www.budgetbytes.com/collard-greens/
+2021-09-12 09:45:38,428 successfully retrieved recipe details from url: https://www.budgetbytes.com/collard-greens/
+2021-09-12 09:45:38,434 getting recipe details from url: https://www.budgetbytes.com/lemon-blueberry-scones/
+2021-09-12 09:45:38,692 successfully retrieved recipe details from url: https://www.budgetbytes.com/lemon-blueberry-scones/
+2021-09-12 09:45:38,698 getting recipe details from url: https://www.budgetbytes.com/coconut-rice-pilaf/
+2021-09-12 09:45:38,918 successfully retrieved recipe details from url: https://www.budgetbytes.com/coconut-rice-pilaf/
+2021-09-12 09:45:38,923 getting recipe details from url: https://www.budgetbytes.com/teriyaki-pork-sandwiches/
+2021-09-12 09:45:39,631 successfully retrieved recipe details from url: https://www.budgetbytes.com/teriyaki-pork-sandwiches/
+2021-09-12 09:45:39,637 getting recipe details from url: https://www.budgetbytes.com/nutty-caramel-corn/
+2021-09-12 09:45:41,034 successfully retrieved recipe details from url: https://www.budgetbytes.com/nutty-caramel-corn/
+2021-09-12 09:45:41,040 getting recipe details from url: https://www.budgetbytes.com/singapore-noodles/
+2021-09-12 09:45:41,257 successfully retrieved recipe details from url: https://www.budgetbytes.com/singapore-noodles/
+2021-09-12 09:45:41,263 getting recipe details from url: https://www.budgetbytes.com/rice-pudding/
+2021-09-12 09:45:42,819 successfully retrieved recipe details from url: https://www.budgetbytes.com/rice-pudding/
+2021-09-12 09:45:42,825 getting recipe details from url: https://www.budgetbytes.com/no-knead-bread/
+2021-09-12 09:45:43,483 Error getting recipe details from url: https://www.budgetbytes.com/no-knead-bread/
+Traceback (most recent call last):
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 73, in get_recipe_details_from_html
+    current_recipe = Recipe(
+  File "pydantic\main.py", line 406, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for Recipe
+servings
+  none is not an allowed value (type=type_error.none.not_allowed)
+2021-09-12 09:45:43,483 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/no-knead-bread/
+2021-09-12 09:45:43,483 getting recipe details from url: https://www.budgetbytes.com/chunky-split-pea-soup/
+2021-09-12 09:45:44,172 successfully retrieved recipe details from url: https://www.budgetbytes.com/chunky-split-pea-soup/
+2021-09-12 09:45:44,179 getting recipe details from url: https://www.budgetbytes.com/dal-nirvana/
+2021-09-12 09:45:44,412 successfully retrieved recipe details from url: https://www.budgetbytes.com/dal-nirvana/
+2021-09-12 09:45:44,418 getting recipe details from url: https://www.budgetbytes.com/cinnamon-raisin-bagels/
+2021-09-12 09:45:45,181 successfully retrieved recipe details from url: https://www.budgetbytes.com/cinnamon-raisin-bagels/
+2021-09-12 09:45:45,188 getting recipe details from url: https://www.budgetbytes.com/honey-wheat-sandwich-bread/
+2021-09-12 09:45:45,418 successfully retrieved recipe details from url: https://www.budgetbytes.com/honey-wheat-sandwich-bread/
+2021-09-12 09:45:45,425 getting recipe details from url: https://www.budgetbytes.com/autumn-fruit-and-nut-oatmeal/
+2021-09-12 09:45:46,105 successfully retrieved recipe details from url: https://www.budgetbytes.com/autumn-fruit-and-nut-oatmeal/
+2021-09-12 09:45:46,112 getting recipe details from url: https://www.budgetbytes.com/honey-wheat-pizza-dough/
+2021-09-12 09:45:46,322 successfully retrieved recipe details from url: https://www.budgetbytes.com/honey-wheat-pizza-dough/
+2021-09-12 09:45:46,327 getting recipe details from url: https://www.budgetbytes.com/pumpkin-cream-cheese-spread/
+2021-09-12 09:45:46,556 successfully retrieved recipe details from url: https://www.budgetbytes.com/pumpkin-cream-cheese-spread/
+2021-09-12 09:45:46,562 getting recipe details from url: https://www.budgetbytes.com/pumpkin-bread-pudding/
+2021-09-12 09:45:47,308 successfully retrieved recipe details from url: https://www.budgetbytes.com/pumpkin-bread-pudding/
+2021-09-12 09:45:47,315 getting recipe details from url: https://www.budgetbytes.com/spinach-artichoke-pasta/
+2021-09-12 09:45:47,986 successfully retrieved recipe details from url: https://www.budgetbytes.com/spinach-artichoke-pasta/
+2021-09-12 09:45:47,993 getting recipe details from url: https://www.budgetbytes.com/tartar-like-sauce/
+2021-09-12 09:45:48,687 successfully retrieved recipe details from url: https://www.budgetbytes.com/tartar-like-sauce/
+2021-09-12 09:45:48,694 getting recipe details from url: https://www.budgetbytes.com/tilapia-fish-sticks/
+2021-09-12 09:45:49,479 successfully retrieved recipe details from url: https://www.budgetbytes.com/tilapia-fish-sticks/
+2021-09-12 09:45:49,487 getting recipe details from url: https://www.budgetbytes.com/chai-concentrate/
+2021-09-12 09:45:50,161 successfully retrieved recipe details from url: https://www.budgetbytes.com/chai-concentrate/
+2021-09-12 09:45:50,168 getting recipe details from url: https://www.budgetbytes.com/mushroom-herb-gravy/
+2021-09-12 09:45:50,926 successfully retrieved recipe details from url: https://www.budgetbytes.com/mushroom-herb-gravy/
+2021-09-12 09:45:50,933 getting recipe details from url: https://www.budgetbytes.com/red-wine-cranberry-sauce/
+2021-09-12 09:45:51,662 successfully retrieved recipe details from url: https://www.budgetbytes.com/red-wine-cranberry-sauce/
+2021-09-12 09:45:51,669 getting recipe details from url: https://www.budgetbytes.com/holiday-wild-rice-dressing/
+2021-09-12 09:45:53,321 successfully retrieved recipe details from url: https://www.budgetbytes.com/holiday-wild-rice-dressing/
+2021-09-12 09:45:53,328 getting recipe details from url: https://www.budgetbytes.com/party-food-round-up-2010/
+2021-09-12 09:45:55,655 Error getting recipe details from url : https://www.budgetbytes.com/party-food-round-up-2010/ (ElementNotFound)
+Traceback (most recent call last):
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 42, in get_recipe_details_from_html
+    cost_data = self._get_cost_data(soup)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 90, in _get_cost_data
+    cost_string = str(self._get_cost_string(soup))
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 287, in _get_cost_string
+    raise ElementNotFound("Could not find cost string")
+recipe_detail_scraper.ElementNotFound: Could not find cost string
+2021-09-12 09:45:55,656 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/party-food-round-up-2010/
+2021-09-12 09:45:55,656 getting recipe details from url: https://www.budgetbytes.com/black-eyed-peas/
+2021-09-12 09:45:56,440 successfully retrieved recipe details from url: https://www.budgetbytes.com/black-eyed-peas/
+2021-09-12 09:45:56,448 getting recipe details from url: https://www.budgetbytes.com/cranberry-walnut-bread/
+2021-09-12 09:45:57,151 successfully retrieved recipe details from url: https://www.budgetbytes.com/cranberry-walnut-bread/
+2021-09-12 09:45:57,159 getting recipe details from url: https://www.budgetbytes.com/black-bean-roasted-salsa-soup/
+2021-09-12 09:45:57,384 successfully retrieved recipe details from url: https://www.budgetbytes.com/black-bean-roasted-salsa-soup/
+2021-09-12 09:45:57,392 getting recipe details from url: https://www.budgetbytes.com/how-to-kick-the-can-of-beans/
+2021-09-12 09:45:57,625 Error getting recipe details from url : https://www.budgetbytes.com/how-to-kick-the-can-of-beans/ (ElementNotFound)
+Traceback (most recent call last):
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 21, in get_recipe_details_from_url
+    current_recipe = self.get_recipe_details_from_html(soup, url)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 42, in get_recipe_details_from_html
+    cost_data = self._get_cost_data(soup)
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 90, in _get_cost_data
+    cost_string = str(self._get_cost_string(soup))
+  File "C:\Users\Jesse\Documents\LocalProgrammingProjects\RecipeScraper\recipe_detail_scraper.py", line 287, in _get_cost_string
+    raise ElementNotFound("Could not find cost string")
+recipe_detail_scraper.ElementNotFound: Could not find cost string
+2021-09-12 09:45:57,626 Could not retrieve recipe, continuing... url: https://www.budgetbytes.com/how-to-kick-the-can-of-beans/
+2021-09-12 09:45:57,626 getting recipe details from url: https://www.budgetbytes.com/falafel/
+2021-09-12 09:45:57,903 successfully retrieved recipe details from url: https://www.budgetbytes.com/falafel/
+2021-09-12 09:45:57,911 getting recipe details from url: https://www.budgetbytes.com/pita-bread/
+2021-09-12 09:45:58,599 successfully retrieved recipe details from url: https://www.budgetbytes.com/pita-bread/
+2021-09-12 09:45:58,607 getting recipe details from url: https://www.budgetbytes.com/cinnamon-spice-biscotti/
+2021-09-12 09:45:59,346 successfully retrieved recipe details from url: https://www.budgetbytes.com/cinnamon-spice-biscotti/
+2021-09-12 09:45:59,355 getting recipe details from url: https://www.budgetbytes.com/no-knead-ciabatta/
+2021-09-12 09:46:00,073 successfully retrieved recipe details from url: https://www.budgetbytes.com/no-knead-ciabatta/
+2021-09-12 09:46:00,081 getting recipe details from url: https://www.budgetbytes.com/cinnamon-raisin-bread/
+2021-09-12 09:46:00,786 successfully retrieved recipe details from url: https://www.budgetbytes.com/cinnamon-raisin-bread/
+2021-09-12 09:46:00,795 getting recipe details from url: https://www.budgetbytes.com/zucchini-fritters/
+2021-09-12 09:46:01,454 successfully retrieved recipe details from url: https://www.budgetbytes.com/zucchini-fritters/
+2021-09-12 09:46:01,462 getting recipe details from url: https://www.budgetbytes.com/spinach-lasagna-roll-ups/
+2021-09-12 09:46:01,730 successfully retrieved recipe details from url: https://www.budgetbytes.com/spinach-lasagna-roll-ups/
+2021-09-12 09:46:01,739 getting recipe details from url: https://www.budgetbytes.com/not-butter-chicken/
+2021-09-12 09:46:02,465 successfully retrieved recipe details from url: https://www.budgetbytes.com/not-butter-chicken/
+2021-09-12 09:46:02,474 getting recipe details from url: https://www.budgetbytes.com/chipotle-mashed-sweet-potatoes/
+2021-09-12 09:46:03,157 successfully retrieved recipe details from url: https://www.budgetbytes.com/chipotle-mashed-sweet-potatoes/
+2021-09-12 09:46:03,166 getting recipe details from url: https://www.budgetbytes.com/flour-tortillas-v-2-0-low-fat/
+2021-09-12 09:46:03,914 successfully retrieved recipe details from url: https://www.budgetbytes.com/flour-tortillas-v-2-0-low-fat/
+2021-09-12 09:46:03,923 getting recipe details from url: https://www.budgetbytes.com/flour-tortillas/
+2021-09-12 09:46:04,702 successfully retrieved recipe details from url: https://www.budgetbytes.com/flour-tortillas/
+2021-09-12 09:46:04,711 getting recipe details from url: https://www.budgetbytes.com/broccoli-shells-n-cheese/
+2021-09-12 09:46:05,384 successfully retrieved recipe details from url: https://www.budgetbytes.com/broccoli-shells-n-cheese/
+2021-09-12 09:46:05,393 getting recipe details from url: https://www.budgetbytes.com/raspberry-chipotle-bbq-chicken/
+2021-09-12 09:46:06,178 successfully retrieved recipe details from url: https://www.budgetbytes.com/raspberry-chipotle-bbq-chicken/
+2021-09-12 09:46:06,187 getting recipe details from url: https://www.budgetbytes.com/mango-pineapple-chutney/
+2021-09-12 09:46:06,893 successfully retrieved recipe details from url: https://www.budgetbytes.com/mango-pineapple-chutney/
+2021-09-12 09:46:06,902 getting recipe details from url: https://www.budgetbytes.com/quick-curried-chick-peas/
+2021-09-12 09:46:07,130 successfully retrieved recipe details from url: https://www.budgetbytes.com/quick-curried-chick-peas/
+2021-09-12 09:46:07,139 getting recipe details from url: https://www.budgetbytes.com/chocolate-lava-cake-for-two-or-one/
+2021-09-12 09:46:07,931 successfully retrieved recipe details from url: https://www.budgetbytes.com/chocolate-lava-cake-for-two-or-one/
+2021-09-12 09:46:07,941 getting recipe details from url: https://www.budgetbytes.com/quick-lemon-garlic-fish/
+2021-09-12 09:46:08,692 successfully retrieved recipe details from url: https://www.budgetbytes.com/quick-lemon-garlic-fish/
+2021-09-12 09:46:08,702 getting recipe details from url: https://www.budgetbytes.com/hearty-meatball-soup/
+2021-09-12 09:46:09,362 successfully retrieved recipe details from url: https://www.budgetbytes.com/hearty-meatball-soup/
+2021-09-12 09:46:09,372 getting recipe details from url: https://www.budgetbytes.com/turkey-meatballs/
+2021-09-12 09:46:10,055 successfully retrieved recipe details from url: https://www.budgetbytes.com/turkey-meatballs/
+2021-09-12 09:46:10,065 getting recipe details from url: https://www.budgetbytes.com/beer-braised-collard-greens/
+2021-09-12 09:46:10,769 successfully retrieved recipe details from url: https://www.budgetbytes.com/beer-braised-collard-greens/
+2021-09-12 09:46:10,779 getting recipe details from url: https://www.budgetbytes.com/lemon-spice-cake/
+2021-09-12 09:46:11,595 successfully retrieved recipe details from url: https://www.budgetbytes.com/lemon-spice-cake/
+2021-09-12 09:46:11,605 getting recipe details from url: https://www.budgetbytes.com/olive-herb-bread/
+2021-09-12 09:46:12,364 successfully retrieved recipe details from url: https://www.budgetbytes.com/olive-herb-bread/
+2021-09-12 09:46:12,374 getting recipe details from url: https://www.budgetbytes.com/morning-glory-muffins/
+2021-09-12 09:46:14,145 successfully retrieved recipe details from url: https://www.budgetbytes.com/morning-glory-muffins/
+2021-09-12 09:46:14,156 Finished

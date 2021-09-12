@@ -70,8 +70,17 @@ class RecipeDetailScraper():
 
         # TODO: get instruction set data and put into recipe class
 
-        current_recipe = Recipe(url, recipe_title, current_ingredient_set,
-                                cost_data.recipe_cost, cost_data.serving_cost, servings, prep_time, cook_time, None, img_url)
+        current_recipe = Recipe(
+            url=url,
+            name=recipe_title,
+            ingredient_set=current_ingredient_set,
+            total_cost=cost_data.recipe_cost,
+            serving_cost=cost_data.serving_cost,
+            servings=servings,
+            prep_time=prep_time,
+            cook_time=cook_time,
+            img_url=img_url
+        )
         return current_recipe
 
     def _get_cost_data(self, soup: BeautifulSoup) -> Costs:
@@ -101,7 +110,7 @@ class RecipeDetailScraper():
                 ingredient_element)
             ingredient_list.append(current_ingredient)
 
-        current_ingredient_set = IngredientSet(ingredient_list)
+        current_ingredient_set = IngredientSet(ingredients=ingredient_list)
         return current_ingredient_set
 
     def _get_ingredient_set(self, soup):
@@ -120,7 +129,11 @@ class RecipeDetailScraper():
         current_price = float(self._format_price(current_price))
 
         current_ingredient = Ingredient(
-            current_name, current_amount, current_unit, current_price)
+            name=current_name,
+            amount=current_amount,
+            unit=current_unit,
+            price=current_price
+        )
 
         return current_ingredient
 

@@ -19,11 +19,11 @@ class PersistenceHandler():
 
         if pre_existing_recipe is None:
             with open(self._persistence_file, "a+") as persistence_store:
-                persistence_store.write(recipe.to_json() + "\n")
+                persistence_store.write(recipe.json() + "\n")
         else:
             self._delete_recipe_from_persistence(recipe.url)
             with open(self._persistence_file, "a") as persistence_store:
-                persistence_store.write(recipe.to_json() + "\n")
+                persistence_store.write(recipe.json() + "\n")
 
     def save_recipes_to_persistence(self, recipe_list: list[Recipe]):
         for recipe in recipe_list:
@@ -44,7 +44,7 @@ class PersistenceHandler():
             persistence_store.seek(0)
             for recipe in recipe_list:
                 if recipe.url != url:
-                    persistence_store.write(recipe.to_json() + "\n")
+                    persistence_store.write(recipe.json() + "\n")
             persistence_store.truncate()
 
 

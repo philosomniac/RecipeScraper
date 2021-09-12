@@ -40,24 +40,24 @@ class Recipe(BaseModel):
     url: str
     name: str
     ingredient_set: IngredientSet
-    total_cost: float
-    serving_cost: float
-    servings: int
-    prep_time: int
-    cook_time: int
-    instruction_set: InstructionSet
-    img_url: str
+    total_cost: float = 0
+    serving_cost: float = 0
+    servings: int = 1
+    prep_time: int = 0
+    cook_time: int = 0
+    # instruction_set: InstructionSet
+    img_url: str = ""
 
-    def __eq__(self, o: Recipe) -> bool:
-        return self.url == o.url and \
-            self.name == o.name and \
-            self.img_url == self.img_url and \
-            self.ingredient_set == o.ingredient_set and \
-            self.instruction_set == self.instruction_set
+    # def __eq__(self, o: Recipe) -> bool:
+    #     return self.url == o.url and \
+    #         self.name == o.name and \
+    #         self.img_url == self.img_url and \
+    #         self.ingredient_set == o.ingredient_set and \
+    #         self.instruction_set == self.instruction_set
 
-    def to_json(self) -> str:
-        """Transforms a recipe into its JSON representation"""
-        return json.dumps(self, default=lambda x: vars(x))
+    # def to_json(self) -> str:
+    #     """Transforms a recipe into its JSON representation"""
+    #     return json.dumps(self, default=lambda x: vars(x))
 
     @classmethod
     def from_json(cls, recipe_json: str) -> Recipe:
