@@ -4,13 +4,13 @@ from datetime import datetime
 
 import pytest
 
-import ScraperCommon
-from models.Ingredient import Ingredient
-from models.IngredientSet import IngredientSet
-from models.Recipe import Recipe
-from PersistenceHandler import PersistenceHandler
-from RecipeDetailScraper import ElementNotFound, RecipeDetailScraper
-from RecipeURLRetriever import RecipeURLRetriever
+import scraper_common
+from models.ingredient import Ingredient
+from models.ingredient_set import IngredientSet
+from models.recipe import Recipe
+from persistence_handler import PersistenceHandler
+from recipe_detail_scraper import ElementNotFound, RecipeDetailScraper
+from recipe_url_retriever import RecipeURLRetriever
 
 
 @pytest.fixture
@@ -111,27 +111,27 @@ def test_scrape_full_recipe_url_list(retriever: RecipeURLRetriever):
 
 def test_save_soup_to_file():
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
-    ScraperCommon.save_html_from_url_to_file(
+    scraper_common.save_html_from_url_to_file(
         test_recipe_url, "Test_Lemon_Garlic_Asparagus.txt")
 
 
 def test_get_soup_from_test_file():
     test_file_name = "Test_elements.txt"
     print(os.getcwd())
-    _ = ScraperCommon.get_html_from_test_file(test_file_name)
+    _ = scraper_common.get_html_from_test_file(test_file_name)
 
 
 def test_get_ingredient_elements(detail_scraper):
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
-    soup = ScraperCommon.get_parsed_html_from_url(test_recipe_url)
+    soup = scraper_common.get_parsed_html_from_url(test_recipe_url)
     ingredient_elements = detail_scraper._get_ingredient_elements(soup)
 
-    ScraperCommon.save_html_to_file(ingredient_elements, "Test_elements.txt")
+    scraper_common.save_html_to_file(ingredient_elements, "Test_elements.txt")
 
 
 def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
     test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
-    soup = ScraperCommon.get_html_from_test_file(test_html_file)
+    soup = scraper_common.get_html_from_test_file(test_html_file)
 
     target_ingredients = [
         Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),
@@ -152,7 +152,7 @@ def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
 def test_get_recipe_detail_functions(sample_recipe: Recipe, detail_scraper: RecipeDetailScraper):
     test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
-    soup = ScraperCommon.get_html_from_test_file(test_html_file)
+    soup = scraper_common.get_html_from_test_file(test_html_file)
     scraped_recipe = detail_scraper.get_recipe_details_from_html(
         soup, test_recipe_url)
 
@@ -171,7 +171,7 @@ def test_scraping_non_recipe_should_throw_error(detail_scraper: RecipeDetailScra
     non_recipe_file = 'Soup_File_Non_Recipe.txt'
 
     with pytest.raises(ElementNotFound):
-        soup = ScraperCommon.get_html_from_test_file(non_recipe_file)
+        soup = scraper_common.get_html_from_test_file(non_recipe_file)
         detail_scraper.get_recipe_details_from_html(soup)
 
 

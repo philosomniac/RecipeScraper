@@ -4,11 +4,11 @@ import re
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, Tag
 
-import ScraperCommon
-from models.Costs import Costs
-from models.Ingredient import Ingredient
-from models.IngredientSet import IngredientSet
-from models.Recipe import Recipe
+import scraper_common
+from models.costs import Costs
+from models.ingredient import Ingredient
+from models.ingredient_set import IngredientSet
+from models.recipe import Recipe
 
 
 class RecipeDetailScraper():
@@ -16,7 +16,7 @@ class RecipeDetailScraper():
         try:
             url = url.strip()
             logging.info(f"getting recipe details from url: {url}")
-            soup = ScraperCommon.get_parsed_html_from_url(url)
+            soup = scraper_common.get_parsed_html_from_url(url)
 
             current_recipe = self.get_recipe_details_from_html(soup, url)
             logging.info(

@@ -1,4 +1,4 @@
-from models.Ingredient import Ingredient
+from models.ingredient import Ingredient
 
 
 class IngredientSet:
@@ -11,8 +11,6 @@ class IngredientSet:
                 self.ingredients.append(Ingredient.from_json(list_item))
             elif isinstance(list_item, dict):
                 self.ingredients.append(Ingredient(**list_item))
-
-        pass
 
     def __eq__(self, other: object) -> bool:
         return self.ingredients == other

@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from urllib.error import HTTPError
 
-import ScraperCommon
+import scraper_common
 
 
 class RecipeURLRetriever():
@@ -43,7 +43,7 @@ class RecipeURLRetriever():
         """Function: Retrieve Recipe List"""
         url_list = []
         try:
-            soup = ScraperCommon.get_parsed_html_from_url(archiveurl)
+            soup = scraper_common.get_parsed_html_from_url(archiveurl)
             article_elements = self._get_article_elements_from_page(soup)
             url_list.extend(
                 self._get_article_urls_from_article_elements(article_elements))

@@ -1,10 +1,30 @@
+"""It's a recipe"""
+
 from __future__ import annotations
-from models.IngredientSet import IngredientSet
+
 import json
+
+from models.ingredient_set import IngredientSet
+
+# from pydantic import BaseModel
 
 
 class Recipe:
-    def __init__(self, url="", name=None, ingredient_set: IngredientSet = IngredientSet([]), total_cost=None, serving_cost=None, servings=None, prep_time=None, cook_time=None, instruction_set=None, img_url=None):
+    """Represents a recipe"""
+
+    def __init__(
+            self,
+            url="",
+            name=None,
+            ingredient_set: IngredientSet = IngredientSet([]),
+            total_cost=None,
+            serving_cost=None,
+            servings=None,
+            prep_time=None,
+            cook_time=None,
+            instruction_set=None,
+            img_url=None
+    ):
         self.url = url
         self.name = name
         self.ingredient_set = ingredient_set
@@ -15,7 +35,6 @@ class Recipe:
         self.cook_time = cook_time
         self.instruction_set = instruction_set
         self.img_url = img_url
-        pass
 
     def __eq__(self, o: Recipe) -> bool:
         return self.url == o.url and \
@@ -25,10 +44,12 @@ class Recipe:
             self.instruction_set == self.instruction_set
 
     def to_json(self) -> str:
+        """Transforms a recipe into its JSON representation"""
         return json.dumps(self, default=lambda x: vars(x))
 
     @classmethod
     def from_json(cls, recipe_json: str) -> Recipe:
+        """Constructs a recipe from its JSON respresentation"""
         return Recipe._json_to_recipe(recipe_json)
 
     @staticmethod
