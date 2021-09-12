@@ -27,20 +27,5 @@ class Recipe(BaseModel):
     @classmethod
     def from_json(cls, recipe_json: str) -> Recipe:
         """Constructs a recipe from its JSON respresentation"""
-        return Recipe._json_to_recipe(recipe_json)
-
-    @staticmethod
-    def _recipe_decode(json_to_decode: dict):
-        if 'ingredient_set' in json_to_decode:
-            ingredient_set = IngredientSet(
-                ingredients=json_to_decode['ingredient_set']['ingredients'])
-            del json_to_decode['ingredient_set']
-            recipe = Recipe(ingredient_set=ingredient_set, **json_to_decode)
-            return recipe
-
-        return json_to_decode
-
-    @staticmethod
-    def _json_to_recipe(recipe_json: str):
-        recipe = json.loads(recipe_json, object_hook=Recipe._recipe_decode)
-        return recipe
+        # return Recipe._json_to_recipe(recipe_json)
+        return Recipe.parse_raw(recipe_json)
