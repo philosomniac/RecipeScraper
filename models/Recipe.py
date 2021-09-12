@@ -5,36 +5,48 @@ from __future__ import annotations
 import json
 
 from models.ingredient_set import IngredientSet
+from models.instruction_set import InstructionSet
 
-# from pydantic import BaseModel
+from pydantic import BaseModel
 
 
-class Recipe:
+class Recipe(BaseModel):
     """Represents a recipe"""
 
-    def __init__(
-            self,
-            url="",
-            name=None,
-            ingredient_set: IngredientSet = IngredientSet([]),
-            total_cost=None,
-            serving_cost=None,
-            servings=None,
-            prep_time=None,
-            cook_time=None,
-            instruction_set=None,
-            img_url=None
-    ):
-        self.url = url
-        self.name = name
-        self.ingredient_set = ingredient_set
-        self.total_cost = total_cost
-        self.serving_cost = serving_cost
-        self.servings = servings
-        self.prep_time = prep_time
-        self.cook_time = cook_time
-        self.instruction_set = instruction_set
-        self.img_url = img_url
+    # def __init__(
+    #         self,
+    #         url="",
+    #         name=None,
+    #         ingredient_set: IngredientSet = IngredientSet([]),
+    #         total_cost=None,
+    #         serving_cost=None,
+    #         servings=None,
+    #         prep_time=None,
+    #         cook_time=None,
+    #         instruction_set=None,
+    #         img_url=None
+    # ):
+    #     self.url = url
+    #     self.name = name
+    #     self.ingredient_set = ingredient_set
+    #     self.total_cost = total_cost
+    #     self.serving_cost = serving_cost
+    #     self.servings = servings
+    #     self.prep_time = prep_time
+    #     self.cook_time = cook_time
+    #     self.instruction_set = instruction_set
+    #     self.img_url = img_url
+
+    url: str
+    name: str
+    ingredient_set: IngredientSet
+    total_cost: float
+    serving_cost: float
+    servings: int
+    prep_time: int
+    cook_time: int
+    instruction_set: InstructionSet
+    img_url: str
 
     def __eq__(self, o: Recipe) -> bool:
         return self.url == o.url and \
@@ -56,7 +68,7 @@ class Recipe:
     def _recipe_decode(json_to_decode: dict):
         if 'ingredient_set' in json_to_decode:
             ingredient_set = IngredientSet(
-                json_to_decode['ingredient_set']['ingredients'])
+                ingredients=json_to_decode['ingredient_set']['ingredients'])
             del json_to_decode['ingredient_set']
             recipe = Recipe(ingredient_set=ingredient_set, **json_to_decode)
             return recipe

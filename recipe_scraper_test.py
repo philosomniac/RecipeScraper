@@ -1,4 +1,5 @@
 import filecmp
+from models.instruction_set import InstructionSet
 import os
 from datetime import datetime
 
@@ -43,15 +44,45 @@ def recipe_json_list() -> list[str]:
 @pytest.fixture
 def sample_recipe() -> Recipe:
     target_ingredients = [
-        Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),
-        Ingredient("garlic", "2", "cloves", float("0.16")),
-        Ingredient("olive oil", "1", "tbsp", float("0.16")),
-        Ingredient("salt", "1/8", "tsp", float("0.02")),
-        Ingredient("freshly cracked black pepper",
-                   "1/8", "tsp", float("0.89")),
-        Ingredient("fresh lemon", "1", "", float("0.89"))
+        Ingredient(
+            name="asparagus (1 lb.)",
+            amount="1",
+            unit="bunch",
+            price=1.88
+        ),
+        Ingredient(
+            name="garlic",
+            amount="2",
+            unit="cloves",
+            price=0.16
+        ),
+        Ingredient(
+            name="olive oil",
+            amount="1",
+            unit="tbsp",
+            price=0.16
+        ),
+        Ingredient(
+            name="salt",
+            amount="1/8",
+            unit="tsp",
+            price=0.02
+        ),
+        Ingredient(
+            name="freshly cracked black pepper",
+            amount="1/8",
+            unit="tsp",
+            price=0.89
+        ),
+        Ingredient(
+            name="fresh lemon",
+            amount="1",
+            unit="",
+            price=0.89
+        )
+
     ]
-    target_ingredient_set = IngredientSet(target_ingredients)
+    target_ingredient_set = IngredientSet(ingredients=target_ingredients)
     url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
     name = "Lemon Garlic Roasted Asparagus"
     total_cost = 3.13
@@ -62,16 +93,16 @@ def sample_recipe() -> Recipe:
     # total_time_mins = 30
     img_url = "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-200x200.jpg"
     return Recipe(
-        url,
-        name,
-        target_ingredient_set,
-        total_cost,
-        serving_cost,
-        servings,
-        prep_time_mins,
-        cook_time_mins,
-        None,
-        img_url
+        url=url,
+        name=name,
+        ingredient_set=target_ingredient_set,
+        total_cost=total_cost,
+        serving_cost=serving_cost,
+        servings=servings,
+        prep_time=prep_time_mins,
+        cook_time=cook_time_mins,
+        instruction_set=InstructionSet(),
+        img_url=img_url
     )
 
 
@@ -134,15 +165,45 @@ def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
     soup = scraper_common.get_html_from_test_file(test_html_file)
 
     target_ingredients = [
-        Ingredient("asparagus (1 lb.)", "1", "bunch", float("1.88")),
-        Ingredient("garlic", "2", "cloves", float("0.16")),
-        Ingredient("olive oil", "1", "tbsp", float("0.16")),
-        Ingredient("salt", "1/8", "tsp", float("0.02")),
-        Ingredient("freshly cracked black pepper",
-                   "1/8", "tsp", float("0.89")),
-        Ingredient("fresh lemon", "1", "", float("0.89"))
+        Ingredient(
+            name="asparagus (1 lb.)",
+            amount="1",
+            unit="bunch",
+            price=1.88
+        ),
+        Ingredient(
+            name="garlic",
+            amount="2",
+            unit="cloves",
+            price=0.16
+        ),
+        Ingredient(
+            name="olive oil",
+            amount="1",
+            unit="tbsp",
+            price=0.16
+        ),
+        Ingredient(
+            name="salt",
+            amount="1/8",
+            unit="tsp",
+            price=0.02
+        ),
+        Ingredient(
+            name="freshly cracked black pepper",
+            amount="1/8",
+            unit="tsp",
+            price=0.89
+        ),
+        Ingredient(
+            name="fresh lemon",
+            amount="1",
+            unit="",
+            price=0.89
+        )
+
     ]
-    target_ingredient_set = IngredientSet(target_ingredients)
+    target_ingredient_set = IngredientSet(ingredients=target_ingredients)
 
     actual_ingredients = detail_scraper._get_ingredient_set(soup)
 
