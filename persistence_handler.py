@@ -1,4 +1,5 @@
 from models.recipe import Recipe
+from typing import Callable
 
 
 class PersistenceHandler():
@@ -54,6 +55,17 @@ class PersistenceHandler():
                 if recipe.url != url:
                     persistence_store.write(recipe.json() + "\n")
             persistence_store.truncate()
+
+    def get_recipes_by_property(self, matching_function: Callable) -> list[Recipe]:
+        recipe_list = []
+        with open(self._persistence_file, "r") as persistence_store:
+            for recipe_str in persistence_store:
+                recipe = Recipe.from_json(recipe_str)
+                recipe_list.append(recipe)
+
+        matching_recipes = [r for r in recipe_list if matching_function(r)]
+
+        return matching_recipes
 
 
 class RecipeNotFoundException(Exception):

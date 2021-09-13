@@ -351,3 +351,19 @@ def test_save_existing_recipe_should_modify_recipe(persistence: PersistenceHandl
     persistence.save_recipe_to_persistence(recipe)
     modified_recipe = persistence.get_recipe_by_url(url)
     assert modified_recipe.prep_time == modified_prep_time
+
+
+def test_get_recipes_by_property(persistence: PersistenceHandler):
+    target_name = "Mexican Red Lentil Stew"
+    recipes = persistence.get_recipes_by_property(
+        lambda r: target_name in r.name)
+
+    assert len(recipes) == 1
+    assert recipes[0].name == target_name
+
+    target_url_substring = "pumpkin"
+    recipes_2 = persistence.get_recipes_by_property(
+        lambda r: target_url_substring in r.url)
+
+    assert len(recipes_2) > 1
+    assert target_url_substring in recipes_2[1].url
