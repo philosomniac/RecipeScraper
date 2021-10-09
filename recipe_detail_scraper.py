@@ -220,7 +220,7 @@ class RecipeDetailScraper():
         return soup.find(class_="wprm-recipe-ingredients-container")
 
     def _get_img_url(self, soup):
-        return soup.find(class_="wprm-recipe-image").img['data-src']
+        return soup.find(class_="wprm-recipe-image").img['src']
 
     def _get_servings_unit(self, soup):
         return soup.find(class_="wprm-recipe-servings-unit").string

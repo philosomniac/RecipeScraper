@@ -143,11 +143,11 @@ def test_scrape_full_recipe_url_list(retriever: RecipeURLRetriever):
 def test_save_soup_to_file():
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
     scraper_common.save_html_from_url_to_file(
-        test_recipe_url, "Test_Lemon_Garlic_Asparagus.txt")
+        test_recipe_url, "Test_Lemon_Garlic_Asparagus.html")
 
 
 def test_get_soup_from_test_file():
-    test_file_name = "Test_elements.txt"
+    test_file_name = "Test_elements.html"
     print(os.getcwd())
     _ = scraper_common.get_html_from_test_file(test_file_name)
 
@@ -157,11 +157,11 @@ def test_get_ingredient_elements(detail_scraper):
     soup = scraper_common.get_parsed_html_from_url(test_recipe_url)
     ingredient_elements = detail_scraper._get_ingredient_elements(soup)
 
-    scraper_common.save_html_to_file(ingredient_elements, "Test_elements.txt")
+    scraper_common.save_html_to_file(ingredient_elements, "Test_elements.html")
 
 
 def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
-    test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
+    test_html_file = "Test_Lemon_Garlic_Asparagus.html"
     soup = scraper_common.get_html_from_test_file(test_html_file)
 
     target_ingredients = [
@@ -211,7 +211,7 @@ def test_get_ingredient_list_from_html(detail_scraper: RecipeDetailScraper):
 
 
 def test_get_recipe_detail_functions(sample_recipe: Recipe, detail_scraper: RecipeDetailScraper):
-    test_html_file = "Test_Lemon_Garlic_Asparagus.txt"
+    test_html_file = "Test_Lemon_Garlic_Asparagus.html"
     test_recipe_url = "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/"
     soup = scraper_common.get_html_from_test_file(test_html_file)
     scraped_recipe = detail_scraper.get_recipe_details_from_html(
@@ -229,7 +229,7 @@ def test_get_recipe_detail_functions(sample_recipe: Recipe, detail_scraper: Reci
 
 
 def test_scraping_non_recipe_should_throw_error(detail_scraper: RecipeDetailScraper):
-    non_recipe_file = 'Soup_File_Non_Recipe.txt'
+    non_recipe_file = 'Soup_File_Non_Recipe.html'
 
     with pytest.raises(ElementNotFound):
         soup = scraper_common.get_html_from_test_file(non_recipe_file)
