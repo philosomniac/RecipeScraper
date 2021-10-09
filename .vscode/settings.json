@@ -12,7 +12,7 @@
     ],
     "python.linting.enabled": true,
     "python.testing.pytestArgs": [
-        "."
+        "test"
     ],
     "diffEditor.codeLens": true
 }
