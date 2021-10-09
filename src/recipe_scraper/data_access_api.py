@@ -1,7 +1,7 @@
 """The API that will retrieve the recipe data"""
 
 from fastapi import FastAPI
-from persistence_handler import PersistenceHandler
+from recipe_scraper.persistence_handler import PersistenceHandler
 
 
 app = FastAPI()
