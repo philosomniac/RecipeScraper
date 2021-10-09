@@ -1,17 +1,16 @@
 import filecmp
-from models.instruction_set import InstructionSet
 import os
 from datetime import datetime
 
 import pytest
-
-import scraper_common
-from models.ingredient import Ingredient
-from models.ingredient_set import IngredientSet
-from models.recipe import Recipe
-from persistence_handler import PersistenceHandler
-from recipe_detail_scraper import ElementNotFound, RecipeDetailScraper
-from recipe_url_retriever import RecipeURLRetriever
+from recipe_scraper import scraper_common
+from recipe_scraper.models.ingredient import Ingredient
+from recipe_scraper.models.ingredient_set import IngredientSet
+from recipe_scraper.models.recipe import Recipe
+from recipe_scraper.persistence_handler import PersistenceHandler
+from recipe_scraper.recipe_detail_scraper import (ElementNotFound,
+                                                  RecipeDetailScraper)
+from recipe_scraper.recipe_url_retriever import RecipeURLRetriever
 
 
 @pytest.fixture
@@ -135,7 +134,7 @@ def test_scrape_full_recipe_url_list(retriever: RecipeURLRetriever):
     _ = retriever.scrape_recipe_URL_list_to_file(
         test_file_path, month_limit)
 
-    compare_file_path = "BudgetBytesRecipes_test_compare.txt"
+    compare_file_path = "tests\\BudgetBytesRecipes_test_compare.txt"
 
     assert filecmp.cmp(test_file_path, compare_file_path, shallow=False)
 

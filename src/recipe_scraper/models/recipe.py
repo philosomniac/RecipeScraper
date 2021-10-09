@@ -4,10 +4,8 @@ from __future__ import annotations
 
 import json
 
-from models.ingredient_set import IngredientSet
-from models.instruction_set import InstructionSet
-
 from pydantic import BaseModel
+from recipe_scraper.models.ingredient_set import IngredientSet
 
 
 class Recipe(BaseModel):

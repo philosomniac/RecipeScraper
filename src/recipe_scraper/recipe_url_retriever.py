@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from urllib.error import HTTPError
 
-import scraper_common
+from . import scraper_common
 
 
 class RecipeURLRetriever():

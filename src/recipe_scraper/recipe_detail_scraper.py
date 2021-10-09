@@ -4,11 +4,11 @@ import re
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, Tag
 
-import scraper_common
-from models.costs import Costs
-from models.ingredient import Ingredient
-from models.ingredient_set import IngredientSet
-from models.recipe import Recipe
+from . import scraper_common
+from recipe_scraper.models.costs import Costs
+from recipe_scraper.models.ingredient import Ingredient
+from recipe_scraper.models.ingredient_set import IngredientSet
+from recipe_scraper.models.recipe import Recipe
 
 
 class RecipeDetailScraper():

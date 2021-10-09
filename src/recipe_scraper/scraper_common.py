@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 
 
-TestSoupFilePath = "TestSoupFiles\\"
+TestSoupFilePath = "tests\\TestSoupFiles\\"
 
 
 def get_parsed_html_from_url(url: str) -> BeautifulSoup:

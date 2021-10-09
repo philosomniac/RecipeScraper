@@ -1,4 +1,4 @@
-from models.ingredient import Ingredient
+from recipe_scraper.models.ingredient import Ingredient
 from pydantic import BaseModel
 
 
