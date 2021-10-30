@@ -15,6 +15,14 @@ class PersistenceHandler():
                     return recipe
         return None
 
+    def get_all_recipes(self) -> list[Recipe]:
+        recipes = []
+        with open(self._persistence_file, "r") as persistence_store:
+            for recipe_str in persistence_store:
+                recipe = Recipe.from_json(recipe_str)
+                recipes.append(recipe)
+        return recipes
+
     def get_recipe_by_name(self, name) -> Recipe:
         with open(self._persistence_file, "r") as persistence_store:
             for recipe_str in persistence_store:
