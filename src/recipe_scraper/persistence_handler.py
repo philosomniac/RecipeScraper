@@ -1,11 +1,12 @@
 from recipe_scraper.models.recipe import Recipe
 from typing import Callable
+from os import path
 
 
 class PersistenceHandler():
 
     def __init__(self):
-        self._persistence_file = 'data\\recipedb.txt'
+        self._persistence_file = path.join('data', 'recipedb.txt')
 
     def get_recipe_by_url(self, url) -> Recipe:
         with open(self._persistence_file, "r") as persistence_store:
