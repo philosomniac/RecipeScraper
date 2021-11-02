@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 
 
-TestSoupFilePath = "tests\\TestSoupFiles\\"
+TestSoupFilePath = os.path.join("tests", "TestSoupFiles")
 
 
 def get_parsed_html_from_url(url: str) -> BeautifulSoup:
@@ -21,7 +21,7 @@ def save_html_from_url_to_file(url: str, file_name: str):
 
 
 def get_html_from_test_file(file_name: str) -> BeautifulSoup:
-    file_path = TestSoupFilePath + file_name
+    file_path = os.path.join(TestSoupFilePath, file_name)
     with open(file_path, encoding="utf-8") as html_file:
         soup = BeautifulSoup(html_file, "html.parser")
 

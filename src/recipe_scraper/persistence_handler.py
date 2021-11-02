@@ -1,12 +1,12 @@
 from recipe_scraper.models.recipe import Recipe
 from typing import Callable
-from os import path
+import os
 
 
 class PersistenceHandler():
 
     def __init__(self):
-        self._persistence_file = path.join('data', 'recipedb.txt')
+        self._persistence_file = os.path.join('data', 'recipedb.txt')
 
     def get_recipe_by_url(self, url) -> Recipe:
         with open(self._persistence_file, "r") as persistence_store:
@@ -16,7 +16,7 @@ class PersistenceHandler():
                     return recipe
         return None
 
-    def get_all_recipes(self) -> list[Recipe]:
+    def get_all_recipes(self) -> "list[Recipe]":
         recipes = []
         with open(self._persistence_file, "r") as persistence_store:
             for recipe_str in persistence_store:
@@ -43,7 +43,7 @@ class PersistenceHandler():
             with open(self._persistence_file, "a") as persistence_store:
                 persistence_store.write(recipe.json() + "\n")
 
-    def save_recipes_to_persistence(self, recipe_list: list[Recipe]):
+    def save_recipes_to_persistence(self, recipe_list: "list[Recipe]"):
         for recipe in recipe_list:
             self.save_recipe_to_persistence(recipe)
 
@@ -65,7 +65,7 @@ class PersistenceHandler():
                     persistence_store.write(recipe.json() + "\n")
             persistence_store.truncate()
 
-    def get_recipes_by_property(self, matching_function: Callable) -> list[Recipe]:
+    def get_recipes_by_property(self, matching_function: Callable) -> "list[Recipe]":
         recipe_list = []
         with open(self._persistence_file, "r") as persistence_store:
             for recipe_str in persistence_store:

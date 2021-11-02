@@ -29,7 +29,7 @@ def persistence() -> PersistenceHandler:
 
 
 @pytest.fixture()
-def recipe_json_list() -> list[str]:
+def recipe_json_list() -> "list[str]":
     json_list = [
         '{"url": "https://www.budgetbytes.com/lemon-garlic-roasted-asparagus/", "name": "Lemon Garlic Roasted Asparagus", "ingredient_set": {"ingredients": [{"name": "asparagus (1 lb.)", "amount": "1", "unit": "bunch", "price": 1.88}, {"name": "garlic", "amount": "2", "unit": "cloves", "price": 0.16}, {"name": "olive oil", "amount": "1", "unit": "tbsp", "price": 0.16}, {"name": "salt", "amount": "1/8", "unit": "tsp", "price": 0.02}, {"name": "freshly cracked black pepper", "amount": "1/8", "unit": "tsp", "price": 0.89}, {"name": "fresh lemon", "amount": "1", "unit": "", "price": 0.89}]}, "total_cost": 3.13, "serving_cost": 0.78, "servings": 4, "prep_time": 10, "cook_time": 20, "img_url": "https://www.budgetbytes.com/wp-content/uploads/2011/03/Lemon-Garlic-Roasted-Asparagus-pan-200x200.jpg"}',
         '{"url": "https://www.budgetbytes.com/parmesan-roasted-potatoes/", "name": "Parmesan Roasted Potatoes", "ingredient_set": {"ingredients": [{"name": "russet or red potatoes", "amount": "2", "unit": "lbs", "price": 1.2}, {"name": "chopped fresh parsley", "amount": "1/4", "unit": "cup", "price": 0.2}, {"name": "olive oil", "amount": "2", "unit": "Tbsp", "price": 0.32}, {"name": "grated Parmesan", "amount": "1/3", "unit": "cup", "price": 0.55}, {"name": "garlic powder", "amount": "1/2", "unit": "tsp", "price": 0.05}, {"name": "Salt and pepper to taste", "amount": "", "unit": "", "price": 0.05}]}, "total_cost": 2.37, "serving_cost": 0.59, "servings": 4, "prep_time": 15, "cook_time": 40, "img_url": "https://www.budgetbytes.com/wp-content/uploads/2009/11/Parmesan-Roasted-Potatoes-dip-200x200.jpg"}',
@@ -134,7 +134,7 @@ def test_scrape_full_recipe_url_list(retriever: RecipeURLRetriever):
     _ = retriever.scrape_recipe_URL_list_to_file(
         test_file_path, month_limit)
 
-    compare_file_path = "tests\\BudgetBytesRecipes_test_compare.txt"
+    compare_file_path = os.path.join("tests", "BudgetBytesRecipes_test_compare.txt")
 
     assert filecmp.cmp(test_file_path, compare_file_path, shallow=False)
 
@@ -306,7 +306,7 @@ def test_save_recipe_to_persistence(persistence: PersistenceHandler, sample_reci
     assert persistence.count_recipes_with_url(sample_recipe.url) == 1
 
 
-def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, recipe_json_list: list[str]):
+def test_save_multiple_recipes_to_persistence(persistence: PersistenceHandler, recipe_json_list: "list[str]"):
     recipe_list = []
 
     for recipe_json_str in recipe_json_list:
