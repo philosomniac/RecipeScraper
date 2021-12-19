@@ -1,6 +1,7 @@
-from recipe_scraper.models.recipe import Recipe
-from typing import Callable
 import os
+from typing import Callable
+
+from recipe_scraper.models import Recipe
 
 
 class PersistenceHandler():

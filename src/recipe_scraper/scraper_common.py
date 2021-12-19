@@ -1,7 +1,7 @@
 import os
-from bs4 import BeautifulSoup
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
 
+from bs4 import BeautifulSoup
 
 TestSoupFilePath = os.path.join("tests", "TestSoupFiles")
 
