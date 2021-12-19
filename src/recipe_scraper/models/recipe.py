@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 
 from pydantic import BaseModel
-from recipe_scraper.models.ingredient_set import IngredientSet
+from models.ingredient_set import IngredientSet
 
 
 class Recipe(BaseModel):

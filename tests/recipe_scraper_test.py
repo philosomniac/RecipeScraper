@@ -134,7 +134,8 @@ def test_scrape_full_recipe_url_list(retriever: RecipeURLRetriever):
     _ = retriever.scrape_recipe_URL_list_to_file(
         test_file_path, month_limit)
 
-    compare_file_path = os.path.join("tests", "BudgetBytesRecipes_test_compare.txt")
+    compare_file_path = os.path.join(
+        "tests", "BudgetBytesRecipes_test_compare.txt")
 
     assert filecmp.cmp(test_file_path, compare_file_path, shallow=False)
 

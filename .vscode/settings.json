@@ -10,10 +10,12 @@
         "-p",
         "*test.py"
     ],
-    "python.linting.enabled": true,
+    "python.linting.enabled": false,
     "python.testing.pytestArgs": [
         "tests"
     ],
     "diffEditor.codeLens": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "autopep8",
 
 }
