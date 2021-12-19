@@ -4,9 +4,7 @@ from datetime import datetime
 
 import pytest
 from recipe_scraper import scraper_common
-from recipe_scraper.models.ingredient import Ingredient
-from recipe_scraper.models.ingredient_set import IngredientSet
-from recipe_scraper.models.recipe import Recipe
+from recipe_scraper.models import Ingredient, IngredientSet, Recipe
 from recipe_scraper.persistence_handler import PersistenceHandler
 from recipe_scraper.recipe_detail_scraper import (ElementNotFound,
                                                   RecipeDetailScraper)

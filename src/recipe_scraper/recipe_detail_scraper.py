@@ -4,11 +4,8 @@ import re
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, Tag
 
-from models.costs import Costs
-from models.ingredient import Ingredient
-from models.ingredient_set import IngredientSet
-from models.recipe import Recipe
-import scraper_common
+from recipe_scraper import scraper_common
+from recipe_scraper.models import Costs, Ingredient, IngredientSet, Recipe
 
 
 class RecipeDetailScraper():
@@ -280,7 +277,7 @@ class RecipeDetailScraper():
         return soup.find(class_="wprm-recipe-total-time-container")
 
     def _get_cost_string(self, soup):
-        result = soup.find(class_="wprm-recipe-recipe_cost")
+        result = soup.find(class_="cost")
         if result:
             return result.string
         else:
