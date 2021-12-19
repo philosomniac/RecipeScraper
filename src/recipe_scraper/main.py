@@ -1,6 +1,7 @@
-from recipe_detail_scraper import RecipeDetailScraper
 import logging
-from persistence_handler import PersistenceHandler
+
+from recipe_scraper.persistence_handler import PersistenceHandler
+from recipe_scraper.recipe_detail_scraper import RecipeDetailScraper
 
 
 def setup_logging():

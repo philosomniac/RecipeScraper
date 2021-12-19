@@ -1,5 +1,5 @@
 import logging
-import re
+
 
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, Tag
@@ -9,6 +9,9 @@ from recipe_scraper.models import Costs, Ingredient, IngredientSet, Recipe
 
 
 class RecipeDetailScraper():
+    """takes in a budgetbytes.com url OR an html file containing a budgetbytes.com
+    recipe, and parses the information into a Recipe model"""
+
     def get_recipe_details_from_url(self, url: str) -> Recipe:
         try:
             url = url.strip()
@@ -30,25 +33,22 @@ class RecipeDetailScraper():
             raise
 
     def get_recipe_details_from_html(self, soup: BeautifulSoup, url: str = "") -> Recipe:
-        # TODO: extract method for each recipe attribute.
-        # TODO: wrap each operation in a try block(?)
         # TODO: log events
+
         recipe_title = self._get_recipe_title(soup)
 
-        # TODO: Parse the cost into real data
         cost_data = self._get_cost_data(soup)
 
-        # TODO: Parse time strings into actual times
-        # total_time = get_total_time(soup)
         try:
             prep_time = self._get_prep_time(soup)
         except ElementNotFound:
-            # means there is no prep time
+            # some recipes don't have cook time
             prep_time = 0
+
         try:
             cook_time = self._get_cook_time(soup)
         except ElementNotFound:
-            # means there is no cook time
+            # some recipes don't have prep time
             cook_time = 0
 
         if cook_time == 0 and prep_time == 0:
@@ -59,7 +59,6 @@ class RecipeDetailScraper():
         except ElementNotFound:
             # assume single serving if servings element can't be found
             servings = 1
-        # servings_unit = get_servings_unit(soup)
 
         img_url = self._get_img_url(soup)
 
@@ -83,18 +82,15 @@ class RecipeDetailScraper():
     def _get_cost_data(self, soup: BeautifulSoup) -> Costs:
         recipe_cost = None
         serving_cost = None
-        try:
-            cost_string = str(self._get_cost_string(soup))
-            recipe_cost = self._get_recipe_cost_from_cost_string(cost_string)
-            try:
-                serving_cost = self._get_serving_cost_from_cost_string(
-                    cost_string)
-            except ElementNotFound:
-                # means the recipe_cost is the same as the serving cost
-                serving_cost = recipe_cost
 
+        cost_string = str(self._get_cost_string(soup))
+        recipe_cost = self._get_recipe_cost_from_cost_string(cost_string)
+        try:
+            serving_cost = self._get_serving_cost_from_cost_string(
+                cost_string)
         except ElementNotFound:
-            raise
+            # means the recipe_cost is the same as the serving cost
+            serving_cost = recipe_cost
 
         costs = Costs(serving_cost, recipe_cost)
         return costs
@@ -114,9 +110,7 @@ class RecipeDetailScraper():
         ingredient_elements = self._get_ingredient_elements(soup)
         return self._get_ingredient_set_from_elements(ingredient_elements)
 
-    # TODO: unit test this
-
-    # TODO: add support for ingredient sections
+    # TODO: add support for recipes that have ingredients divided into named sections
 
     def _get_ingredient_from_element(self, element: PageElement) -> Ingredient:
         current_amount = self._get_current_amount(element)
@@ -134,26 +128,26 @@ class RecipeDetailScraper():
 
         return current_ingredient
 
-    def _get_recipe_urls(self, starting_line_index: int) -> list:
-        with open("BudgetBytesRecipes.txt") as recipefile:
-            recipe_urls = [line.strip() for line in recipefile]
-            return recipe_urls[starting_line_index-1:]
+    @staticmethod
+    def _format_price(price_string: str) -> str:
+        return price_string.replace("(", "").replace(")", "").replace("$", "").replace("*", "")
 
-    def _format_price(self, s: str) -> str:
-        return s.replace("(", "").replace(")", "").replace("$", "").replace("*", "")
-
-    def _get_ingredient_price(self, element):
+    @staticmethod
+    def _get_ingredient_price(element):
         result = ""
         if isinstance(element, Tag):
             price_element = element.find(class_="wprm-recipe-ingredient-notes")
             if price_element is not None:
-                result = price_element.string
+                result = price_element.string if isinstance(
+                    price_element, Tag) else price_element
+
         if result is not None:
             return result
         else:
             return ""
 
-    def _get_recipe_cost_from_cost_string(self, cost_string: str) -> float:
+    @staticmethod
+    def _get_recipe_cost_from_cost_string(cost_string: str) -> float:
         recipe_word_index = cost_string.index('recipe')
         recipe_cost_string = cost_string[:recipe_word_index]
         recipe_cost_string = recipe_cost_string.replace("$", "")
@@ -161,7 +155,8 @@ class RecipeDetailScraper():
         recipe_cost = float(recipe_cost_string)
         return recipe_cost
 
-    def _get_serving_cost_from_cost_string(self, cost_string: str) -> float:
+    @staticmethod
+    def _get_serving_cost_from_cost_string(cost_string: str) -> float:
         try:
             slash_character_index = cost_string.index("/")
             serving_word_index = cost_string.index('serving')
@@ -174,32 +169,39 @@ class RecipeDetailScraper():
         except:
             raise ElementNotFound("Could not get serving cost")
 
-    def _get_ingredient_name(self, element):
+    @staticmethod
+    def _get_ingredient_name(element):
         result = ""
         if isinstance(element, Tag):
             ingredient_element = element.find(
                 class_="wprm-recipe-ingredient-name")
             if ingredient_element is not None:
-                if ingredient_element.string is not None:
-                    result = ingredient_element.string.strip()
+                result = ingredient_element.string if isinstance(
+                    ingredient_element, Tag) else ingredient_element
+                result = result.strip() if isinstance(result, str) else result
         return result
 
-    def _get_current_unit(self, element) -> str:
+    @staticmethod
+    def _get_current_unit(element: PageElement) -> str:
         result = ""
         if isinstance(element, Tag):
             unit_element = element.find(class_="wprm-recipe-ingredient-unit")
             if unit_element is not None:
-                if unit_element.string is not None:
-                    result = unit_element.string
-        return result
+                result = unit_element.string if isinstance(
+                    unit_element, Tag) else str(unit_element)
+        if result is not None:
+            return result
+        raise ElementNotFound("Could not get ingredient unit element")
 
-    def _get_current_amount(self, element):
+    @staticmethod
+    def _get_current_amount(element):
         amount = ""
         if isinstance(element, Tag):
             ingredient_tag = element.find(
                 class_="wprm-recipe-ingredient-amount")
             if ingredient_tag is not None:
-                amount = ingredient_tag.string
+                if isinstance(ingredient_tag, Tag):
+                    amount = ingredient_tag.string
         if amount is not None:
             return amount
         else:
@@ -213,18 +215,23 @@ class RecipeDetailScraper():
                 class_="wprm-recipe-ingredient")
         return result
 
-    def _get_ingredient_container(self, soup):
+    @staticmethod
+    def _get_ingredient_container(soup):
         return soup.find(class_="wprm-recipe-ingredients-container")
 
-    def _get_img_url(self, soup):
+    @staticmethod
+    def _get_img_url(soup):
         return soup.find(class_="wprm-recipe-image").img['src']
 
-    def _get_servings_unit(self, soup):
+    @staticmethod
+    def _get_servings_unit(soup):
         return soup.find(class_="wprm-recipe-servings-unit").string
 
-    def _get_servings(self, soup):
+    @staticmethod
+    def _get_servings(soup):
         try:
-            return int(soup.find(class_="wprm-recipe-servings").string)
+            servings = int(soup.find(class_="wprm-recipe-servings").string)
+            return servings
         except:
             ElementNotFound("Could not get servings")
 
@@ -238,7 +245,8 @@ class RecipeDetailScraper():
         except:
             raise ElementNotFound("Could not get Cook time")
 
-    def _parse_cook_time_string_to_minutes(self, cook_time_string: str) -> int:
+    @staticmethod
+    def _parse_cook_time_string_to_minutes(cook_time_string: str) -> int:
 
         hours_component_index = cook_time_string.find("hr")
         result_time = 0
@@ -273,33 +281,35 @@ class RecipeDetailScraper():
         except:
             raise ElementNotFound("Could not get Prep time")
 
-    def _get_total_time(self, soup):
+    @staticmethod
+    def _get_total_time(soup):
         return soup.find(class_="wprm-recipe-total-time-container")
 
-    def _get_cost_string(self, soup):
+    @staticmethod
+    def _get_cost_string(soup):
         result = soup.find(class_="cost")
         if result:
             return result.string
-        else:
-            raise ElementNotFound("Could not find cost string")
 
-    def _get_recipe_title(self, soup):
+        raise ElementNotFound("Could not find cost string")
+
+    @staticmethod
+    def _get_recipe_title(soup):
         result = soup.find(class_="wprm-recipe-name")
         if result:
             return result.string
-        else:
-            # old format
-            old_format_result = soup.find(class_="post-title").h1
-            if old_format_result:
-                return old_format_result
-            else:
-                raise ElementNotFound("Could not find recipe title")
+
+        # old format
+        old_format_result = soup.find(class_="post-title").h1
+        if old_format_result:
+            return old_format_result
+
+        raise ElementNotFound("Could not find recipe title")
 
 
 class ElementNotFound(Exception):
     """Raised when an element can't be found in the html"""
-    pass
 
 
 class CouldNotScrapeRecipe(Exception):
-    pass
+    """Raised when recipe scraping fails and could not be recovered"""

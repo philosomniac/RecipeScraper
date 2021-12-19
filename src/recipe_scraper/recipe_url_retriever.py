@@ -9,9 +9,11 @@ from recipe_scraper import scraper_common
 
 
 class RecipeURLRetriever():
+    """Scrapes a list of recipe URLs from budgetbytes.com and saves them to a file.
+This is used as input to the detail_scraper module that scrapes each recipe URL 
+and parses its details"""
 
     def scrape_recipe_URL_list_to_file(self, recipe_file_path: str = "BudgetBytesRecipes.txt", month_limit: int = 1000):
-        """Function: Retrieve Recipe List"""
 
         recipe_url_list = []
 
@@ -36,12 +38,10 @@ class RecipeURLRetriever():
             return recipefile
 
     def _get_archive_page_url_from_date(self, targetdate: datetime.date) -> str:
-        """Function: Retrieve Recipe List"""
         paddedmonth = str(targetdate.month).zfill(2)
         return "https://www.budgetbytes.com/archive/{0}/{1}/".format(targetdate.year, paddedmonth)
 
     def _get_recipe_urls_from_archive_page(self, archiveurl: str) -> list:
-        """Function: Retrieve Recipe List"""
         url_list = []
         try:
             soup = scraper_common.get_parsed_html_from_url(archiveurl)
@@ -59,7 +59,6 @@ class RecipeURLRetriever():
         return soup.find_all("article")
 
     def _get_article_urls_from_article_elements(self, article_elements: ResultSet) -> list:
-        """Function: Retrieve Recipe List"""
         url_list = []
         article_element: PageElement
         for article_element in article_elements:

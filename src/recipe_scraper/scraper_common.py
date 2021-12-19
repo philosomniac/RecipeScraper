@@ -7,7 +7,6 @@ TestSoupFilePath = os.path.join("tests", "TestSoupFiles")
 
 
 def get_parsed_html_from_url(url: str) -> BeautifulSoup:
-    """Function: General scraping"""
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     page = urlopen(req)
     html = page.read().decode("utf-8")

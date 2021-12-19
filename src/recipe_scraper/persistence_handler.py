@@ -15,7 +15,8 @@ class PersistenceHandler():
                 recipe = Recipe.from_json(recipe_str)
                 if recipe.url == url:
                     return recipe
-        return None
+        raise RecipeNotFoundException(
+            "Could not find recipe with url: %s" % url)
 
     def get_all_recipes(self) -> "list[Recipe]":
         recipes = []
@@ -31,7 +32,8 @@ class PersistenceHandler():
                 recipe = Recipe.from_json(recipe_str)
                 if recipe.name == name:
                     return recipe
-        return None
+        raise RecipeNotFoundException(
+            "Could not find recipe with name: %s" % name)
 
     def save_recipe_to_persistence(self, recipe: Recipe):
         pre_existing_recipe = self.get_recipe_by_url(recipe.url)

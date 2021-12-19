@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 import json
 from typing import List
+
 from pydantic import BaseModel
 
 
@@ -37,9 +39,9 @@ class IngredientSet(BaseModel):
         return self.ingredients == other
 
 
-class InstructionSet(BaseModel):
-    def __init__(self, step_list):
-        pass
+class InstructionSet:
+    # TODO: implement instruction set model
+    pass
 
 
 class InstructionStep:
@@ -66,7 +68,7 @@ class Recipe(BaseModel):
     # instruction_set: InstructionSet
     img_url: str = ""
 
-    @classmethod
+    @ classmethod
     def from_json(cls, recipe_json: str) -> Recipe:
         """Constructs a recipe from its JSON respresentation"""
         # return Recipe._json_to_recipe(recipe_json)
