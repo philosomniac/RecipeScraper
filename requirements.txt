@@ -2,7 +2,6 @@ attrs==21.2.0
 beautifulsoup4==4.10.0
 bs4==0.0.1
 iniconfig==1.1.1
-git+https://github.com/philosomniac/RecipeScraper
 packaging==21.2
 pluggy==1.0.0
 py==1.10.0
